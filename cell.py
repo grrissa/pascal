@@ -13,7 +13,7 @@ class Cell(object):
     @purpose: 
     1/ create cell class 
     """
-    def __init__(self, h:bool, s:bool, i:str)-->None:
+    def __init__(self, h:bool, s:bool, i:str)->None:
         self.hit = h
         self.ship = s
         self.id = i
