@@ -1,3 +1,4 @@
+
 class player(object):
     def __init__(self, score:int, is_turn:bool)->None:
         self.score = score
