@@ -5,7 +5,7 @@ Class: COMP-305 SP22
 Prof: A. Nuzen
 Purpose: Cell Class
 """
-class Cell(Object)
+class Cell(object):
     """
     @Class Cell
     @constructor(hit:bool, ship:bool, id:str)
