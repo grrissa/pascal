@@ -33,7 +33,7 @@ class Gameboard:
     def __init__(self, num_rows, num_cols):
         """ Initialize view of the game """
         # Constants
-        self.CELL_SIZE = 40
+        self.CELL_SIZE = 30
         self.CONTROL_FRAME_HEIGHT = 500
 
         # Size of grid
@@ -60,22 +60,32 @@ class Gameboard:
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
                                 height = self.CONTROL_FRAME_HEIGHT)
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
-        (self.start_button, self.quit_button, self.label1) = self.add_control()
+        (self.start_button, self.quit_button, self.label1,
+            self.confirm_button, self.your_hits, self.opponent) = self.add_control()
 
     def add_control(self):
         """ 
-        Create control buttons and slider, and add them to the control frame 
+        Create control buttons and welcome message, and add them to the control frame 
         """
-        start_button = tk.Button(self.control_frame, text="Start")
+        start_button = tk.Button(self.control_frame, text="Start", font=("Helvetica", 10))
         start_button.grid(row=1, column=1)
 
-        quit_button = tk.Button(self.control_frame, text="Quit")
+        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10))
         quit_button.grid(row=1, column=2)
 
-        label1 = tk.Label(self.control_frame, text="Welcome to Battleship", font=("Helvetica", 40))
+        label1 = tk.Label(self.control_frame, text="Welcome to Battleship", font=("Helvetica", 20))
         label1.grid(row=2)
 
-        return (start_button, quit_button, label1)
+        confirm_button = tk.Button(self.control_frame, text="Confirm Hit", font=("Helvetica", 20))
+        confirm_button.grid(row=3)
+
+        your_hits = tk.Label(self.control_frame, text="Your Hits: ", font=("Helvetica", 10))
+        your_hits.grid(row=4)
+
+        opponent = tk.Label(self.control_frame, text="Opponent: ", font=("Helvetica", 10))
+        opponent.grid(row=5)
+
+        return (start_button, quit_button, label1, confirm_button, your_hits, opponent)
 
 
     def add_cells(self):
