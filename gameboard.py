@@ -70,7 +70,7 @@ class Gameboard:
         start_button = tk.Button(self.control_frame, text="Start", font=("Helvetica", 10))
         start_button.grid(row=1, column=1)
 
-        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10))
+        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10), command=quit)
         quit_button.grid(row=1, column=2)
 
         label1 = tk.Label(self.control_frame, text="Welcome to Battleship", font=("Helvetica", 20))
@@ -102,6 +102,8 @@ class Gameboard:
             cells.append(row)
         return cells
 
+    def quit(self):
+        self.window.destroy()
 
 if __name__ == "__main__":
     game_of_life = Control()
