@@ -103,6 +103,7 @@ class Gameboard:
         return cells
 
     def quit(self):
+        """ Functionality for quit button """
         self.window.destroy()
 
 if __name__ == "__main__":
