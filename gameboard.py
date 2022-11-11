@@ -1,13 +1,10 @@
 """
-Authors:
-Aidan Rooney
-Alizea Hinz
-Gabe Krishnadasan
-Marissa Esteban
-
-Description:
-Gameboard
-
+Description: Class to create GUI gameboard
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
 """
 
 import tkinter as tk
