@@ -1,4 +1,4 @@
-import player
+import player, gameboard
 
 class humanPlayer(player):
     def __init__(self, score:int, is_turn:bool)->None:

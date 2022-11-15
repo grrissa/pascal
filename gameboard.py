@@ -24,8 +24,21 @@ class Control:
         # Create view
         self.board = Gameboard(self.NUM_ROWS, self.NUM_COLS)
 
+        # Cell clicks.  (Note that a separate handler function is defined for 
+        # each cell.)
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                def handler(event, row = r, column = c):
+                    self.cell_click_handler(row, column)
+                self.board.set_cell_click_handler(r, c, handler)
+
+
         # Start the simulation
         self.board.window.mainloop()
+
+    def cell_click_handler(self, row, column):
+        """ Cell click """
+        print("Cell click: row = %d col = %d" % (row, column))
 
 class Gameboard:
     """ The view """
@@ -54,7 +67,7 @@ class Gameboard:
         self.grid_frame = tk.Frame(self.window, height = num_rows * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.grid_frame.grid(row = 2, column = 1, padx=40, pady=40)
-        self.cells = self.add_cells()
+        self.cells2 = self.add_cells()
 
         # Create frame for controls
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
@@ -101,6 +114,11 @@ class Gameboard:
                 row.append(frame)
             cells.append(row)
         return cells
+
+    def set_cell_click_handler(self, row, column, handler):
+        """ set handler for clicking on cell in row, column to the function handler """
+        self.cells[row][column].bind('<Button-1>', handler)
+        self.cells2[row][column].bind('<Button-1>', handler)
 
 
 if __name__ == "__main__":
