@@ -1,10 +1,9 @@
-import player, gameboard, cell
+import player
 
 class humanPlayer(player):
-    def __init__(self, score:int, is_turn:bool, board:cell[][])->None:
+    def __init__(self, score:int, is_turn:bool)->None:
         self.score = score
         self.is_turn = is_turn
-        self.board = board
 
     def make_hit(self)->None:
         #Need to implement
