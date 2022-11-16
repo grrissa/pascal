@@ -1,13 +1,10 @@
 """
-Authors:
-Aidan Rooney
-Alizea Hinz
-Gabe Krishnadasan
-Marissa Esteban
-
-Description:
-Gameboard
-
+Description: Class to create GUI gameboard
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
 """
 
 import tkinter as tk
@@ -145,7 +142,7 @@ class Gameboard:
         start_button = tk.Button(self.control_frame, text="Start", font=("Helvetica", 10))
         start_button.grid(row=1, column=1)
 
-        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10))
+        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10), command=quit)
         quit_button.grid(row=1, column=2)
 
         label1 = tk.Label(self.control_frame, text="Welcome to Battleship", font=("Helvetica", 20))
@@ -182,6 +179,9 @@ class Gameboard:
         self.cells[row][column].bind('<Button-1>', handler)
         self.cells2[row][column].bind('<Button-1>', handler)
 
+    def quit(self):
+        """ Functionality for quit button """
+        self.window.destroy()
 
 if __name__ == "__main__":
     game_of_life = Control()

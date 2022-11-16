@@ -1,5 +1,13 @@
-import player
+"""
+Description: Class for humanPlayer object
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
+"""
 
+import player
 class humanPlayer(player):
     def __init__(self, score:int, is_turn:bool)->None:
         self.score = score

@@ -1,3 +1,11 @@
+"""
+Description: Class for player object
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
+"""
 
 class player(object):
     def __init__(self, score:int, is_turn:bool)->None:
