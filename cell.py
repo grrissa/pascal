@@ -1,9 +1,10 @@
 """
-Names: Alizea Hinz, Marissa Esteban, Gabe Krishnadasan, Aidan Rooney
-Proj: Final Project- Battleship 
-Class: COMP-305 SP22
-Prof: A. Nuzen
-Purpose: Cell Class
+Description: Class for cell object
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
 """
 class Cell(object):
     """
