@@ -10,9 +10,8 @@ Professor: A. Nuzen
 from player import player
 from cell import cell
 class humanPlayer(player):
-    def __init__(self, score:int, is_turn:bool)->None:
-        self.score = score
-        self.is_turn = is_turn
+    def __init__(self, playerNum, score:int, is_turn:bool)->None:
+        super().__init__(playerNum, score, is_turn)
 
         shipCells = []
         for r in range(10):
