@@ -147,7 +147,6 @@ class Control:
         self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
         self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
 
-        print("it is player " + str(self.curr_player) + "s turn")
 
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.update_cells()
