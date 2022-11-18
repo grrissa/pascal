@@ -121,7 +121,7 @@ class Control:
         else:
             return
 
-        if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+        if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                 self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
                 if (self.curr_player == self.player1):
@@ -200,7 +200,7 @@ class Control:
             print("player 1 done")
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
-            self.reset_cells2()
+            self.update_cells()
             self.board.ship_frame.destroy()
             print("player 2 done")
         print("ships placed"+str(self.ships_placed))
@@ -234,7 +234,7 @@ class Control:
     def update_cells(self):
         for r in range(self.NUM_ROWS):
             for c in range(self.NUM_COLS):
-                if (self.curr_player.attackingCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="red")
                 elif (self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="grey")
@@ -457,4 +457,3 @@ class Gameboard:
 
 if __name__ == "__main__":
     game_of_life = Control()
-
