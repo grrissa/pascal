@@ -8,7 +8,12 @@ Professor: A. Nuzen
 """
 
 import tkinter as tk
-#import humanPlayer, player
+from battleship import battleship
+from destroyer import destroyer
+from cruiser import cruiser
+from battleship import battleship
+from carrier import carrier
+from ship import ship
 from enum import IntEnum
 
 class Control:
@@ -21,17 +26,15 @@ class Control:
 
         # Create view
         self.board1 = GameIntro()
+        self.last_cell_clicked = [-1, -1]
 
         self.board1.set_human_handler(self.human_handler)
         self.board1.set_ai_handler(self.ai_handler)
 
         #self.player1 = humanPlayer(0, True)
 
-        self.board.set_battleship_handler(self.battleship_handler)
-        self.board.set_carrier_handler(self.carrier_handler)
-        self.board.set_submarine_handler(self.submarine_handler)
-        self.board.set_cruiser_handler(self.cruiser_handler)
-        self.board.set_destroyer_handler(self.destroyer_handler)
+        self.ship = ship(0, False)
+        self.ship_to_place = False
         
         # Start the simulation
         self.board1.window.mainloop()
@@ -39,6 +42,24 @@ class Control:
     def cell_click_handler(self, row, column):
         """ Cell click """
         print("Cell click: row = %d col = %d" % (row, column))
+        if self.ship_to_place == True:
+            if self.last_cell_clicked == [row, column]:
+                self.ship.change_orientation()
+            if self.ship.horizontal == True:
+                if self.ship.length + row > self.NUM_ROWS:
+                    print("ship will go out of range")
+                else:
+                    for c in range(self.ship.length):
+                        self.board.cells[row][c+column].configure(bg = "gray")
+                    self.ship_to_place = False
+            else:
+                if self.ship.length + column > self.NUM_COLS:
+                    print("ship will go out of range")
+                else:
+                    for r in range(self.ship.length):
+                        self.board.cells[r+row][column].configure(bg = "gray")
+                    self.ship_to_place = False
+
 
     def board_setup(self):
         # Cell clicks.  (Note that a separate handler function is defined for 
@@ -50,18 +71,37 @@ class Control:
                     self.cell_click_handler(row, column)
                 self.board.set_cell_click_handler(r, c, handler)
 
+        self.initializing_board_handlers()
         self.board.window.mainloop()
+
+    def initializing_board_handlers(self):
+        self.board.set_battleship_handler(self.battleship_handler)
+        self.board.set_carrier_handler(self.carrier_handler)
+        self.board.set_submarine_handler(self.submarine_handler)
+        self.board.set_cruiser_handler(self.cruiser_handler)
+        self.board.set_destroyer_handler(self.destroyer_handler)
 
     def carrier_handler(self):
         print("carrier button was pushed")
+        self.ship_to_place = True
+        self.ship = carrier()
     def battleship_handler(self):
         print("battleship button was pushed")
+        self.ship_to_place = True
+        self.ship = battleship()
     def submarine_handler(self):
         print("submarine button was pushed")
+        self.ship_to_place = True
+        self.ship = submarine()
     def cruiser_handler(self):
         print("cruiser button was pushed")
+        self.ship_to_place = True
+        self.ship = cruiser()
     def destroyer_handler(self):
         print("destroyer button was pushed")
+        self.ship_to_place = True
+        self.ship = destroyer()
+
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         #self.player2 = humanPlayer(0, False)

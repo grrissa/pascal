@@ -8,5 +8,12 @@ Professor: A. Nuzen
 """
 
 class ship(object):
-    def __init__(self, length:int) -> None:
+    def __init__(self, length:int, horitontal:bool) -> None:
         self.length = length
+        self.horizontal = True
+
+    def change_orientation(self):
+        if self.horizontal == True:
+            self.horizontal = False
+        else:
+            self.horizontal = True
