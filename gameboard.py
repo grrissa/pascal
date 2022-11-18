@@ -33,8 +33,7 @@ class Control:
         self.lastRow2 = -1
         self.lastColumn2 = -1
 
-        self.player1 = humanPlayer(0, True)
-        self.player_ships = []
+        self.player1 = humanPlayer(1, 0, True)
 
         self.curr_player = self.player1
 
@@ -120,31 +119,37 @@ class Control:
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
         else:
             return
-        
+
         if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                 self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+                if (self.curr_player == self.player1):
+                    self.player1_hits +=1
+                else:
+                    self.player2_hits +=1
                 self.lastRow = -1
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
             self.lastRow = -1
         
-        if (self.curr_player == self.player1):
+        if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
             self.player1.is_turn = False
             self.player2.is_turn = True
         else:
             self.curr_player = self.player1
-            self.player1.is_turn = False
-            self.player2.is_turn = True
+            self.player2.is_turn = False
+            self.player1.is_turn = True
         
+        
+        # updating the game board
+        self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
+        self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
 
-        self.board.player1_hits = self.player1_hits
-        self.board.player2_hits = self.player1_hits
-
-        print("CONFIRM BUTTON PRESSEDDDDDD")
         print("it is player " + str(self.curr_player) + "s turn")
+
+        print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.update_cells()
 
 
@@ -237,21 +242,19 @@ class Control:
                 if (self.curr_player.shipCells[r][c].ship == True):
                     self.board.cells2[r][c].configure(bg="grey")
                 else:
-                    self.board.cells2[r][c].configure(bg="blue")
-
-                
+                    self.board.cells2[r][c].configure(bg="blue")         
 
 
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
-        self.player2 = humanPlayer(0, False)
+        self.player2 = humanPlayer(2, 0, False)
         print("human button pressed")
         self.board1.window.destroy()
         self.board_setup()
             
     def ai_handler(self):
         """ Pause simulation """
-        self.player2 = computerPlayer(0, False)
+        self.player2 = computerPlayer(2, 0, False)
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
