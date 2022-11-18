@@ -8,10 +8,14 @@ Professor: A. Nuzen
 """
 
 class player(object):
-    def __init__(self, score:int, is_turn:bool)->None:
+    def __init__(self, playerNum, score:int, is_turn:bool)->None:
+        self.playerNum = playerNum
         self.score = score
         self.is_turn = is_turn
 
     def make_hit(self)->None:
         #Need to implement
         return
+
+    def __str__(self):
+        return ("Player %d", self.playerNum)

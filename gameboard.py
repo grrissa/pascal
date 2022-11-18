@@ -65,8 +65,9 @@ class Control:
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
-
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
+        else:
+            return
         
         if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
