@@ -36,6 +36,7 @@ class Control:
         self.player1 = humanPlayer(1, 0, True)
 
         self.curr_player = self.player1
+        self.other_player = 0
 
         self.player1_hits = 0
         self.player2_hits = 0
@@ -135,12 +136,19 @@ class Control:
         
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
+            self.other_player = self.player1
             self.player1.is_turn = False
             self.player2.is_turn = True
         else:
             self.curr_player = self.player1
+
+            self.other_player = self.player2
+            self.player1.is_turn = False
+            self.player2.is_turn = True
+
             self.player2.is_turn = False
             self.player1.is_turn = True
+
         
         
         # updating the game board
@@ -247,6 +255,7 @@ class Control:
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         self.player2 = humanPlayer(2, 0, False)
+        self.other_player = self.player2
         print("human button pressed")
         self.board1.window.destroy()
         self.board_setup()
@@ -254,6 +263,7 @@ class Control:
     def ai_handler(self):
         """ Pause simulation """
         self.player2 = computerPlayer(2, 0, False)
+        self.other_player = self.player2
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
