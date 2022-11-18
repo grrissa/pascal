@@ -7,7 +7,15 @@ Professor: A. Nuzen
 </pre>
 """
 
-import ship
+from ship import ship
 class destroyer(ship):
-    def __init__(self, length:int) -> None:
-        self.length = 2
+    def __init__(self, name:str = "destroyer", length:int = 2, horizontal:bool = True) -> None:
+        self.length = length
+        self.horizontal = horizontal
+        self.name = name
+
+    def change_orientation(self):
+        if self.horizontal == True:
+            self.horizontal = False
+        else:
+            self.horizontal = True
