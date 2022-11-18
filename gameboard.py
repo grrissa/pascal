@@ -29,7 +29,7 @@ class Control:
 
         self.player1 = humanPlayer(0, True)
 
-        self.curr_player = 1
+        self.curr_player = self.player1
         
         # Create view
         self.board1 = GameIntro()
@@ -57,31 +57,51 @@ class Control:
         if (self.lastRow2 != -1):
             self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
         print("Cell click: row = %d col = %d and is in bottom frame" % (row, column))
-        self.board.cells2[row][column].configure(bg='red')
+        self.board.cells2[row][column].configure(bg='yellow')
         self.lastRow2 = row
         self.lastColumn2 = column
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
-            print("Player %d has confirmed hit on row = %d col = %d" % (self.curr_player, self.lastRow, self.lastColumn))
+            print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
         
-        if self.curr_player == 1:
-            if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
+        if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
                 self.lastRow = -1
-            else:
-                self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
-                self.lastRow = -1
-            self.curr_player = 2
-            self.player1.is_turn = False
-            self.player2.is_turn = True
         else:
-            self.curr_player = 1
-            self.player2.is_turn = False
-            self.player1.is_turn = True
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+            self.lastRow = -1
+        
+        if (self.curr_player == self.player1):
+            self.curr_player = self.player2
+        else:
+            self.curr_player = self.player1
+        
+        self.curr_player 
+        self.player1.is_turn = False
+        self.player2.is_turn = True
+        
+        # if self.curr_player == 1:
+        #     if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
+        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+        #         self.board.cells[self.lastRow][self.lastColumn].hit = True
+        #         self.lastRow = -1
+        #     else:
+        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+        #         self.lastRow = -1
+        #     self.curr_player = 2
+        #     self.player1.is_turn = False
+        #     self.player2.is_turn = True
+        # else:
+        #     self.curr_player = 1
+        #     self.player2.is_turn = False
+        #     self.player1.is_turn = True
 
         print("CONFIRM BUTTON PRESSEDDDDDD")
         print("it is player " + str(self.curr_player) + "s turn")
+        self.update_cells()
 
 
     def board_setup(self):
@@ -107,8 +127,20 @@ class Control:
         self.board.window.mainloop()
 
     def update_cells(self):
-        
-        pass
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                if (self.curr_player.attackingCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg="red")
+                elif (self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg="grey")
+                else:
+                    self.board.cells[r][c].configure(bg="blue")
+
+                if (self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg="black")  
+                else:
+                    self.board.cells2[r][c].configure(bg="blue") 
+
 
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
