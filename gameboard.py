@@ -35,7 +35,10 @@ class Control:
 
         self.player1 = humanPlayer(0, True)
 
-        self.curr_player = 1
+        self.curr_player = self.player1
+
+        self.player1_hits = 0
+        self.player2_hits = 0
         
         # Create view
         self.board1 = GameIntro()
@@ -44,7 +47,6 @@ class Control:
         self.board1.set_human_handler(self.human_handler)
         self.board1.set_ai_handler(self.ai_handler)
 
-        #self.player1 = humanPlayer(0, True)
 
         self.ship = ship(0, False)
         self.ship_to_place = False
@@ -102,25 +104,35 @@ class Control:
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
-            print("Player %d has confirmed hit on row = %d col = %d" % (self.curr_player, self.lastRow, self.lastColumn))
+            print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
+        else:
+            return
         
-        if self.curr_player == 1:
-            if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
+        if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
                 self.lastRow = -1
-            else:
-                self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
-                self.lastRow = -1
-            self.curr_player = 2
+        else:
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+            self.lastRow = -1
+        
+        if (self.curr_player == self.player1):
+            self.curr_player = self.player2
             self.player1.is_turn = False
             self.player2.is_turn = True
         else:
-            self.curr_player = 1
-            self.player2.is_turn = False
-            self.player1.is_turn = True
+            self.curr_player = self.player1
+            self.player1.is_turn = False
+            self.player2.is_turn = True
+        
+
+        self.board.player1_hits = self.player1_hits
+        self.board.player2_hits = self.player1_hits
 
         print("CONFIRM BUTTON PRESSEDDDDDD")
         print("it is player " + str(self.curr_player) + "s turn")
+        self.update_cells()
 
 
     def board_setup(self):
@@ -183,6 +195,28 @@ class Control:
         print("destroyer button was pushed")
         self.ship_to_place = True
         self.ship = destroyer()
+    def update_cells(self):
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                if (self.curr_player.attackingCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg="red")
+                elif (self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg="grey")
+                else:
+                    self.board.cells[r][c].configure(bg="blue")
+
+                if (self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg="black")  
+                else:
+                    self.board.cells2[r][c].configure(bg="blue")
+
+                if (self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg="grey")
+                else:
+                    self.board.cells2[r][c].configure(bg="blue")
+
+                
+
 
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
@@ -253,6 +287,10 @@ class Gameboard:
         # Create window
         self.window = tk.Tk()
         self.window.title("Battleship")
+
+        # players and their hits
+        self.player1_hits = 0
+        self.player2_hits = 0
 
         # GRID ONE: Create frame for grid of cells, and put cells in the frame
         self.grid_frame = tk.Frame(self.window, height = num_rows * self.CELL_SIZE,
@@ -344,10 +382,10 @@ class Gameboard:
         confirm_button = tk.Button(self.control_frame, text="Confirm Hit", font=("Helvetica", 20))
         confirm_button.grid(row=3)
 
-        your_hits = tk.Label(self.control_frame, text="Your Hits: ", font=("Helvetica", 10))
+        your_hits = tk.Label(self.control_frame, text="Your Hits: " + str(self.player1_hits), font=("Helvetica", 10))
         your_hits.grid(row=4)
 
-        opponent = tk.Label(self.control_frame, text="Opponent: ", font=("Helvetica", 10))
+        opponent = tk.Label(self.control_frame, text="Opponent: " + str(self.player2_hits), font=("Helvetica", 10))
         opponent.grid(row=5)
 
         return (start_button, quit_button, label1, confirm_button, your_hits, opponent)
