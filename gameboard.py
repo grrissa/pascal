@@ -34,6 +34,7 @@ class Control:
         self.lastColumn2 = -1
 
         self.player1 = humanPlayer(0, True)
+        self.player_ships = []
 
         self.curr_player = self.player1
 
@@ -72,27 +73,39 @@ class Control:
     def cell_click_handler2(self, row, column):
         """ Cell click """
         print("Cell click: row = %d col = %d" % (row, column))
+        
         if self.ship_to_place == True:
+            illegal_ship = False
             if self.ship.horizontal == True:
-                if self.ship.length + column >= self.NUM_COLS:
+                if self.ship.length + column > self.NUM_COLS:
                     print("ship will go out of range")
                 else:
                     for c in range(self.ship.length):
-                        self.board.cells2[row][c+column].configure(bg = "gray")
-                        self.curr_player.shipCells[row][c+column].ship = True
-                        self.curr_player.shipCells[row][c+column].id = self.ship.name
-                    self.ship_to_place = False
-                    self.ships_placed += 1
+                        if self.curr_player.shipCells[row][c+column].ship == True:
+                            print("attempting to place ship illegally")
+                            illegal_ship = True
+                        else:
+                            self.board.cells2[row][c+column].configure(bg = "gray")
+                            self.curr_player.shipCells[row][c+column].ship = True
+                            self.curr_player.shipCells[row][c+column].id = self.ship.name
+                    if illegal_ship == False:
+                        self.ship_to_place = False
+                        self.ships_placed += 1
             else:
                 if self.ship.length + row > self.NUM_ROWS:
                     print("ship will go out of range")
                 else:
                     for r in range(self.ship.length):
-                        self.board.cells2[r+row][column].configure(bg = "gray")
-                        self.curr_player.shipCells[r+row][column].ship = True
-                        self.curr_player.shipCells[r+row][column].id = self.ship.name
-                    self.ship_to_place = False
-                    self.ships_placed += 1
+                        if self.curr_player.shipCells[row][c+column].ship == True:
+                            print("attempting to place ship illegally")
+                            illegal_ship = True
+                        else:
+                            self.board.cells2[r+row][column].configure(bg = "gray")
+                            self.curr_player.shipCells[r+row][column].ship = True
+                            self.curr_player.shipCells[r+row][column].id = self.ship.name
+                    if illegal_ship == False:
+                        self.ship_to_place = False
+                        self.ships_placed += 1
         else:
             if (self.lastRow2 != -1):
                 self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
@@ -170,10 +183,15 @@ class Control:
         print("done placing ships button was pushed")
         if self.ships_placed == 5 and self.curr_player == self.player1:
             self.curr_player = self.player2
-            self.ships_placed == 0
+            self.ships_placed = 0
+            self.reset_cells2()
+            print("player 1 done")
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
+            self.reset_cells2()
             self.board.ship_frame.destroy()
+            print("player 2 done")
+        print("ships placed"+str(self.ships_placed))
 
     def carrier_handler(self):
         print("carrier button was pushed")
@@ -195,6 +213,12 @@ class Control:
         print("destroyer button was pushed")
         self.ship_to_place = True
         self.ship = destroyer()
+
+    def reset_cells2(self):
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                self.board.cells2[r][c].configure(bg="blue")   
+
     def update_cells(self):
         for r in range(self.NUM_ROWS):
             for c in range(self.NUM_COLS):
