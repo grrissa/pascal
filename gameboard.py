@@ -9,6 +9,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 from humanPlayer import humanPlayer
+from cell import cell
 from computerPlayer import computerPlayer
 from enum import IntEnum
 
@@ -27,6 +28,7 @@ class Control:
         self.lastColumn2 = -1
 
         self.player1 = humanPlayer(0, True)
+
         self.curr_player = 1
         
         # Create view
@@ -43,7 +45,7 @@ class Control:
     def cell_click_handler1(self, row, column):
         """ Cell click """
         if (self.lastRow != -1):
-            self.board.cells[self.lastRow][self.lastColumn].configure(bg='white')
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
         print("Cell click: row = %d col = %d and is in top frame" % (row, column))
         self.board.cells[row][column].configure(bg='red')
         self.lastRow = row
@@ -53,7 +55,7 @@ class Control:
     def cell_click_handler2(self, row, column):
         """ Cell click """
         if (self.lastRow2 != -1):
-            self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='white')
+            self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
         print("Cell click: row = %d col = %d and is in bottom frame" % (row, column))
         self.board.cells2[row][column].configure(bg='red')
         self.lastRow2 = row
@@ -64,6 +66,12 @@ class Control:
             print("Player %d has confirmed hit on row = %d col = %d" % (self.curr_player, self.lastRow, self.lastColumn))
         
         if self.curr_player == 1:
+            if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+                self.lastRow = -1
+            else:
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+                self.lastRow = -1
             self.curr_player = 2
             self.player1.is_turn = False
             self.player2.is_turn = True
@@ -97,6 +105,10 @@ class Control:
         self.board.set_confirm_hit_handler(handler)
 
         self.board.window.mainloop()
+
+    def update_cells(self):
+        
+        pass
 
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
@@ -211,7 +223,6 @@ class Gameboard:
 
         return (start_button, quit_button, label1, confirm_button, your_hits, opponent)
 
-
     def add_cells(self):
         """ Add cells to the view """
         cells = []
@@ -220,7 +231,7 @@ class Gameboard:
             for c in range(self.num_cols):
                 frame = tk.Frame(self.grid_frame, width = self.CELL_SIZE, 
                         height = self.CELL_SIZE, borderwidth = 1, 
-                        relief = "solid", background="white")
+                        relief = "solid", background="blue")
                 frame.grid(row = r, column = c)
                 row.append(frame)
             cells.append(row)
