@@ -9,9 +9,10 @@ Professor: A. Nuzen
 
 from ship import ship
 class cruiser(ship):
-    def __init__(self, length:int = 3, horizontal:bool = True) -> None:
+    def __init__(self, name:str = "cruiser", length:int = 3, horizontal:bool = True) -> None:
         self.length = length
         self.horizontal = horizontal
+        self.name = name
 
     def change_orientation(self):
         if self.horizontal == True:

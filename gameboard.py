@@ -57,25 +57,6 @@ class Control:
     def cell_click_handler1(self, row, column):
         """ Cell click """
         print("Cell click: row = %d col = %d and is in top frame" % (row, column))
-        if self.ship_to_place == True:
-               # if self.last_cell_clicked == [row, column]:
-            #    self.ship.change_orientation()
-            if self.ship.horizontal == True:
-                if self.ship.length + row > self.NUM_ROWS:
-                    print("ship will go out of range")
-                else:
-                    for c in range(self.ship.length):
-                        self.board.cells[row][c+column].configure(bg = "gray")
-                    self.ship_to_place = False
-                    self.ships_placed += 1
-            else:
-                if self.ship.length + column > self.NUM_COLS:
-                    print("ship will go out of range")
-                else:
-                    for r in range(self.ship.length):
-                        self.board.cells[r+row][column].configure(bg = "gray")
-                    self.ship_to_place = False
-                    self.ships_placed += 1
 
         if (self.lastRow != -1):
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
@@ -90,32 +71,34 @@ class Control:
         """ Cell click """
         print("Cell click: row = %d col = %d" % (row, column))
         if self.ship_to_place == True:
-           # if self.last_cell_clicked == [row, column]:
-            #    self.ship.change_orientation()
             if self.ship.horizontal == True:
-                if self.ship.length + row > self.NUM_ROWS:
+                if self.ship.length + column >= self.NUM_COLS:
                     print("ship will go out of range")
                 else:
                     for c in range(self.ship.length):
                         self.board.cells2[row][c+column].configure(bg = "gray")
+                        self.curr_player.shipCells[row][c+column].ship = True
+                        self.curr_player.shipCells[row][c+column].id = self.ship.name
                     self.ship_to_place = False
                     self.ships_placed += 1
             else:
-                if self.ship.length + column > self.NUM_COLS:
+                if self.ship.length + row > self.NUM_ROWS:
                     print("ship will go out of range")
                 else:
                     for r in range(self.ship.length):
                         self.board.cells2[r+row][column].configure(bg = "gray")
+                        self.curr_player.shipCells[r+row][column].ship = True
+                        self.curr_player.shipCells[r+row][column].id = self.ship.name
                     self.ship_to_place = False
                     self.ships_placed += 1
+        else:
+            if (self.lastRow2 != -1):
+                self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
+         
+        self.lastRow2 = row
+        self.lastColumn2 = column
 
-        if (self.lastRow2 != -1):
-            self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
-
-        if self.ships_placed == 5:
-            self.board.cells2[row][column].configure(bg='red')
-            self.lastRow2 = row
-            self.lastColumn2 = column
+            
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
@@ -169,6 +152,16 @@ class Control:
         self.board.set_submarine_handler(self.submarine_handler)
         self.board.set_cruiser_handler(self.cruiser_handler)
         self.board.set_destroyer_handler(self.destroyer_handler)
+        self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
+
+    def done_placing_ships_handler(self):
+        print("done placing ships button was pushed")
+        if self.ships_placed == 5 and self.curr_player == self.player1:
+            self.curr_player = self.player2
+            self.ships_placed == 0
+        elif self.ships_placed == 5 and self.curr_player == self.player2:
+            self.curr_player = self.player1
+            self.board.ship_frame.destroy()
 
     def carrier_handler(self):
         print("carrier button was pushed")
@@ -277,13 +270,13 @@ class Gameboard:
         self.ship_frame = tk.Frame(self.window, height = num_cols * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.ship_frame.grid(row = 2, column = 2, padx=40, pady=40)
-        (self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer) = self.ship_buttons()
+        (self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer) = self.ship_buttons()
 
         # Create frame for controls
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
                                 height = self.CONTROL_FRAME_HEIGHT)
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
-        (self.start_button, self.quit_button, self.label1,
+        ( self.start_button, self.quit_button, self.label1,
             self.confirm_button, self.your_hits, self.opponent) = self.add_control()
 
     
@@ -291,22 +284,29 @@ class Gameboard:
         """ 
         Create buttons to choose ship
         """
+        done_placing_ships = tk.Button(self.ship_frame, text="Done Placing Ships", font=("Helvetica", 20))
+        done_placing_ships.grid(row=1, column = 1)
+
         carrier = tk.Button(self.ship_frame, text="Carrier (5 cells)", font=("Helvetica", 10))
-        carrier.grid(row=1, column=1)
+        carrier.grid(row=2, column=1)
 
         battleship = tk.Button(self.ship_frame, text="Battleship (4 cells)", font=("Helvetica", 10))
-        battleship.grid(row=2, column=1)
+        battleship.grid(row=3, column=1)
 
         submarine = tk.Button(self.ship_frame, text="Submarine (3 cells)", font=("Helvetica", 10))
-        submarine.grid(row=3, column = 1)
+        submarine.grid(row=4, column = 1)
 
         cruiser = tk.Button(self.ship_frame, text="Cruiser (3 cells)", font=("Helvetica", 10))
-        cruiser.grid(row=4, column = 1)
+        cruiser.grid(row=5, column = 1)
 
         destroyer = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
-        destroyer.grid(row=5, column = 1)
+        destroyer.grid(row=6, column = 1)
 
-        return (carrier, battleship, submarine, cruiser, destroyer)
+        return (done_placing_ships, carrier, battleship, submarine, cruiser, destroyer)
+
+    def set_done_placing_ships_handler(self, handler):
+        """ set handler for clicking on cell in row, column to the function handler """
+        self.done_placing_ships.configure(command = handler)
 
     def set_carrier_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
