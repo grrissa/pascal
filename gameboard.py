@@ -71,6 +71,10 @@ class Control:
         if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                 self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+                if (self.curr_player == self.player1):
+                    self.player1_hits +=1
+                else:
+                    self.player2_hits +=1
                 self.lastRow = -1
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
@@ -79,33 +83,18 @@ class Control:
         
         if (self.curr_player == self.player1):
             self.curr_player = self.player2
+            self.player1.is_turn = False
+            self.player2.is_turn = True
         else:
             self.curr_player = self.player1
+            self.player2.is_turn = False
+            self.player1.is_turn = True
         
-        self.curr_player 
-        self.player1.is_turn = False
-        self.player2.is_turn = True
         
-        # if self.curr_player == 1:
-        #     if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
-        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
-        #         self.board.cells[self.lastRow][self.lastColumn].hit = True
-        #         self.lastRow = -1
-        #     else:
-        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
-        #         self.lastRow = -1
-        #     self.curr_player = 2
-        #     self.player1.is_turn = False
-        #     self.player2.is_turn = True
-        # else:
-        #     self.curr_player = 1
-        #     self.player2.is_turn = False
-        #     self.player1.is_turn = True
+        # updating the game board
+        self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
+        self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
 
-        self.board.player1_hits = self.player1_hits
-        self.board.player2_hits = self.player1_hits
-
-        print("CONFIRM BUTTON PRESSEDDDDDD")
         print("it is player " + str(self.curr_player) + "s turn")
         self.update_cells()
 
