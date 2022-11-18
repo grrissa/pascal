@@ -6,7 +6,7 @@ Course: COMP-305 FA22
 Professor: A. Nuzen
 </pre>
 """
-class Cell(object):
+class cell(object):
     """
     @Class Cell
     @constructor(hit:bool, ship:bool, id:str)
