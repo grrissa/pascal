@@ -154,6 +154,11 @@ class Control:
         # updating the game board
         self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
         self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
+        if (self.curr_player.playerNum == 1):
+            self.board.player['text'] = "PLAYER 2S TURN"
+        else:
+            self.board.player['text'] = "PLAYER 1S TURN"
+
 
 
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
@@ -351,7 +356,7 @@ class Gameboard:
                                 height = self.CONTROL_FRAME_HEIGHT)
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         ( self.start_button, self.quit_button, self.label1,
-            self.confirm_button, self.your_hits, self.opponent) = self.add_control()
+            self.confirm_button, self.your_hits, self.opponent, self.player) = self.add_control()
 
     
     def ship_buttons(self):
@@ -424,7 +429,10 @@ class Gameboard:
         opponent = tk.Label(self.control_frame, text="Opponent: " + str(self.player2_hits), font=("Helvetica", 10))
         opponent.grid(row=5)
 
-        return (start_button, quit_button, label1, confirm_button, your_hits, opponent)
+        player = tk.Label(self.control_frame, text="PLAYER 1S TURN", font=("Helvetica", 20))
+        player.grid(row=6)
+
+        return (start_button, quit_button, label1, confirm_button, your_hits, opponent, player)
 
     def add_cells(self):
         """ Add cells to the view """
