@@ -65,8 +65,9 @@ class Control:
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
-
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
+        else:
+            return
         
         if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
@@ -79,28 +80,13 @@ class Control:
         
         if (self.curr_player == self.player1):
             self.curr_player = self.player2
+            self.player1.is_turn = False
+            self.player2.is_turn = True
         else:
             self.curr_player = self.player1
+            self.player1.is_turn = False
+            self.player2.is_turn = True
         
-        self.curr_player 
-        self.player1.is_turn = False
-        self.player2.is_turn = True
-        
-        # if self.curr_player == 1:
-        #     if self.player2.shipCells[self.lastRow][self.lastColumn].ship == True:
-        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
-        #         self.board.cells[self.lastRow][self.lastColumn].hit = True
-        #         self.lastRow = -1
-        #     else:
-        #         self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
-        #         self.lastRow = -1
-        #     self.curr_player = 2
-        #     self.player1.is_turn = False
-        #     self.player2.is_turn = True
-        # else:
-        #     self.curr_player = 1
-        #     self.player2.is_turn = False
-        #     self.player1.is_turn = True
 
         self.board.player1_hits = self.player1_hits
         self.board.player2_hits = self.player1_hits
@@ -145,7 +131,14 @@ class Control:
                 if (self.curr_player.shipCells[r][c].ship == True):
                     self.board.cells2[r][c].configure(bg="black")  
                 else:
-                    self.board.cells2[r][c].configure(bg="blue") 
+                    self.board.cells2[r][c].configure(bg="blue")
+
+                if (self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg="grey")
+                else:
+                    self.board.cells2[r][c].configure(bg="blue")
+
+                
 
 
     def human_handler(self):
