@@ -430,7 +430,7 @@ class Gameboard:
         opponent.grid(row=5)
 
         player = tk.Label(self.control_frame, text="PLAYER 1S TURN", font=("Helvetica", 20))
-        player.grid(row=6)
+        player.grid(row=7)
 
         return (start_button, quit_button, label1, confirm_button, your_hits, opponent, player)
 
