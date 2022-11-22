@@ -203,11 +203,13 @@ class Control:
             self.ships_placed = 0
             self.reset_cells2()
             print("player 1 done")
+            self.board.player['text'] = "PLAYER 2S TURN"
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
             self.update_cells()
             self.board.ship_frame.destroy()
             print("player 2 done")
+            self.board.player['text'] = "PLAYER 1S TURN"
         print("ships placed"+str(self.ships_placed))
 
     def carrier_handler(self):
