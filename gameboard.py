@@ -36,6 +36,7 @@ class Control:
         self.player1 = humanPlayer(1, 0, True)
 
         self.curr_player = self.player1
+        self.other_player = 0
 
         self.player1_hits = 0
         self.player2_hits = 0
@@ -120,7 +121,7 @@ class Control:
         else:
             return
 
-        if self.curr_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+        if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                 self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
                 if (self.curr_player == self.player1):
@@ -135,19 +136,30 @@ class Control:
         
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
+            self.other_player = self.player1
             self.player1.is_turn = False
             self.player2.is_turn = True
         else:
             self.curr_player = self.player1
+
+            self.other_player = self.player2
+            self.player1.is_turn = False
+            self.player2.is_turn = True
+
             self.player2.is_turn = False
             self.player1.is_turn = True
+
         
         
         # updating the game board
         self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
         self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
+        if (self.curr_player.playerNum == 1):
+            self.board.player['text'] = "PLAYER 2S TURN"
+        else:
+            self.board.player['text'] = "PLAYER 1S TURN"
 
-        print("it is player " + str(self.curr_player) + "s turn")
+
 
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.update_cells()
@@ -193,7 +205,7 @@ class Control:
             print("player 1 done")
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
-            self.reset_cells2()
+            self.update_cells()
             self.board.ship_frame.destroy()
             print("player 2 done")
         print("ships placed"+str(self.ships_placed))
@@ -227,7 +239,7 @@ class Control:
     def update_cells(self):
         for r in range(self.NUM_ROWS):
             for c in range(self.NUM_COLS):
-                if (self.curr_player.attackingCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="red")
                 elif (self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="grey")
@@ -248,6 +260,7 @@ class Control:
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         self.player2 = humanPlayer(2, 0, False)
+        self.other_player = self.player2
         print("human button pressed")
         self.board1.window.destroy()
         self.board_setup()
@@ -255,6 +268,7 @@ class Control:
     def ai_handler(self):
         """ Pause simulation """
         self.player2 = computerPlayer(2, 0, False)
+        self.other_player = self.player2
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
@@ -342,7 +356,7 @@ class Gameboard:
                                 height = self.CONTROL_FRAME_HEIGHT)
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         ( self.start_button, self.quit_button, self.label1,
-            self.confirm_button, self.your_hits, self.opponent) = self.add_control()
+            self.confirm_button, self.your_hits, self.opponent, self.player) = self.add_control()
 
     
     def ship_buttons(self):
@@ -415,7 +429,10 @@ class Gameboard:
         opponent = tk.Label(self.control_frame, text="Opponent: " + str(self.player2_hits), font=("Helvetica", 10))
         opponent.grid(row=5)
 
-        return (start_button, quit_button, label1, confirm_button, your_hits, opponent)
+        player = tk.Label(self.control_frame, text="PLAYER 1S TURN", font=("Helvetica", 20))
+        player.grid(row=7)
+
+        return (start_button, quit_button, label1, confirm_button, your_hits, opponent, player)
 
     def add_cells(self):
         """ Add cells to the view """
@@ -448,4 +465,3 @@ class Gameboard:
 
 if __name__ == "__main__":
     game_of_life = Control()
-
