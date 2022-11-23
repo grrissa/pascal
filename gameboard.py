@@ -57,6 +57,7 @@ class Control:
         self.last_ship = ship(0, False)
         self.change_orientation = False
         self.delete_mode = False
+        self.mod_color = "gray"
         
         # Start the simulation
         self.board1.window.mainloop()
@@ -132,6 +133,7 @@ class Control:
                         self.ships_placed += 1
                 else: # illegal ship is true
                     if self.change_orientation == True:
+                        self.ship.change_orientation()
                         self.clear_ship(row, column, 1, illegal_index, not self.ship.horizontal)
                     else:
                         self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal)
@@ -147,15 +149,17 @@ class Control:
 
     def clear_ship(self, row, column, start_range, end_range, horizontal):
         if horizontal == True:
-            for c in range(start_range, end_range):
-                self.board.cells2[row][c+column].configure(bg = "blue")
-                self.curr_player.shipCells[row][c+column].ship = False
-                self.curr_player.shipCells[row][c+column].id = ""
+            if column + end_range <= self.NUM_COLS:
+                for c in range(start_range, end_range):
+                    self.board.cells2[row][c+column].configure(bg = "blue")
+                    self.curr_player.shipCells[row][c+column].ship = False
+                    self.curr_player.shipCells[row][c+column].id = ""
         else:
-            for r in range(start_range, end_range):
-                self.board.cells2[r+row][column].configure(bg = "blue")
-                self.curr_player.shipCells[r+row][column].ship = False
-                self.curr_player.shipCells[r+row][column].id = ""
+            if row + end_range <= self.NUM_ROWS:
+                for r in range(start_range, end_range):
+                    self.board.cells2[r+row][column].configure(bg = "blue")
+                    self.curr_player.shipCells[r+row][column].ship = False
+                    self.curr_player.shipCells[r+row][column].id = ""
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
@@ -245,6 +249,21 @@ class Control:
         
         self.ships_placed -= 1
         self.ship_types_placed.remove(ship_name)
+        self.update_ship_labels(ship_name)
+
+    def update_ship_labels(self, ship_name):
+        if ship_name == "carrier":
+            self.board.carrier.configure(fg = "black")
+        elif ship_name == "destroyer":
+            self.board.destroyer.configure(fg = "black")
+        elif ship_name == "battleship":
+            self.board.battleship.configure(fg = "black")
+        elif ship_name == "submarine":
+            self.board.submarine.configure(fg = "black")
+        elif ship_name == "cruiser":
+            self.board.cruiser.configure(fg = "black")
+        else:
+            print("invalid ship name")
 
     def delete_ship_handler(self):
         print("delete mode on")
@@ -261,6 +280,8 @@ class Control:
             self.curr_player = self.player2
             self.ships_placed = 0
             self.reset_cells2()
+            for s in self.ship_types_placed:
+                self.update_ship_labels(s)
             self.ship_types_placed = []
             self.board.player['text'] = "PLAYER 2: Place your ships"
         elif self.ships_placed == 5 and self.curr_player == self.player2:
@@ -271,28 +292,38 @@ class Control:
 
     def carrier_handler(self):
         print("carrier button was pushed")
-        self.ship_to_place = True
-        self.ship = carrier()
+        if "carrier" not in self.ship_types_placed:
+            self.ship_to_place = True
+            self.ship = carrier()
+            self.board.carrier.configure(fg = self.mod_color)
             
     def battleship_handler(self):
         print("battleship button was pushed")
-        self.ship_to_place = True
-        self.ship = battleship()
+        if "battleship" not in self.ship_types_placed:
+            self.ship_to_place = True
+            self.ship = battleship()
+            self.board.battleship.configure(fg = self.mod_color)
 
     def submarine_handler(self):
         print("submarine button was pushed")
-        self.ship_to_place = True
-        self.ship = submarine()
+        if "submarine" not in self.ship_types_placed:
+            self.ship_to_place = True
+            self.ship = submarine()
+            self.board.submarine.configure(fg = self.mod_color)
         
     def cruiser_handler(self):
         print("cruiser button was pushed")
-        self.ship_to_place = True
-        self.ship = cruiser()
+        if "cruiser" not in self.ship_types_placed:
+            self.ship_to_place = True
+            self.ship = cruiser()
+            self.board.cruiser.configure(fg = self.mod_color)
         
     def destroyer_handler(self):
         print("destroyer button was pushed")
-        self.ship_to_place = True
-        self.ship = destroyer()
+        if "destroyer" not in self.ship_types_placed:
+            self.ship_to_place = True
+            self.ship = destroyer()
+            self.board.destroyer.configure(fg = self.mod_color)
 
     def reset_cells2(self):
         for r in range(self.NUM_ROWS):
