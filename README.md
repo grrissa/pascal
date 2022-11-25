@@ -3,4 +3,5 @@
   Semester: Fall 2022\
   Team name: Pascal\
   Team members: Gabe Krishnadasan, Alizea Hinz, Marrisa Nicole Esteban, Aidan Rooney\
-  Drive link: https://drive.google.com/drive/u/0/folders/0AOm0ppwNZuhLUk9PVA
+  Drive link: https://drive.google.com/drive/u/0/folders/0AOm0ppwNZuhLUk9PVA \
+  Trello board: https://trello.com/b/ulQx1yT1/battleship
