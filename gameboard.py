@@ -54,6 +54,14 @@ class Control:
         self.ready_to_hit = False
         self.ships_placed = 0
         
+        """ Started to mess around with cursor location... could be helpful for placement of ships """
+        # def callback(e):
+        #     x = e.x
+        #     y = e.y
+        #     print("Pointer is currently at %d, %d" %(x,y))
+        # self.board1.window.bind('<Motion>', callback)
+
+
         # Start the simulation
         self.board1.window.mainloop()
 
@@ -88,6 +96,7 @@ class Control:
                             self.board.cells2[row][c+column].configure(bg = "gray")
                             self.curr_player.shipCells[row][c+column].ship = True
                             self.curr_player.shipCells[row][c+column].id = self.ship.name
+
                     if illegal_ship == False:
                         self.ship_to_place = False
                         self.ships_placed += 1
@@ -111,9 +120,7 @@ class Control:
                 self.board.cells2[self.lastRow2][self.lastColumn2].configure(bg='blue')
          
         self.lastRow2 = row
-        self.lastColumn2 = column
-
-            
+        self.lastColumn2 = column       
 
     def confirm_hit_handler(self):
         if (self.lastRow != -1):
@@ -148,8 +155,6 @@ class Control:
 
             self.player2.is_turn = False
             self.player1.is_turn = True
-
-        
         
         # updating the game board
         self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
@@ -197,6 +202,7 @@ class Control:
             self.curr_player = self.player2
             self.ships_placed = 0
             self.reset_cells2()
+            self.board.ship_buttons()
             print("player 1 done")
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
@@ -209,22 +215,27 @@ class Control:
         print("carrier button was pushed")
         self.ship_to_place = True
         self.ship = carrier()
+        self.board.carrier_button.destroy()
     def battleship_handler(self):
         print("battleship button was pushed")
         self.ship_to_place = True
         self.ship = battleship()
+        self.board.battleship_button.destroy()
     def submarine_handler(self):
         print("submarine button was pushed")
         self.ship_to_place = True
         self.ship = submarine()
+        self.board.submarine_button.destroy()
     def cruiser_handler(self):
         print("cruiser button was pushed")
         self.ship_to_place = True
         self.ship = cruiser()
+        self.board.cruiser_button.destroy()
     def destroyer_handler(self):
         print("destroyer button was pushed")
         self.ship_to_place = True
         self.ship = destroyer()
+        self.board.destroyer_button.destroy()
 
     def reset_cells2(self):
         for r in range(self.NUM_ROWS):
@@ -361,20 +372,20 @@ class Gameboard:
         done_placing_ships = tk.Button(self.ship_frame, text="Done Placing Ships", font=("Helvetica", 20))
         done_placing_ships.grid(row=1, column = 1)
 
-        carrier = tk.Button(self.ship_frame, text="Carrier (5 cells)", font=("Helvetica", 10))
-        carrier.grid(row=2, column=1)
+        self.carrier_button = tk.Button(self.ship_frame, text="Carrier (5 cells)", font=("Helvetica", 10))
+        self.carrier_button.grid(row=2, column=1)
 
-        battleship = tk.Button(self.ship_frame, text="Battleship (4 cells)", font=("Helvetica", 10))
-        battleship.grid(row=3, column=1)
+        self.battleship_button = tk.Button(self.ship_frame, text="Battleship (4 cells)", font=("Helvetica", 10))
+        self.battleship_button.grid(row=3, column=1)
 
-        submarine = tk.Button(self.ship_frame, text="Submarine (3 cells)", font=("Helvetica", 10))
-        submarine.grid(row=4, column = 1)
+        self.submarine_button = tk.Button(self.ship_frame, text="Submarine (3 cells)", font=("Helvetica", 10))
+        self.submarine_button.grid(row=4, column = 1)
 
-        cruiser = tk.Button(self.ship_frame, text="Cruiser (3 cells)", font=("Helvetica", 10))
-        cruiser.grid(row=5, column = 1)
+        self.cruiser_button = tk.Button(self.ship_frame, text="Cruiser (3 cells)", font=("Helvetica", 10))
+        self.cruiser_button.grid(row=5, column = 1)
 
-        destroyer = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
-        destroyer.grid(row=6, column = 1)
+        self.destroyer_button = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
+        self.destroyer_button.grid(row=6, column = 1)
 
         return (done_placing_ships, carrier, battleship, submarine, cruiser, destroyer)
 
@@ -384,23 +395,23 @@ class Gameboard:
 
     def set_carrier_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
-        self.carrier.configure(command = handler)
+        self.carrier_button.configure(command = handler)
 
     def set_battleship_handler(self, handler):
         """ set handler for clicking on start button to the function handler """
-        self.battleship.configure(command = handler)
+        self.battleship_button.configure(command = handler)
 
     def set_submarine_handler(self, handler):
         """ set handler for clicking on pause button to the function handler """
-        self.submarine.configure(command = handler)
+        self.submarine_button.configure(command = handler)
 
     def set_cruiser_handler(self, handler):
         """ set handler for clicking on step button to the function handler """
-        self.cruiser.configure(command = handler)
+        self.cruiser_button.configure(command = handler)
 
     def set_destroyer_handler(self, handler):
         """ set handler for clicking on reset button to the function handler """
-        self.destroyer.configure(command = handler)
+        self.destroyer_button.configure(command = handler)
 
     def add_control(self):
         """ 
