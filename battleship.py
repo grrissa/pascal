@@ -14,6 +14,7 @@ class battleship(ship):
         self.horizontal = horizontal
         self.name = name
 
+    #is this class not inherited from ship class, this question goes for all ship subclasses (would be a good use of inheritence)
     def change_orientation(self):
         if self.horizontal == True:
             self.horizontal = False
