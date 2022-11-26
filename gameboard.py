@@ -83,6 +83,7 @@ class Control:
             if self.curr_player.shipCells[row][column].ship == True:
                 self.delete_mode_func(self.curr_player.shipCells[row][column].id)
         else:
+            switch_point = -1
             if self.ship == self.last_ship and self.curr_player.shipCells[row][column].id == self.ship.name:
                 self.ship.change_orientation()
                 self.change_orientation = True
@@ -96,25 +97,27 @@ class Control:
                     # switching to vertical
                     switch_point = column-self.ship_start
                     if (row-switch_point >= 0 ) and (row+switch_point <= self.NUM_ROWS): # if new ship won't go out of bounds, continue on
-                        self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal)
                         if switch_point != 0:
+                            self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal)
                             for first_half in range(0, switch_point+1):
                                 if self.curr_player.shipCells[row-first_half][column].ship == True and self.curr_player.shipCells[row-first_half][column].id != self.ship.name:
                                     print("attempting to place ship illegally")
                                     illegal_ship = True
                                     illegal_index = c
                                     self.ship.change_orientation()
+                                    self.clear_ship(row-switch_point, column, 0, illegal_index, not self.ship.horizontal)
                                     break
                                 else:
                                     self.board.cells2[row-first_half][column].configure(bg = "gray")
                                     self.curr_player.shipCells[row-first_half][column].ship = True
                                     self.curr_player.shipCells[row-first_half][column].id = self.ship.name
-                            for second_half in range(switch_point-1, self.ship.length-switch_point):
+                            for second_half in range(switch_point-1, self.ship.length-switch_point+1):
                                 if self.curr_player.shipCells[row+second_half][column].ship == True and self.curr_player.shipCells[row+second_half][column].id != self.ship.name:
                                     print("attempting to place ship illegally")
                                     illegal_ship = True
                                     illegal_index = c
                                     self.ship.change_orientation()
+                                    self.clear_ship(row+switch_point-1, column, switch_point-1, illegal_index, not self.ship.horizontal)
                                     break
                                 else:
                                     self.board.cells2[row+second_half][column].configure(bg = "gray")
@@ -129,14 +132,15 @@ class Control:
                             break
                     switch_point = row-self.ship_start
                     if (column-switch_point >= 0 ) and (column+switch_point <= self.NUM_COLS): # if new ship won't go out of bounds, continue on
-                        self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal)
                         if switch_point != 0:
+                            self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal)
                             for first_half in range(0, switch_point+1):
                                 if self.curr_player.shipCells[row][column-first_half].ship == True and self.curr_player.shipCells[row][column-first_half].id != self.ship.name:
                                     print("attempting to place ship illegally")
                                     illegal_ship = True
                                     illegal_index = c
                                     self.ship.change_orientation()
+                                    self.clear_ship(row, column-switch_point, 0, illegal_index, not self.ship.horizontal)
                                     break
                                 else:
                                     self.board.cells2[row][column-first_half].configure(bg = "gray")
@@ -148,16 +152,17 @@ class Control:
                                     illegal_ship = True
                                     illegal_index = c
                                     self.ship.change_orientation()
+                                    self.clear_ship(row, column+switch_point-1, switch_point -1, illegal_index, not self.ship.horizontal)
                                     break
                                 else:
                                     self.board.cells2[row][column+second_half].configure(bg = "gray")
                                     self.curr_player.shipCells[row][column+second_half].ship = True
                                     self.curr_player.shipCells[row][column+second_half].id = self.ship.name
-            if (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False or self.switch_point == 0:
+            if (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False or switch_point == 0:
                 illegal_ship = False
                 illegal_index = 0
-                if self.ship.length + column <= self.NUM_COLS-1:
-                    if self.ship.horizontal == False:
+                if self.ship.horizontal == True:
+                    if self.ship.length + column <= self.NUM_COLS-1:
                         for c in range(self.ship.length):
                             if self.curr_player.shipCells[row][c+column].ship == True and self.curr_player.shipCells[row][c+column].id != self.ship.name:
                                 print("attempting to place ship illegally")
@@ -170,12 +175,31 @@ class Control:
                                 self.board.cells2[row][c+column].configure(bg = "gray")
                                 self.curr_player.shipCells[row][c+column].ship = True
                                 self.curr_player.shipCells[row][c+column].id = self.ship.name
+
+                else:
+                    if self.ship.length + row <= self.NUM_ROWS:
+                        for r in range(self.ship.length):
+                            if self.curr_player.shipCells[r+row][column].ship == True and self.curr_player.shipCells[r+row][column].id != self.ship.name:
+                                print("attempting to place ship illegally")
+                                illegal_ship = True
+                                illegal_index = r
+                                break
+                            else:
+                                self.board.cells2[r+row][column].configure(bg = "gray")
+                                self.curr_player.shipCells[r+row][column].ship = True
+                                self.curr_player.shipCells[r+row][column].id = self.ship.name
+                    else:
+                        print("ship will go out of range")
+                        illegal_ship = True
    
                 if illegal_ship == False:
-                    self.last_ship = self.ship
-                    self.ship_types_placed.append(self.ship.name)
                     self.ship_to_place = False
-                    self.ships_placed += 1
+                    if switch_point != -1:
+                        self.clear_ship(row, column, 1, self.ship.length, not self.ship.horizontal)
+                    else:
+                        self.ship_types_placed.append(self.ship.name)
+                        self.ships_placed += 1
+                        self.last_ship = self.ship
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal)
 
