@@ -153,14 +153,6 @@ class Control:
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
 
-            self.change_orientation = False
-            if self.curr_player.shipCells[row][column].ship == False:
-                self.lastRow2 = -1
-                self.lastColumn2 = -1
-            else:
-                self.lastRow2 = row
-                self.lastColumn2 = column
-
     def place_ship(self, row, column, start_range, end_range, horizontal, ship_name):
         if horizontal == True:
             for c in range(start_range, end_range):
