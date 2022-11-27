@@ -69,8 +69,8 @@ class Control:
         if (self.lastRow != -1):
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
         
-        if self.ships_placed == 5:
-            self.board.cells[row][column].configure(bg='red')
+        if self.ships_placed == 5 and self.curr_player.attackingCells[row][column].hit == False:
+            self.board.cells[row][column].configure(bg='yellow')
             self.lastRow = row
             self.lastColumn = column
 
@@ -195,11 +195,16 @@ class Control:
                 else:
                     self.player2_hits +=1
                 self.lastRow = -1
+                
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
             self.lastRow = -1
         
+        self.board.window.update()
+        self.board.window.after(1000, self.update_player())
+        
+    def update_player(self):   
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
             self.other_player = self.player1
@@ -207,7 +212,6 @@ class Control:
             self.player2.is_turn = True
         else:
             self.curr_player = self.player1
-
             self.other_player = self.player2
             self.player1.is_turn = False
             self.player2.is_turn = True
@@ -226,7 +230,6 @@ class Control:
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.update_cells()
 
-
     def board_setup(self):
         # Cell clicks.  (Note that a separate handler function is defined for 
         # each cell.)
@@ -242,7 +245,6 @@ class Control:
                 def handler(event, row = r, column = c):
                     self.cell_click_handler2(row, column)
                 self.board.set_cell_click_handler_bottom(r, c, handler)
-
         def handler(event):
             self.confirm_hit_handler()
         self.board.set_confirm_hit_handler(handler)
@@ -250,7 +252,7 @@ class Control:
         self.initializing_board_handlers()
         self.board.window.mainloop()
 
-    def initializing_board_handlers(self):
+    def initializing_board_handlers(self): 
         self.board.set_battleship_handler(self.battleship_handler)
         self.board.set_carrier_handler(self.carrier_handler)
         self.board.set_submarine_handler(self.submarine_handler)
