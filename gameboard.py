@@ -306,18 +306,25 @@ class Control:
             self.curr_player = self.player2
             self.ships_placed = 0
             self.reset_cells2()
-            if self.player2.is_human == True:
-                for s in self.ship_types_placed:
-                    self.update_ship_labels(s)
-                self.ship_types_placed = []
-                self.board.player['text'] = "PLAYER 2: Place your ships"
-            else:
+            for s in self.ship_types_placed:
+                self.update_ship_labels(s)
+            self.ship_types_placed = []
+            self.board.player['text'] = "PLAYER 2: Place your ships"
 
+            if self.player2.is_human == False:
+                # randomly placing ships
                 for i in range(5):
                     self.ship = self.ship_types[i]
-                    # self.ship.horizontal = look up how to do random bool                    
-                    self.cell_click_handler2(random.Random())
+                    self.ship.set_orientation(bool(random.randint(0,1)))    
+                    
+                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
+                self.curr_player = self.player1
+                self.update_cells()
+                self.board.ship_frame.destroy()
+                self.board.player['text'] = "PLAYER 1S TURN"
+
+            
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
             self.update_cells()

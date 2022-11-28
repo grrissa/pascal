@@ -17,3 +17,6 @@ class ship(object):
             self.horizontal = False
         else:
             self.horizontal = True
+
+    def set_orientation(self, orientation):
+        self.horizontal = orientation
