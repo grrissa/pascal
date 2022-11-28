@@ -12,6 +12,7 @@ class player(object):
         self.playerNum = playerNum
         self.score = score
         self.is_turn = is_turn
+        self.is_human = True
 
     def make_hit(self)->None:
         #Need to implement

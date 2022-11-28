@@ -18,6 +18,7 @@ from humanPlayer import humanPlayer
 from cell import cell
 from computerPlayer import computerPlayer
 from enum import IntEnum
+import random
 
 class Control:
     """ The controller. """
@@ -53,6 +54,7 @@ class Control:
         self.ship_to_place = False
         self.ready_to_hit = False
         self.ships_placed = 0
+        self.ship_types = [battleship(0, False), carrier(0, False), cruiser(0, False), submarine(0, False), destroyer(0, False)]
         self.ship_types_placed = []
         self.last_ship = ship(0, False)
         self.change_orientation = False
@@ -75,7 +77,7 @@ class Control:
             self.lastColumn = column
 
     
-    def cell_click_handler2(self, row, column):
+    def cell_click_handler2(self, row, column) -> bool:
         """ Cell click """
         print("Cell click: row = %d col = %d" % (row, column))
         if self.delete_mode == True:
@@ -101,6 +103,7 @@ class Control:
                                     self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
                                     self.place_ship(row, self.ship_start, 0, self.ship.length, self.ship.horizontal, self.ship.name)
                                     break
+                
                                 else:
                                     self.board.cells2[row-switch_point+first_half][column].configure(bg = "gray")
                                     self.curr_player.shipCells[row-switch_point+first_half][column].ship = True
@@ -152,6 +155,7 @@ class Control:
                     self.last_ship = self.ship
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+        
 
     def place_ship(self, row, column, start_range, end_range, horizontal, ship_name):
         if horizontal == True:
@@ -302,10 +306,18 @@ class Control:
             self.curr_player = self.player2
             self.ships_placed = 0
             self.reset_cells2()
-            for s in self.ship_types_placed:
-                self.update_ship_labels(s)
-            self.ship_types_placed = []
-            self.board.player['text'] = "PLAYER 2: Place your ships"
+            if self.player2.is_human == True:
+                for s in self.ship_types_placed:
+                    self.update_ship_labels(s)
+                self.ship_types_placed = []
+                self.board.player['text'] = "PLAYER 2: Place your ships"
+            else:
+
+                for i in range(5):
+                    self.ship = self.ship_types[i]
+                    # self.ship.horizontal = look up how to do random bool                    
+                    self.cell_click_handler2(random.Random())
+
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
             self.update_cells()
@@ -415,7 +427,7 @@ class GameIntro:
         human_button = tk.Button(self.control_frame, text="Human vs Human", font=("Helvetica", 10))
         human_button.grid(row=2, column=1)
 
-        ai_button = tk.Button(self.control_frame, text="Human vs AI", font=("Helvetica", 10))
+        ai_button = tk.Button(self.control_frame, text="Human vs Computer", font=("Helvetica", 10))
         ai_button.grid(row=3, column=1)
 
         return (human_button, ai_button)
