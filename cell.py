@@ -18,4 +18,3 @@ class cell(object):
         self.hit = h
         self.ship = s
         self.id = i
-
