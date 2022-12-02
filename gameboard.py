@@ -245,14 +245,14 @@ class Control:
             self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
             self.lastRow = -1
-
         #THIS IS OUR ENDGAME CHECKER!! CURRENTLY ONLY QUITS WINDOW, NEED TO CHANGE TO SPEPERATE WINDOW WITH GAME WINNER INSTEAD
         if (self.curr_player.numOfHits == 17):
             self.board.window.destroy()
+            self.end_game_setup()
+        else:
+            self.board.window.update()
+            self.board.window.after(1000, self.update_player())
 
-
-        self.board.window.update()
-        self.board.window.after(1000, self.update_player())
         
     def update_player(self):   
         if (self.curr_player.playerNum == 1):
@@ -279,6 +279,12 @@ class Control:
 
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.update_cells()
+
+    def end_game_setup(self):
+        self.end_board = EndGame()
+        self.end_board.set_quit_handler(self.quit_handler)
+        self.end_board.set_repeat_handler(self.repeat_handler)
+        self.end_board.window.mainloop()
 
     def board_setup(self):
         # Cell clicks.  (Note that a separate handler function is defined for 
@@ -458,6 +464,52 @@ class Control:
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
+    
+    def quit_handler(self):
+        self.end_board.window.destroy()
+    def repeat_handler(self):
+        self.end_board.window.destroy()
+        self.__init__()
+        
+
+class EndGame:
+    def __init__(self):
+        """ Initialize view of the game """
+        # Constants
+        self.CONTROL_FRAME_HEIGHT = 500
+
+        # Create window
+        self.window = tk.Tk()
+        self.window.title("Battleship")
+
+        # Create frame for controls
+        self.control_frame = tk.Frame(self.window, width = self.CONTROL_FRAME_HEIGHT, 
+                                height = self.CONTROL_FRAME_HEIGHT)
+        self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
+        (self.repeat_button, self.quit_button) = self.add_control()
+
+    def add_control(self):
+        """ 
+        Create control buttons and welcome message, and add them to the control frame 
+        """
+        welcome = tk.Label(self.control_frame, text="Game has ended", font=("Helvetica", 20))
+        welcome.grid(row=1, column = 1)
+
+        repeat_button = tk.Button(self.control_frame, text="Repeat Game?", font=("Helvetica", 10))
+        repeat_button.grid(row=2, column=1)
+
+        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10))
+        quit_button.grid(row=3, column=1)
+
+        return (repeat_button, quit_button)
+
+    def set_repeat_handler(self, handler):
+        """ set handler for clicking on start button to the function handler """
+        self.repeat_button.configure(command = handler)
+
+    def set_quit_handler(self, handler):
+        """ set handler for clicking on pause button to the function handler """
+        self.quit_button.configure(command = handler)
 
 class GameIntro:
     def __init__(self):
