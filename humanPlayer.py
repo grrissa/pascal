@@ -29,6 +29,10 @@ class humanPlayer(player):
 
         self.shipCells = shipCells
         self.attackingCells = attackingCells
+        self.numOfHits = 0
+
+    def incrementHits(self):
+        self.numOfHits += 1
 
     def make_hit(self)->None:
         #Need to implement

@@ -39,9 +39,6 @@ class Control:
 
         self.curr_player = self.player1
         self.other_player = 0
-
-        self.player1_hits = 0
-        self.player2_hits = 0
         
         # Create view
         self.board1 = GameIntro()
@@ -235,18 +232,12 @@ class Control:
             return
         print(self.lastRow, self.lastColumn)
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
-            #Aidans Code
             if (self.other_player.shipCells[self.lastRow][self.lastColumn].hit == False):
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                 self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
-                self.shipSunk(self.lastRow, self.lastColumn) #AIDANS FUNCTION
-                if (self.curr_player == self.player1):
-                    self.player1_hits +=1
-                else:
-                    self.player2_hits +=1
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+                self.curr_player.incrementHits()
                 self.lastRow = -1
-        #Aidans Code
-
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
@@ -271,8 +262,8 @@ class Control:
             self.player1.is_turn = True
 
         # updating the game board
-        self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
-        self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
+        self.board.your_hits['text'] = "Your Hits: " + str(self.player1.numOfHits)
+        self.board.opponent['text'] = "Opponent: " + str(self.player2.numOfHits)
         if (self.curr_player.playerNum == 1):
             self.board.player['text'] = "PLAYER 2S TURN"
         else:
@@ -421,6 +412,7 @@ class Control:
     def update_cells(self):
         for r in range(self.NUM_ROWS):
             for c in range(self.NUM_COLS):
+                
                 if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="red")
                 elif (self.curr_player.attackingCells[r][c].hit == True):
@@ -516,9 +508,6 @@ class Gameboard:
         self.window = tk.Tk()
         self.window.title("Battleship")
 
-        # players and their hits
-        self.player1_hits = 0
-        self.player2_hits = 0
 
         # GRID ONE: Create frame for grid of cells, and put cells in the frame
         self.grid_frame = tk.Frame(self.window, height = num_rows * self.CELL_SIZE,
@@ -617,10 +606,10 @@ class Gameboard:
         confirm_button = tk.Button(self.control_frame, text="Confirm Hit", font=("Helvetica", 20))
         confirm_button.grid(row=3)
 
-        your_hits = tk.Label(self.control_frame, text="Your Hits: " + str(self.player1_hits), font=("Helvetica", 10))
+        your_hits = tk.Label(self.control_frame, text="Your Hits: 0", font=("Helvetica", 10))
         your_hits.grid(row=4)
 
-        opponent = tk.Label(self.control_frame, text="Opponent: " + str(self.player2_hits), font=("Helvetica", 10))
+        opponent = tk.Label(self.control_frame, text="Opponent: 0", font=("Helvetica", 10))
         opponent.grid(row=5)
 
         player = tk.Label(self.control_frame, text="PLAYER 1: Place your ships", font=("Helvetica", 20))
