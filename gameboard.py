@@ -320,6 +320,7 @@ class Control:
                     
                     self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
+
                 self.curr_player = self.player1
                 self.update_cells()
                 self.board.ship_frame.destroy()
