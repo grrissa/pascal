@@ -230,6 +230,8 @@ class Control:
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
         else:
             return
+
+        
         print(self.lastRow, self.lastColumn)
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
             if (self.other_player.shipCells[self.lastRow][self.lastColumn].hit == False):
@@ -240,9 +242,10 @@ class Control:
                 self.lastRow = -1
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+            self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
             self.lastRow = -1
-        
+
         self.board.window.update()
         self.board.window.after(1000, self.update_player())
         
@@ -420,13 +423,12 @@ class Control:
                 else:
                     self.board.cells[r][c].configure(bg="blue")
 
-                if (self.curr_player.shipCells[r][c].ship == True):
-                    self.board.cells2[r][c].configure(bg="black")  
-                else:
-                    self.board.cells2[r][c].configure(bg="blue")
-
-                if (self.curr_player.shipCells[r][c].ship == True):
+                if (self.curr_player.shipCells[r][c].ship == True and self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg="orange")
+                elif(self.curr_player.shipCells[r][c].ship == True):
                     self.board.cells2[r][c].configure(bg="grey")
+                elif(self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg="black")
                 else:
                     self.board.cells2[r][c].configure(bg="blue")         
 
