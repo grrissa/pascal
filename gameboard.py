@@ -246,6 +246,11 @@ class Control:
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
             self.lastRow = -1
 
+        #THIS IS OUR ENDGAME CHECKER!! CURRENTLY ONLY QUITS WINDOW, NEED TO CHANGE TO SPEPERATE WINDOW WITH GAME WINNER INSTEAD
+        if (self.curr_player.numOfHits == 17):
+            self.board.window.destroy()
+
+
         self.board.window.update()
         self.board.window.after(1000, self.update_player())
         
