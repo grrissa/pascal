@@ -311,6 +311,7 @@ class Control:
             self.ship_types_placed = []
             self.board.player['text'] = "PLAYER 2: Place your ships"
 
+            # marissa added this ignore until needed
             if self.player2.is_human == False:
                 # randomly placing ships
                 for i in range(5):
