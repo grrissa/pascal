@@ -20,11 +20,3 @@ class player(object):
 
     def __str__(self):
         return ("Player %d", self.playerNum)
-
-    def setHits(self, ship_types):
-        self.hit = {}
-        self.ship_size = {}
-        for item in ship_types:
-            print(item.name)
-            self.ship_size[item.name] = item.length
-            self.hit[item.name] = 0

@@ -19,7 +19,6 @@ from cell import cell
 from computerPlayer import computerPlayer
 from enum import IntEnum
 import random
-ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
 
 class Control:
     """ The controller. """
@@ -47,35 +46,23 @@ class Control:
         self.board1 = GameIntro()
         self.last_cell_clicked = [-1, -1]
 
-        
+        self.board1.set_human_handler(self.human_handler)
+        self.board1.set_ai_handler(self.ai_handler)
 
 
         self.ship = ship(0, False)
         self.ship_to_place = False
         self.ready_to_hit = False
         self.ships_placed = 0
-        #Deleted parameters
-        self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
-       
-        #AIDAN START copied and pasted code down
-        self.board1.set_human_handler(self.human_handler)
-        self.board1.set_ai_handler(self.ai_handler)
-        #AIDAN FINISH copied and pasted code down
-
+        self.ship_types = [battleship(0, False), carrier(0, False), cruiser(0, False), submarine(0, False), destroyer(0, False)]
         self.ship_types_placed = []
         self.last_ship = ship(0, False)
         self.change_orientation = False
         self.delete_mode = False
         self.mod_color = "gray"
-        #AIDANS ADDED CODE
-        self.player1.setHits(self.ship_types)
         
         # Start the simulation
         self.board1.window.mainloop()
-   
-    #New Code written by AIDAN
-
-     
 
     def cell_click_handler1(self, row, column):
         """ Cell click """
@@ -84,40 +71,10 @@ class Control:
         if (self.lastRow != -1):
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
         
-        #print(self.other_player.shipCells[row][column].hit)
-        if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
-        #self.other_player.shipCells[row][column].ship == True):
-
-            #AIDANS added code
-           # print(self.curr_player.hit)
-            #print(self.other_player.shipCells[row][column].id)
-            #self.curr_player.hit[self.other_player.shipCells[row][column].id] += 1
-            #self.other_player.shipCells[row][column].hit = True
-
-            #We need find equivalent size to this cell
-            #if (self.curr_player.hit[self.other_player.shipCells[row][column].id] == self.curr_player.ship_size[self.other_player.shipCells[row][column].id]):
-               # print(self.curr_player.shipCells[row][column].id)
-               # print("ship sunk")
-            
-            ##Aidans Code 
+        if self.ships_placed == 5 and self.curr_player.attackingCells[row][column].hit == False:
             self.board.cells[row][column].configure(bg='yellow')
             self.lastRow = row
             self.lastColumn = column
-    
-    def shipSunk(self, row, column):
-        print(self.other_player.shipCells[row][column].hit)
-        if (self.ships_placed == 5 and  self.other_player.shipCells[row][column].ship == True):
-
-            #AIDANS added code
-            print(self.curr_player.hit)
-            print(self.other_player.shipCells[row][column].id)
-            self.curr_player.hit[self.other_player.shipCells[row][column].id] += 1
-            #self.other_player.shipCells[row][column].hit = True
-
-            #We need find equivalent size to this cell
-            if (self.curr_player.hit[self.other_player.shipCells[row][column].id] == self.curr_player.ship_size[self.other_player.shipCells[row][column].id]):
-                print(self.curr_player.shipCells[row][column].id)
-                print("ship sunk")
 
     
     def cell_click_handler2(self, row, column) -> bool:
@@ -233,20 +190,16 @@ class Control:
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
         else:
             return
-        print(self.lastRow, self.lastColumn)
+
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
-            #Aidans Code
-            if (self.other_player.shipCells[self.lastRow][self.lastColumn].hit == False):
                 self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
-                self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
-                self.shipSunk(self.lastRow, self.lastColumn) #AIDANS FUNCTION
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
                 if (self.curr_player == self.player1):
                     self.player1_hits +=1
                 else:
                     self.player2_hits +=1
                 self.lastRow = -1
-        #Aidans Code
-
+                
         else:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
             self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
@@ -442,8 +395,6 @@ class Control:
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         self.player2 = humanPlayer(2, 0, False)
-        self.player2.setHits(ship_types) #AIDANS CODE
-
         self.other_player = self.player2
         print("human button pressed")
         self.board1.window.destroy()
@@ -453,9 +404,6 @@ class Control:
         """ Pause simulation """
         self.player2 = computerPlayer(2, 0, False)
         self.other_player = self.player2
-        #Aidans Code START
-        self.player2.setHits(ship_types)
-        #Aidans Code FINISH
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()

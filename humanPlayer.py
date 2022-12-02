@@ -33,12 +33,3 @@ class humanPlayer(player):
     def make_hit(self)->None:
         #Need to implement
         return
-    #AIDANS CODE START 
-    def setHits(self, ship_types):
-        self.hit = {}
-        self.ship_size = {}
-        for item in ship_types:
-            print(item.name)
-            self.ship_size[item.name] = item.length
-            self.hit[item.name] = 0
-    #AIDANS CODE FINISH
