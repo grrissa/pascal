@@ -54,7 +54,7 @@ class Control:
         self.ship_to_place = False
         self.ready_to_hit = False
         self.ships_placed = 0
-        self.ship_types = [battleship(0, False), carrier(0, False), cruiser(0, False), submarine(0, False), destroyer(0, False)]
+        self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
         self.ship_types_placed = []
         self.last_ship = ship(0, False)
         self.change_orientation = False
@@ -135,6 +135,7 @@ class Control:
             elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False:
                 illegal_ship = False
                 illegal_index = 0
+                print("entering placing ships")
                 if self.ship.horizontal == True:
                     if self.ship.length + column <= self.NUM_COLS:
                         for c in range(self.ship.length):
@@ -149,12 +150,14 @@ class Control:
 
    
                 if illegal_ship == False:
+                    print("success")
                     self.ship_to_place = False
                     self.ship_types_placed.append(self.ship.name)
                     self.ships_placed += 1
                     self.last_ship = self.ship
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+        print(self.ships_placed)
         
 
     def place_ship(self, row, column, start_range, end_range, horizontal, ship_name):
@@ -315,12 +318,14 @@ class Control:
             if self.player2.is_human == False:
                 # randomly placing ships
                 for i in range(5):
+                    self.ship_to_place = True
                     self.ship = self.ship_types[i]
+                    print(self.ship)
                     self.ship.set_orientation(bool(random.randint(0,1)))    
-                    
-                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
+                    while self.ships_placed != i+1:
+                        self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
-
+                print(self.curr_player.shipCells)
                 self.curr_player = self.player1
                 self.update_cells()
                 self.board.ship_frame.destroy()
