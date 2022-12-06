@@ -29,23 +29,24 @@ class Control:
         self.NUM_ROWS = 10
         self.NUM_COLS = 10
 
+        #Keeps track of users last clicked cell
         self.lastRow = -1
         self.lastColumn = -1
 
-        self.lastRow2 = -1
-        self.lastColumn2 = -1
+        #Not sure if we need this code
+        # self.lastRow2 = -1
+        # self.lastColumn2 = -1
 
+        #Initilizes a human player (Always going to be at least 1)
         self.player1 = humanPlayer(1, 0, True)
 
+        #Variables to keep track of which player is the one making the move and which player is not
         self.curr_player = self.player1
         self.other_player = 0
         
         # Create view
         self.board1 = GameIntro()
         self.last_cell_clicked = [-1, -1]
-
-        
-
 
         self.ship = ship(0, False)
         self.ship_to_place = False
@@ -72,50 +73,20 @@ class Control:
    
     #New Code written by AIDAN
 
-     
-
+    """
+    This handler is for the top 100 cells of the window, mostly for making hits
+    """
     def cell_click_handler1(self, row, column):
         """ Cell click """
         print("Cell click: row = %d col = %d and is in top frame" % (row, column))
 
         if (self.lastRow != -1):
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
-        
-        #print(self.other_player.shipCells[row][column].hit)
+
         if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
-        #self.other_player.shipCells[row][column].ship == True):
-
-            #AIDANS added code
-           # print(self.curr_player.hit)
-            #print(self.other_player.shipCells[row][column].id)
-            #self.curr_player.hit[self.other_player.shipCells[row][column].id] += 1
-            #self.other_player.shipCells[row][column].hit = True
-
-            #We need find equivalent size to this cell
-            #if (self.curr_player.hit[self.other_player.shipCells[row][column].id] == self.curr_player.ship_size[self.other_player.shipCells[row][column].id]):
-               # print(self.curr_player.shipCells[row][column].id)
-               # print("ship sunk")
-            
-            ##Aidans Code 
             self.board.cells[row][column].configure(bg='yellow')
             self.lastRow = row
             self.lastColumn = column
-    
-    def shipSunk(self, row, column):
-        print(self.other_player.shipCells[row][column].hit)
-        if (self.ships_placed == 5 and  self.other_player.shipCells[row][column].ship == True):
-
-            #AIDANS added code
-            print(self.curr_player.hit)
-            print(self.other_player.shipCells[row][column].id)
-            self.curr_player.hit[self.other_player.shipCells[row][column].id] += 1
-            #self.other_player.shipCells[row][column].hit = True
-
-            #We need find equivalent size to this cell
-            if (self.curr_player.hit[self.other_player.shipCells[row][column].id] == self.curr_player.ship_size[self.other_player.shipCells[row][column].id]):
-                print(self.curr_player.shipCells[row][column].id)
-                print("ship sunk")
-
     
     def cell_click_handler2(self, row, column) -> bool:
         """ Cell click """
@@ -710,4 +681,4 @@ class Gameboard:
         self.window.destroy()
 
 if __name__ == "__main__":
-    game_of_life = Control()
+    battleship = Control()
