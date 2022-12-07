@@ -10,15 +10,6 @@ Professor: A. Nuzen
 from ship import ship
 class submarine(ship):
     def __init__(self, name:str = "submarine", length:int = 3,  horizontal:bool = True) -> None:
-        self.length = length
-        self.horizontal = horizontal
+        super.__init__(length, horizontal)
         self.name = name
 
-    def change_orientation(self):
-        if self.horizontal == True:
-            self.horizontal = False
-        else:
-            self.horizontal = True
-            
-    def set_orientation(self, orientation):
-        self.horizontal = orientation

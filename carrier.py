@@ -10,15 +10,5 @@ Professor: A. Nuzen
 from ship import ship
 class carrier(ship):
     def __init__(self, name:str = "carrier", length:int = 5,  horizontal:bool = True) -> None:
-        self.length = length
-        self.horizontal = horizontal
+        super.__init__(length, horizontal)
         self.name = name
-
-    def change_orientation(self):
-        if self.horizontal == True:
-            self.horizontal = False
-        else:
-            self.horizontal = True
-
-    def set_orientation(self, orientation):
-        self.horizontal = orientation
