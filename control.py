@@ -48,10 +48,8 @@ class Control:
         #Deleted parameters
         self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
        
-        #AIDAN START copied and pasted code down
         self.board1.set_human_handler(self.human_handler)
         self.board1.set_ai_handler(self.ai_handler)
-        #AIDAN FINISH copied and pasted code down
 
         self.ship_types_placed = []
         self.last_ship = ship(0, False)
@@ -62,7 +60,6 @@ class Control:
         # Start the simulation
         self.board1.window.mainloop()
    
-    #New Code written by AIDAN
 
     """
     This handler is for the top 100 cells of the window, mostly for making hits
@@ -230,8 +227,8 @@ class Control:
             self.end_game_setup()
         #If no one has won, we update window to show other players ships and attacking board
         else:
-            self.board.window.update()
             self.board.window.after(1000, self.update_player())
+            self.board.window.update()
 
         
     def update_player(self):   
@@ -247,9 +244,9 @@ class Control:
         self.board.your_hits['text'] = "Your Hits: " + str(self.player1.numOfHits)
         self.board.opponent['text'] = "Opponent: " + str(self.player2.numOfHits)
         if (self.curr_player.playerNum == 1):
-            self.board.player['text'] = "PLAYER 2S TURN"
-        else:
             self.board.player['text'] = "PLAYER 1S TURN"
+        else:
+            self.board.player['text'] = "PLAYER 2S TURN"
 
         #Testing code
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
@@ -448,9 +445,6 @@ class Control:
         """ Pause simulation """
         self.player2 = computerPlayer(2, 0, False)
         self.other_player = self.player2
-        #Aidans Code START
-        self.player2.setHits(ship_types)
-        #Aidans Code FINISH
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
