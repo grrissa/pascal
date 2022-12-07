@@ -10,6 +10,6 @@ Professor: A. Nuzen
 from ship import ship
 class submarine(ship):
     def __init__(self, name:str = "submarine", length:int = 3,  horizontal:bool = True) -> None:
-        super.__init__(length, horizontal)
+        super().__init__(length, horizontal)
         self.name = name
 
