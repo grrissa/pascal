@@ -19,7 +19,6 @@ from cell import cell
 from computerPlayer import computerPlayer
 from enum import IntEnum
 import random
-ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
 
 class Control:
     """ The controller. """
@@ -446,7 +445,6 @@ class Control:
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         self.player2 = humanPlayer(2, 0, False)
-
         self.other_player = self.player2
         print("human button pressed")
         self.board1.window.destroy()
