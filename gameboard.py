@@ -65,8 +65,6 @@ class Control:
         self.change_orientation = False
         self.delete_mode = False
         self.mod_color = "gray"
-        #AIDANS ADDED CODE
-        self.player1.setHits(self.ship_types)
         
         # Start the simulation
         self.board1.window.mainloop()
@@ -448,7 +446,6 @@ class Control:
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
         self.player2 = humanPlayer(2, 0, False)
-        self.player2.setHits(ship_types) #AIDANS CODE
 
         self.other_player = self.player2
         print("human button pressed")
