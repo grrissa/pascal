@@ -13,23 +13,4 @@ class humanPlayer(player):
         super().__init__(playerNum, score, is_turn)
         self.is_human = True
 
-        shipCells = []
-        for r in range(10):
-            row = []
-            for c in range(10):
-                row.append(cell(False, False, "NA"))
-            shipCells.append(row)
-
-        attackingCells = []
-        for r in range(10):
-            row = []
-            for c in range(10):
-                row.append(cell(False, False, "NA"))
-            attackingCells.append(row)
-
-        self.shipCells = shipCells
-        self.attackingCells = attackingCells
-
-    def make_hit(self)->None:
-        #Need to implement
-        return
+    
