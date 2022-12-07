@@ -18,3 +18,7 @@ class cell(object):
         self.hit = h
         self.ship = s
         self.id = i
+
+    def __repr__(self):
+        return str(self.hit) + " "+str(self.ship) + " "+self.id
+
