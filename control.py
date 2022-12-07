@@ -158,7 +158,18 @@ class Control:
                                 self.curr_player.shipCells[row][c+column].ship = True
                                 self.curr_player.shipCells[row][c+column].id = self.ship.name
                                 illegal_ship = False
-
+                elif self.ship.horizontal == False:
+                    if self.ship.length + row <= self.NUM_ROWS:
+                        for r in range(self.ship.length):
+                            if self.curr_player.shipCells[row+r][column].ship == True and self.curr_player.shipCells[row+r][column].id != self.ship.name:
+                                illegal_ship = True
+                                illegal_index = r
+                                break
+                            else:
+                                self.board.cells2[row+r][column].configure(bg = "gray")
+                                self.curr_player.shipCells[row+r][column].ship = True
+                                self.curr_player.shipCells[row+r][column].id = self.ship.name
+                                illegal_ship = False
    
                 if illegal_ship == False:
                     print("success")
@@ -300,6 +311,7 @@ class Control:
         self.board.set_destroyer_handler(self.destroyer_handler)
         self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
         self.board.set_delete_ship_handler(self.delete_ship_handler)
+        self.board.set_random_ships_handler(self.place_random_ships)
 
     def delete_mode_func(self, ship_name):
         for r in range(self.NUM_ROWS):
@@ -313,17 +325,17 @@ class Control:
         self.ship_types_placed.remove(ship_name)
         self.update_ship_labels(ship_name)
 
-    def update_ship_labels(self, ship_name):
+    def update_ship_labels(self, ship_name, color):
         if ship_name == "carrier":
-            self.board.carrier.configure(fg = "black")
+            self.board.carrier.configure(fg = color)
         elif ship_name == "destroyer":
-            self.board.destroyer.configure(fg = "black")
+            self.board.destroyer.configure(fg = color)
         elif ship_name == "battleship":
-            self.board.battleship.configure(fg = "black")
+            self.board.battleship.configure(fg = color)
         elif ship_name == "submarine":
-            self.board.submarine.configure(fg = "black")
+            self.board.submarine.configure(fg = color)
         elif ship_name == "cruiser":
-            self.board.cruiser.configure(fg = "black")
+            self.board.cruiser.configure(fg = color)
         else:
             print("invalid ship name")
 
@@ -343,18 +355,13 @@ class Control:
             self.ships_placed = 0
             self.reset_cells2()
             for s in self.ship_types_placed:
-                self.update_ship_labels(s)
+                self.update_ship_labels(s, "black")
             self.ship_types_placed = []
             self.board.player['text'] = "PLAYER 2: Place your ships"
 
             if self.player2.is_human == False:
                 # randomly placing ships
-                for i in range(5):
-                    self.ship = self.ship_types[i]
-                    self.ship.set_orientation(bool(random.randint(0,1)))    
-                    
-                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
-
+                self.place_random_ships()
                 self.curr_player = self.player1
                 self.update_cells()
                 self.board.ship_frame.destroy()
@@ -366,6 +373,24 @@ class Control:
             self.update_cells()
             self.board.ship_frame.destroy()
             self.board.player['text'] = "PLAYER 1S TURN"
+
+    def ship_list(self):
+        ship_list = []
+        for ship in self.ship_types:
+            if ship.name not in self.ship_types_placed:
+                ship_list.append(ship)
+        return ship_list
+
+    def place_random_ships(self):
+        if self.ships_placed != 5 and self.delete_mode == False:
+            ship_list = self.ship_list()
+            for ship in ship_list:
+                self.ship_to_place = True
+                self.ship = ship
+                self.ship.set_orientation(bool(random.randint(0,1)))
+                self.update_ship_labels(self.ship.name, self.mod_color)
+                while self.ship.name not in self.ship_types_placed:
+                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
     def carrier_handler(self):
         print("carrier button was pushed")
