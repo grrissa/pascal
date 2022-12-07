@@ -35,6 +35,5 @@ class player(object):
     def incrementHits(self) -> None:
         self.numOfHits += 1
 
-    def __str__(self) -> str:
     def __str__(self):
         return ("Player %d", self.playerNum)
