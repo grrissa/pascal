@@ -479,7 +479,7 @@ class Control:
         self.player2 = computerPlayer(2, 0, False)
         self.other_player = self.player2
         #Aidans Code START
-        self.player2.setHits(ship_types)
+        #self.player2.setHits(ship_types)
         #Aidans Code FINISH
         print("ai button pressed")
         self.board1.window.destroy()
