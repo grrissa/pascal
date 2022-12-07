@@ -9,7 +9,7 @@ Professor: A. Nuzen
 
 from cell import cell
 class player(object):
-    def __init__(self, playerNum, score:int, is_turn:bool)->None:
+    def __init__(self, playerNum, score:int, is_turn:bool) -> None:
         self.playerNum = playerNum
         self.score = score
         self.is_turn = is_turn
@@ -32,8 +32,8 @@ class player(object):
         self.attackingCells = attackingCells
         self.numOfHits = 0
 
-    def incrementHits(self):
+    def incrementHits(self) -> None:
         self.numOfHits += 1
 
-    def __str__(self):
+    def __str__(self) -> str:
         return ("Player %d", self.playerNum)
