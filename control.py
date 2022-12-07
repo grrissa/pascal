@@ -143,8 +143,9 @@ class Control:
                         self.ship.change_orientation()
 
             elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False:
-                illegal_ship = False
+                illegal_ship = True
                 illegal_index = 0
+                print(self.ship_types_placed)
                 if self.ship.horizontal == True:
                     if self.ship.length + column <= self.NUM_COLS:
                         for c in range(self.ship.length):
@@ -156,9 +157,11 @@ class Control:
                                 self.board.cells2[row][c+column].configure(bg = "gray")
                                 self.curr_player.shipCells[row][c+column].ship = True
                                 self.curr_player.shipCells[row][c+column].id = self.ship.name
+                                illegal_ship = False
 
    
                 if illegal_ship == False:
+                    print("success")
                     self.ship_to_place = False
                     self.ship_types_placed.append(self.ship.name)
                     self.ships_placed += 1
