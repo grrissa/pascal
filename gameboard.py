@@ -28,19 +28,20 @@ class Control:
         self.NUM_ROWS = 10
         self.NUM_COLS = 10
 
+        #Keeps track of users last clicked cell
         self.lastRow = -1
         self.lastColumn = -1
 
-        self.lastRow2 = -1
-        self.lastColumn2 = -1
+        #Not sure if we need this code
+        # self.lastRow2 = -1
+        # self.lastColumn2 = -1
 
+        #Initilizes a human player (Always going to be at least 1)
         self.player1 = humanPlayer(1, 0, True)
 
+        #Variables to keep track of which player is the one making the move and which player is not
         self.curr_player = self.player1
         self.other_player = 0
-
-        self.player1_hits = 0
-        self.player2_hits = 0
         
         # Create view
         self.board1 = GameIntro()
@@ -63,23 +64,36 @@ class Control:
         
         # Start the simulation
         self.board1.window.mainloop()
+   
+    #New Code written by AIDAN
+
+    """
+    This handler is for the top 100 cells of the window, mostly for making hits
+    """
 
     def cell_click_handler1(self, row, column):
-        """ Cell click """
+        #For Testing only
         print("Cell click: row = %d col = %d and is in top frame" % (row, column))
 
+        #When the user clicks for the second time, we want to reset their last clicked cell to blue
         if (self.lastRow != -1):
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
-        
-        if self.ships_placed == 5 and self.curr_player.attackingCells[row][column].hit == False:
+
+        #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
+        #Only able to click cells that they have not previously shot a missle at
+        if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
             self.board.cells[row][column].configure(bg='yellow')
             self.lastRow = row
             self.lastColumn = column
 
-    
-    def cell_click_handler2(self, row, column) -> None:
-        """ Cell click """
+    """
+    This handler is for the bottom 100 cells of the window, for placing ships
+    """
+    def cell_click_handler2(self, row, column) -> bool:
+        #Testing code
         print("Cell click: row = %d col = %d" % (row, column))
+
+        #
         if self.delete_mode == True:
             if self.curr_player.shipCells[row][column].ship == True:
                 self.delete_mode_func(self.curr_player.shipCells[row][column].id)
@@ -197,9 +211,44 @@ class Control:
                         self.curr_player.shipCells[r+row][column].ship = False
                         self.curr_player.shipCells[r+row][column].id = ""
 
+    """
+    Handler for the confirm hit button
+    """
     def confirm_hit_handler(self):
-        if (self.lastRow != -1):
+        #Checks to see if the user has chosen a cell to attack or if cell has been attacked already, if not do nothing (Button has no function)
+        if (self.lastRow != -1 or self.other_player.shipCells[self.lastRow][self.lastColumn].hit == True):
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
+        else:
+            return
+
+        #Testing code
+        print(self.lastRow, self.lastColumn)
+
+        #If the cell that is attacked is one with a ship
+        if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+            self.curr_player.incrementHits()
+        #No ship in the cell attacked
+        else:
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+
+        #Changing the hit bool in the selected cell in both players boards
+        self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
+        self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+
+        #resets lastRow and lastColumn
+        self.lastRow = -1
+        self.lastColumn = -1
+
+        #Endgame checker when condition is met, window is destroyed and a winner menu is displayed
+        if (self.curr_player.numOfHits == 17):
+            self.board.window.destroy()
+            self.end_game_setup()
+        #If no one has won, we update window to show other players ships and attacking board
+        else:
+            self.board.window.update()
+            self.board.window.after(1000, self.update_player())
+
             if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
                     self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
                     self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
@@ -218,30 +267,37 @@ class Control:
             self.board.window.after(1000, self.update_player())
         
     def update_player(self):   
+        #Updates curr_player and other_player
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
             self.other_player = self.player1
-            self.player1.is_turn = False
-            self.player2.is_turn = True
         else:
             self.curr_player = self.player1
             self.other_player = self.player2
-            self.player1.is_turn = False
-            self.player2.is_turn = True
 
-            self.player2.is_turn = False
-            self.player1.is_turn = True
-
-        # updating the game board
-        self.board.your_hits['text'] = "Your Hits: " + str(self.player1_hits)
-        self.board.opponent['text'] = "Opponent: " + str(self.player2_hits)
+        #Updating the game board, hits and player turn
+        self.board.your_hits['text'] = "Your Hits: " + str(self.player1.numOfHits)
+        self.board.opponent['text'] = "Opponent: " + str(self.player2.numOfHits)
         if (self.curr_player.playerNum == 1):
             self.board.player['text'] = "PLAYER 2S TURN"
         else:
             self.board.player['text'] = "PLAYER 1S TURN"
 
+        #Testing code
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
+
+        #Updates window for the curr_player
         self.update_cells()
+
+    """
+    For endgame, displays winner and allows for reset of game
+    """
+    def end_game_setup(self):
+        self.end_board = EndGame()
+        self.end_board.who_won['text'] = "PLAYER " + str(self.curr_player.playerNum) + " WON"
+        self.end_board.set_quit_handler(self.quit_handler)
+        self.end_board.set_repeat_handler(self.repeat_handler)
+        self.end_board.window.mainloop()
 
     def board_setup(self):
         # Cell clicks.  (Note that a separate handler function is defined for 
@@ -395,26 +451,37 @@ class Control:
             for c in range(self.NUM_COLS):
                 self.board.cells2[r][c].configure(bg="blue")   
 
+    """
+    Updates window with the curr_players ship and attacking board
+    """
     def update_cells(self):
+        #Nested for loop to go through all cells
         for r in range(self.NUM_ROWS):
             for c in range(self.NUM_COLS):
+                #For upper 100 cells
+                #If there was a ship, and its been hit
                 if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="red")
+                #If there was a hit with no ship
                 elif (self.curr_player.attackingCells[r][c].hit == True):
                     self.board.cells[r][c].configure(bg="grey")
+                #No hit or ship
                 else:
                     self.board.cells[r][c].configure(bg="blue")
 
-                if (self.curr_player.shipCells[r][c].ship == True):
-                    self.board.cells2[r][c].configure(bg="black")  
-                else:
-                    self.board.cells2[r][c].configure(bg="blue")
-
-                if (self.curr_player.shipCells[r][c].ship == True):
+                #For lower 100 cells
+                #If there was a ship, and its been hit
+                if (self.curr_player.shipCells[r][c].ship == True and self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg="orange")
+                #If there is a ship no hit
+                elif(self.curr_player.shipCells[r][c].ship == True):
                     self.board.cells2[r][c].configure(bg="grey")
+                #If there was a hit no ship
+                elif(self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg="black")
+                #No ship no hit
                 else:
                     self.board.cells2[r][c].configure(bg="blue")         
-
 
     def human_handler(self):
         """ Start (or restart) simulation by scheduling the next step. """
@@ -431,6 +498,55 @@ class Control:
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
+    
+    def quit_handler(self):
+        self.end_board.window.destroy()
+    def repeat_handler(self):
+        self.end_board.window.destroy()
+        self.__init__()
+        
+
+class EndGame:
+    def __init__(self):
+        """ Initialize view of the game """
+        # Constants
+        self.CONTROL_FRAME_HEIGHT = 700
+
+        # Create window
+        self.window = tk.Tk()
+        self.window.title("Battleship")
+
+        # Create frame for controls
+        self.control_frame = tk.Frame(self.window, width = self.CONTROL_FRAME_HEIGHT, 
+                                height = self.CONTROL_FRAME_HEIGHT)
+        self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
+        (self.repeat_button, self.quit_button, self.who_won) = self.add_control()
+
+    def add_control(self):
+        """ 
+        Create control buttons and welcome message, and add them to the control frame 
+        """
+        welcome = tk.Label(self.control_frame, text="Game has ended", font=("Helvetica", 20))
+        welcome.grid(row=1, column = 1)
+
+        who_won = tk.Label(self.control_frame, text="", font=("Helvetica", 20))
+        who_won.grid(row=2, column = 1)
+
+        repeat_button = tk.Button(self.control_frame, text="Repeat Game?", font=("Helvetica", 10))
+        repeat_button.grid(row=3, column=1)
+
+        quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10))
+        quit_button.grid(row=4, column=1)
+
+        return (repeat_button, quit_button, who_won)
+
+    def set_repeat_handler(self, handler):
+        """ set handler for clicking on start button to the function handler """
+        self.repeat_button.configure(command = handler)
+
+    def set_quit_handler(self, handler):
+        """ set handler for clicking on pause button to the function handler """
+        self.quit_button.configure(command = handler)
 
 class GameIntro:
     def __init__(self):
@@ -488,9 +604,6 @@ class Gameboard:
         self.window = tk.Tk()
         self.window.title("Battleship")
 
-        # players and their hits
-        self.player1_hits = 0
-        self.player2_hits = 0
 
         # GRID ONE: Create frame for grid of cells, and put cells in the frame
         self.grid_frame = tk.Frame(self.window, height = num_rows * self.CELL_SIZE,
@@ -596,10 +709,10 @@ class Gameboard:
         confirm_button = tk.Button(self.control_frame, text="Confirm Hit", font=("Helvetica", 20))
         confirm_button.grid(row=3)
 
-        your_hits = tk.Label(self.control_frame, text="Your Hits: " + str(self.player1_hits), font=("Helvetica", 10))
+        your_hits = tk.Label(self.control_frame, text="Your Hits: 0", font=("Helvetica", 10))
         your_hits.grid(row=4)
 
-        opponent = tk.Label(self.control_frame, text="Opponent: " + str(self.player2_hits), font=("Helvetica", 10))
+        opponent = tk.Label(self.control_frame, text="Opponent: 0", font=("Helvetica", 10))
         opponent.grid(row=5)
 
         player = tk.Label(self.control_frame, text="PLAYER 1: Place your ships", font=("Helvetica", 20))
@@ -637,4 +750,4 @@ class Gameboard:
         self.window.destroy()
 
 if __name__ == "__main__":
-    game_of_life = Control()
+    battleship = Control()

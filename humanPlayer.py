@@ -8,10 +8,10 @@ Professor: A. Nuzen
 """
 
 from player import player
-from cell import cell
 class humanPlayer(player):
-    def __init__(self, playerNum, score:int, is_turn:bool)->None:
+    def __init__(self, playerNum, score:int, is_turn:bool) -> None:
         super().__init__(playerNum, score, is_turn)
+        self.is_human = True
 
         shipCells = []
         for r in range(10):
