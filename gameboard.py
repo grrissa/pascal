@@ -39,7 +39,7 @@ class Gameboard:
         self.grid_frame.grid(row = 2, column = 1, padx=40, pady=20)
         self.cells2 = self.add_cells()
 
-        # GRID 2: Create frame for grid of cells, and put cells in the frame
+        # GRID 3: Create frame for grid of cells, and put cells in the frame
         self.ship_frame = tk.Frame(self.window, height = num_cols * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.ship_frame.grid(row = 2, column = 2, padx=40, pady=40)
@@ -52,6 +52,20 @@ class Gameboard:
         ( self.start_button, self.quit_button, self.label1,
             self.confirm_button, self.your_hits, self.opponent, self.player) = self.add_control()
 
+        self.switch_frame = tk.Frame(self.window, relief = "solid", background = "black")
+        self.switch_frame.grid(row = 1, column = 1, columnspan = 2, rowspan = 2, sticky = "news")
+        self.window.grid_columnconfigure(0, weight=1)
+        self.switch_players = self.player_switch()
+
+    def player_switch(self):
+        switch_players = tk.Button(self.switch_frame, text = "Ready to Switch Players", font=("Helvetica", 20), bg= "blue" , fg = "blue")
+        #switch_players.grid(row=1, column = 1, columnspan = 2, rowspan = 2, sticky = "se")
+        switch_players.pack()
+        return switch_players
+
+    def set_switch_players_handler(self, handler):
+        """ set handler for clicking on reset button to the function handler """
+        self.switch_players.configure(command = handler)
     
     def ship_buttons(self):
         """ 

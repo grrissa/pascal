@@ -45,7 +45,7 @@ class Control:
         self.ship_to_place = False
         self.ready_to_hit = False
         self.ships_placed = 0
-        #Deleted parameters
+        self.done_placing_ships = False
         self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
        
         #AIDAN START copied and pasted code down
@@ -58,7 +58,6 @@ class Control:
         self.change_orientation = False
         self.delete_mode = False
         self.mod_color = "gray"
-        
         # Start the simulation
         self.board1.window.mainloop()
    
@@ -70,17 +69,17 @@ class Control:
     def cell_click_handler1(self, row, column):
         #For Testing only
         print("Cell click: row = %d col = %d and is in top frame" % (row, column))
+        if self.done_placing_ships == True:
+            #When the user clicks for the second time, we want to reset their last clicked cell to blue
+            if (self.lastRow != -1):
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
 
-        #When the user clicks for the second time, we want to reset their last clicked cell to blue
-        if (self.lastRow != -1):
-            self.board.cells[self.lastRow][self.lastColumn].configure(bg='blue')
-
-        #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
-        #Only able to click cells that they have not previously shot a missle at
-        if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
-            self.board.cells[row][column].configure(bg='yellow')
-            self.lastRow = row
-            self.lastColumn = column
+            #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
+            #Only able to click cells that they have not previously shot a missle at
+            if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
+                self.board.cells[row][column].configure(bg='yellow')
+                self.lastRow = row
+                self.lastColumn = column
 
     """
     This handler is for the bottom 100 cells of the window, for placing ships
@@ -220,7 +219,6 @@ class Control:
             print("Confirmed hit on row = %d col = %d" % (self.lastRow, self.lastColumn))
         else:
             return
-
         #Testing code
         print(self.lastRow, self.lastColumn)
 
@@ -251,6 +249,7 @@ class Control:
 
         
     def update_player(self):   
+        
         #Updates curr_player and other_player
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
@@ -260,16 +259,16 @@ class Control:
             self.other_player = self.player2
 
         #Updating the game board, hits and player turn
-        self.board.your_hits['text'] = "Your Hits: " + str(self.player1.numOfHits)
-        self.board.opponent['text'] = "Opponent: " + str(self.player2.numOfHits)
-        if (self.curr_player.playerNum == 1):
+        self.board.your_hits['text'] = "Your Hits: " + str(self.curr_player.numOfHits)
+        self.board.opponent['text'] = "Opponent: " + str(self.other_player.numOfHits)
+        if (self.curr_player.playerNum == 2):
             self.board.player['text'] = "PLAYER 2S TURN"
         else:
             self.board.player['text'] = "PLAYER 1S TURN"
 
         #Testing code
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
-
+        self.player_switch_screen_management(False)
         #Updates window for the curr_player
         self.update_cells()
 
@@ -303,6 +302,7 @@ class Control:
         self.board.set_confirm_hit_handler(handler)
 
         self.initializing_board_handlers()
+        self.player_switch_screen_management()
         self.board.window.mainloop()
 
     def initializing_board_handlers(self): 
@@ -314,6 +314,16 @@ class Control:
         self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
         self.board.set_delete_ship_handler(self.delete_ship_handler)
         self.board.set_random_ships_handler(self.place_random_ships)
+        self.board.set_switch_players_handler(self.player_switch_screen_management)
+
+    def player_switch_screen_management(self, delete: bool = True):
+        if delete == True:
+            self.board.switch_frame.grid_remove()
+        else:
+            self.board.switch_frame.grid()
+            self.board.switch_players.configure(fg = "black")
+            self.board.switch_players.configure(text = "Player "+str(self.curr_player.playerNum) +": Ready to Play!")
+            
 
     def delete_mode_func(self, ship_name):
         for r in range(self.NUM_ROWS):
@@ -372,9 +382,11 @@ class Control:
             
         elif self.ships_placed == 5 and self.curr_player == self.player2:
             self.curr_player = self.player1
+            self.player_switch_screen_management(False)
             self.update_cells()
             self.board.ship_frame.destroy()
             self.board.player['text'] = "PLAYER 1S TURN"
+            self.done_placing_ships = True
 
     def ship_list(self):
         ship_list = []
