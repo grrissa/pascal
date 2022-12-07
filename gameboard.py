@@ -39,11 +39,11 @@ class Gameboard:
         self.grid_frame.grid(row = 2, column = 1, padx=40, pady=20)
         self.cells2 = self.add_cells()
 
-        # GRID 2: Create frame for grid of cells, and put cells in the frame
+        # GRID 3: Create frame for grid of cells, and put cells in the frame
         self.ship_frame = tk.Frame(self.window, height = num_cols * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.ship_frame.grid(row = 2, column = 2, padx=40, pady=40)
-        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer) = self.ship_buttons()
+        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer, self.place_random_ships) = self.ship_buttons()
 
         # Create frame for controls
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
@@ -52,6 +52,20 @@ class Gameboard:
         ( self.start_button, self.quit_button, self.label1,
             self.confirm_button, self.your_hits, self.opponent, self.player) = self.add_control()
 
+        self.switch_frame = tk.Frame(self.window, relief = "solid", background = "black")
+        self.switch_frame.grid(row = 1, column = 1, columnspan = 2, rowspan = 2, sticky = "news")
+        self.window.grid_columnconfigure(0, weight=1)
+        self.switch_players = self.player_switch()
+
+    def player_switch(self):
+        switch_players = tk.Button(self.switch_frame, text = "Ready to Switch Players", font=("Helvetica", 20), bg= "blue" , fg = "blue")
+        #switch_players.grid(row=1, column = 1, columnspan = 2, rowspan = 2, sticky = "se")
+        switch_players.pack()
+        return switch_players
+
+    def set_switch_players_handler(self, handler):
+        """ set handler for clicking on reset button to the function handler """
+        self.switch_players.configure(command = handler)
     
     def ship_buttons(self):
         """ 
@@ -78,12 +92,19 @@ class Gameboard:
         destroyer = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
         destroyer.grid(row=7, column = 1)
 
-        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer)
+        random_ships = tk.Button(self.ship_frame, text="Place Random Ships", font=("Helvetica", 15))
+        random_ships.grid(row=8, column = 1)
+
+        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
 
     def set_done_placing_ships_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
         self.done_placing_ships.configure(command = handler)
     
+    def set_random_ships_handler(self, handler):
+        """ set handler for clicking on cell in row, column to the function handler """
+        self.place_random_ships.configure(command = handler)
+
     def set_delete_ship_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
         self.delete_ship.configure(command = handler)
