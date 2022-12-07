@@ -369,6 +369,13 @@ class Control:
             self.update_cells()
             self.board.ship_frame.destroy()
             self.board.player['text'] = "PLAYER 1S TURN"
+            
+    def ship_list(self):
+        ship_list= []
+        for ship in self.ship_types:
+            if ship.name not in self.ship_types_placed:
+                ship_list.append(ship)
+        return ship_list
 
     def place_random_ships(self):
         if self.ships_placed != 5 and self.delete_mode == False:
@@ -699,6 +706,9 @@ class Gameboard:
                 row.append(frame)
             cells.append(row)
         return cells
+    def set_random_ships_handler(self, handler):
+        """ set handler for clicking on cell in row, column to the function handler """
+        self.random_ships.configure(command = handler)
 
     def set_cell_click_handler_top(self, row, column, handler):
         """ set handler for clicking on cell in row, column to the function handler """
