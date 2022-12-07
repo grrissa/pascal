@@ -43,7 +43,7 @@ class Gameboard:
         self.ship_frame = tk.Frame(self.window, height = num_cols * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.ship_frame.grid(row = 2, column = 2, padx=40, pady=40)
-        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer) = self.ship_buttons()
+        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer, self.place_random_ships) = self.ship_buttons()
 
         # Create frame for controls
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
@@ -78,12 +78,19 @@ class Gameboard:
         destroyer = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
         destroyer.grid(row=7, column = 1)
 
-        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer)
+        random_ships = tk.Button(self.ship_frame, text="Place Random Ships", font=("Helvetica", 15))
+        random_ships.grid(row=8, column = 1)
+
+        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
 
     def set_done_placing_ships_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
         self.done_placing_ships.configure(command = handler)
     
+    def set_random_ships_handler(self, handler):
+        """ set handler for clicking on cell in row, column to the function handler """
+        self.place_random_ships.configure(command = handler)
+
     def set_delete_ship_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
         self.delete_ship.configure(command = handler)

@@ -177,8 +177,10 @@ class Control:
                     self.ship_types_placed.append(self.ship.name)
                     self.ships_placed += 1
                     self.last_ship = self.ship
+                    self.update_ship_labels(self.ship.name, self.mod_color)
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+                    self.update_ship_labels(self.ship.name, "black")
         
 
     def place_ship(self, row, column, start_range, end_range, horizontal, ship_name):
@@ -323,7 +325,7 @@ class Control:
         
         self.ships_placed -= 1
         self.ship_types_placed.remove(ship_name)
-        self.update_ship_labels(ship_name)
+        self.update_ship_labels(ship_name, "black")
 
     def update_ship_labels(self, ship_name, color):
         if ship_name == "carrier":
