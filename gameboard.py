@@ -370,6 +370,17 @@ class Control:
             self.board.ship_frame.destroy()
             self.board.player['text'] = "PLAYER 1S TURN"
 
+    def place_random_ships(self):
+        if self.ships_placed != 5 and self.delete_mode == False:
+            ship_list = self.ship_list()
+            for ship in ship_list:
+                self.ship_to_place = True
+                self.ship = ship
+                self.ship.set_orientation(bool(random.randint(0,1)))
+                self.update_ship_labels(self.ship.name, self.mod_color)
+                while self.ship.name not in self.ship_types_placed:
+                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
+                    
     def carrier_handler(self):
         print("carrier button was pushed")
         if "carrier" not in self.ship_types_placed and self.delete_mode == False:
