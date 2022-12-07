@@ -149,7 +149,7 @@ class Control:
                         self.ship.change_orientation()
 
             elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False:
-                illegal_ship = True
+                illegal_ship = False
                 illegal_index = 0
                 if self.ship.horizontal == True:
                     if self.ship.length + column <= self.NUM_COLS:
@@ -162,19 +162,6 @@ class Control:
                                 self.board.cells2[row][c+column].configure(bg = "gray")
                                 self.curr_player.shipCells[row][c+column].ship = True
                                 self.curr_player.shipCells[row][c+column].id = self.ship.name
-                                ilegal_ship = False
-                elif self.ship.horizontal == False:
-                    if self.ship.length + row <= self.NUM_ROWS:
-                        for r in range(self.ship.length):
-                            if self.curr_player.shipCells[row+r][column].ship == True and self.curr_player.shipCells[row+r][column].id != self.ship.name:
-                                illegal_ship = True
-                                illegal_index = r
-                                break
-                            else:
-                                self.board.cells2[row+r][column].configure(bg = "gray")
-                                self.curr_player.shipCells[row+r][column].ship = True
-                                self.curr_player.shipCells[row+r][column].id = self.ship.name
-                                illegal_ship = False
 
    
                 if illegal_ship == False:
@@ -316,7 +303,6 @@ class Control:
         self.board.set_destroyer_handler(self.destroyer_handler)
         self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
         self.board.set_delete_ship_handler(self.delete_ship_handler)
-        #self.board.set_random_ships_handler(self.place_random_ships)
 
     def delete_mode_func(self, ship_name):
         for r in range(self.NUM_ROWS):
@@ -330,17 +316,17 @@ class Control:
         self.ship_types_placed.remove(ship_name)
         self.update_ship_labels(ship_name)
 
-    def update_ship_labels(self, ship_name, mod_color):
+    def update_ship_labels(self, ship_name):
         if ship_name == "carrier":
-            self.board.carrier.configure(fg = mod_color)
+            self.board.carrier.configure(fg = "black")
         elif ship_name == "destroyer":
-            self.board.destroyer.configure(fg = mod_color)
+            self.board.destroyer.configure(fg = "black")
         elif ship_name == "battleship":
-            self.board.battleship.configure(fg = mod_color)
+            self.board.battleship.configure(fg = "black")
         elif ship_name == "submarine":
-            self.board.submarine.configure(fg = mod_color)
+            self.board.submarine.configure(fg = "black")
         elif ship_name == "cruiser":
-            self.board.cruiser.configure(fg = mod_color)
+            self.board.cruiser.configure(fg = "black")
         else:
             print("invalid ship name")
 
@@ -384,25 +370,6 @@ class Control:
             self.board.ship_frame.destroy()
             self.board.player['text'] = "PLAYER 1S TURN"
 
-    def ship_list(self):
-        ship_list= []
-        for ship in self.ship_types:
-            if ship.name not in self.ship_types_placed:
-                ship_list.append(ship)
-        return ship_list
-
-    def place_random_ships(self):
-        if self.ships_placed != 5 and self.delete_mode == False:
-            ship_list = self.ship_list()
-            for ship in ship_list:
-                self.ship_to_place = True
-                self.ship = ship
-                #self.ship.set_orientation(True)
-               # self.ship.set_orientation(bool(random.randint(0,1)))
-                self.update_ship_labels(self.ship.name, self.mod_color)
-                if self.ship.name not in self.ship_types_placed:
-                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
-                    
     def carrier_handler(self):
         print("carrier button was pushed")
         if "carrier" not in self.ship_types_placed and self.delete_mode == False:
@@ -616,7 +583,7 @@ class Gameboard:
         self.ship_frame = tk.Frame(self.window, height = num_cols * self.CELL_SIZE,
                                 width = num_cols * self.CELL_SIZE)
         self.ship_frame.grid(row = 2, column = 2, padx=40, pady=40)
-        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer, self.random_ships) = self.ship_buttons()
+        (self.delete_ship, self.done_placing_ships, self.carrier, self.battleship, self.submarine, self.cruiser, self.destroyer) = self.ship_buttons()
 
         # Create frame for controls
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
@@ -651,10 +618,7 @@ class Gameboard:
         destroyer = tk.Button(self.ship_frame, text="Destroyer (2 cells)", font=("Helvetica", 10))
         destroyer.grid(row=7, column = 1)
 
-        random_ships = tk.Button(self.ship_frame, text="Place Ships Randomly", font=("Helvetica", 15))
-        random_ships.grid(row=8,column = 1)
-
-        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
+        return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer)
 
     def set_done_placing_ships_handler(self, handler):
         """ set handler for clicking on cell in row, column to the function handler """
@@ -724,9 +688,6 @@ class Gameboard:
                 row.append(frame)
             cells.append(row)
         return cells
-    def set_random_ships_handler(self, handler):
-        """ set handler for clicking on cell in row, column to the function handler """
-        self.random_ships.configure(command = handler)
 
     def set_cell_click_handler_top(self, row, column, handler):
         """ set handler for clicking on cell in row, column to the function handler """
