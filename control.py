@@ -233,11 +233,48 @@ class Control:
         if (self.curr_player.numOfHits == 17):
             self.board.window.destroy()
             self.end_game_setup()
+            
 
         #If no one has won, we update window to show other players ships and attacking board
         else:
-            self.board.window.update()
-            self.board.window.after(1000, self.update_player())
+            # MARISSA ADDED THIS: computer makes a random hit
+            if self.player2.is_human == False:
+                rand_x = random.randint(0,9)
+                rand_y = random.randint(0,9)
+                while self.curr_player.attackingCells[rand_y][rand_x].hit == False:
+                    rand_x = random.randint(0,9)
+                    rand_y = random.randint(0,9)
+                self.cell_click_handler1(rand_x, rand_y)
+                if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+                    self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+                    self.curr_player.incrementHits()
+                #No ship in the cell attacked
+                else:
+                    self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+
+                #Changing the hit bool in the selected cell in both players boards
+                self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+
+                #resets lastRow and lastColumn
+                self.lastRow = -1
+                self.lastColumn = -1
+
+                if (self.curr_player.playerNum == 1):
+                    self.curr_player = self.player2
+                    self.other_player = self.player1
+                else:
+                    self.curr_player = self.player1
+                    self.other_player = self.player2
+                
+                #Updates window for the curr_player
+                self.update_cells()
+
+            else:
+                self.board.window.update()
+                self.board.window.after(1000, self.update_player())
+
+    
 
         
     def update_player(self):   
@@ -266,17 +303,7 @@ class Control:
         #Updates window for the curr_player
         self.update_cells()
 
-        # MARISSA ADDED THIS: computer makes a random hit
-        if self.curr_player.is_human == False:
-            rand_x = random.randint(0,9)
-            rand_y = random.randint(0,9)
-            while self.curr_player.attackingCells[rand_y][rand_x].hit == False:
-                rand_x = random.randint(0,9)
-                rand_y = random.randint(0,9)
-            self.cell_click_handler2(rand_x, rand_y)
-            self.confirm_hit_handler()
-
-        
+                
            
     """
     For endgame, displays winner and allows for reset of game
