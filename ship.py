@@ -26,3 +26,6 @@ class ship(object):
         if self.length == self.numHits:
             return True
         return False
+
+    def __str__(self)->str:
+        return self.name + "Testing"

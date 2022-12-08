@@ -184,10 +184,11 @@ class Control:
         if horizontal == True:
             for c in range(start_range, end_range):
                 self.ship_board_update(row, c+column)
-                #THIS IS HARD CODED, NEED TO CHANGE!!!
                 if ship_name == "destroyer":
+                    print("test1")
                     self.curr_player.playerShips["destroyer"] = destroyer()
                 elif ship_name == "submarine":
+                    print("test2")
                     self.curr_player.playerShips["submarine"] = submarine()
                 elif ship_name == "cruiser":
                     self.curr_player.playerShips["cruiser"] = cruiser()
@@ -197,7 +198,6 @@ class Control:
                     self.curr_player.playerShips["carrier"] = carrier()
         else:
             for r in range(start_range, end_range):
-                #THIS IS HARD CODED, NEED TO CHANGE!!!
                 self.ship_board_update(r+row, column)
                 if ship_name == "destroyer":
                     self.curr_player.playerShips["destroyer"] = destroyer()
@@ -244,9 +244,9 @@ class Control:
         #If the cell that is attacked is one with a ship
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
-            self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id).numHits += 1
-            if (self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id).isSunk):
-                pass
+            print(self.other_player.shipCells[self.lastRow][self.lastColumn].id)
+            # if (self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id).isSunk):
+            #     print("A ship has sunk")
                 #Need to print to screen, Other Players "self.other_player.shipCells[self.lastRow][self.lastColumn].id has sunk!"
             self.curr_player.incrementHits()
         #No ship in the cell attacked
