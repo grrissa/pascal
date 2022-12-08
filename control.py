@@ -48,10 +48,8 @@ class Control:
         self.done_placing_ships = False
         self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
        
-        #AIDAN START copied and pasted code down
         self.board1.set_human_handler(self.human_handler)
         self.board1.set_ai_handler(self.ai_handler)
-        #AIDAN FINISH copied and pasted code down
 
         self.ship_types_placed = []
         self.last_ship = ship(0, False)
@@ -61,7 +59,6 @@ class Control:
         # Start the simulation
         self.board1.window.mainloop()
    
-    #New Code written by AIDAN
 
     """
     This handler is for the top 100 cells of the window, mostly for making hits
@@ -570,9 +567,6 @@ class Control:
         """ Pause simulation """
         self.player2 = computerPlayer(2, 0, False)
         self.other_player = self.player2
-        #Aidans Code START
-        #self.player2.setHits(ship_types)
-        #Aidans Code FINISH
         print("ai button pressed")
         self.board1.window.destroy()
         self.board_setup()
