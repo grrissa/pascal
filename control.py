@@ -16,7 +16,7 @@ import random
 
 class Control:
     """ The controller. """
-    def __init__(self):
+    def __init__(self) -> None:
         """ Initializes the game of life """
         # Define parameters
         self.NUM_ROWS = 10
