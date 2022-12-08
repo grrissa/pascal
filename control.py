@@ -248,15 +248,18 @@ class Control:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
-    def computer_hit(self):
+    """
+    Allows the computer to make a hit
+    """
+    def computer_hit(self) -> None:
         rand_x = -1
         rand_y = -1
        
+       # checking whether there was already a hit to that location
         while self.curr_player.attackingCells[rand_x][rand_y].hit == True:
             print("searching")
             rand_x = random.randint(0,9)
             rand_y = random.randint(0,9)
-            #self.curr_player.attackingCells[rand_y][rand_x].hit = True
         
         if self.other_player.shipCells[rand_x][rand_y].ship == True:
             self.curr_player.incrementHits()
@@ -292,6 +295,7 @@ class Control:
                     self.board.player['text'] = "PLAYER 2S TURN"
                 else:
                     self.board.player['text'] = "PLAYER 1S TURN"
+
                 self.player_switch_screen_management(False)
 
             #Updates window for the curr_player
