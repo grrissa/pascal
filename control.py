@@ -233,6 +233,7 @@ class Control:
         if (self.curr_player.numOfHits == 17):
             self.board.window.destroy()
             self.end_game_setup()
+
         #If no one has won, we update window to show other players ships and attacking board
         else:
             self.board.window.update()
@@ -240,7 +241,8 @@ class Control:
 
         
     def update_player(self):   
-        
+
+       
         #Updates curr_player and other_player
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
@@ -260,9 +262,22 @@ class Control:
         #Testing code
         print("it is player " + str(self.curr_player.playerNum) + "s turn")
         self.player_switch_screen_management(False)
+
         #Updates window for the curr_player
         self.update_cells()
 
+        # MARISSA ADDED THIS: computer makes a random hit
+        if self.curr_player.is_human == False:
+            rand_x = random.randint(0,9)
+            rand_y = random.randint(0,9)
+            while self.curr_player.attackingCells[rand_y][rand_x].hit == False:
+                rand_x = random.randint(0,9)
+                rand_y = random.randint(0,9)
+            self.cell_click_handler2(rand_x, rand_y)
+            self.confirm_hit_handler()
+
+        
+           
     """
     For endgame, displays winner and allows for reset of game
     """
