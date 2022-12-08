@@ -170,11 +170,33 @@ class Control:
                 self.board.cells2[row][c+column].configure(bg = "gray")
                 self.curr_player.shipCells[row][c+column].ship = True
                 self.curr_player.shipCells[row][c+column].id = ship_name
+                #THIS IS HARD CODED, NEED TO CHANGE!!!
+                if ship_name == "destroyer":
+                    self.curr_player.playerShips["destroyer"] = destroyer()
+                elif ship_name == "submarine":
+                    self.curr_player.playerShips["submarine"] = submarine()
+                elif ship_name == "cruiser":
+                    self.curr_player.playerShips["cruiser"] = cruiser()
+                elif ship_name == "battleship":
+                    self.curr_player.playerShips["battleship"] = battleship()
+                else:
+                    self.curr_player.playerShips["carrier"] = carrier()
         else:
             for r in range(start_range, end_range):
                 self.board.cells2[row+r][column].configure(bg = "gray")
                 self.curr_player.shipCells[row+r][column].ship = True
                 self.curr_player.shipCells[row+r][column].id = ship_name
+                #THIS IS HARD CODED, NEED TO CHANGE!!!
+                if ship_name == "destroyer":
+                    self.curr_player.playerShips["destroyer"] = destroyer()
+                elif ship_name == "submarine":
+                    self.curr_player.playerShips["submarine"] = submarine()
+                elif ship_name == "cruiser":
+                    self.curr_player.playerShips["cruiser"] = cruiser()
+                elif ship_name == "battleship":
+                    self.curr_player.playerShips["battleship"] = battleship()
+                else:
+                    self.curr_player.playerShips["carrier"] = carrier()
 
     def clear_ship(self, row, column, start_range, end_range, horizontal, ship_name):
         if horizontal == True:
@@ -208,6 +230,10 @@ class Control:
         #If the cell that is attacked is one with a ship
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+            self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id).numHits += 1
+            if (self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id).isSunk):
+                pass
+                #Need to print to screen, Other Players "self.other_player.shipCells[self.lastRow][self.lastColumn].id has sunk!"
             self.curr_player.incrementHits()
         #No ship in the cell attacked
         else:
@@ -365,35 +391,30 @@ class Control:
         print("carrier button was pushed")
         if "carrier" not in self.ship_types_placed and self.delete_mode == False:
             self.ship_to_place = True
-            self.ship = carrier()
             self.board.carrier.configure(fg = self.mod_color)
             
     def battleship_handler(self):
         print("battleship button was pushed")
         if "battleship" not in self.ship_types_placed and self.delete_mode == False:
             self.ship_to_place = True
-            self.ship = battleship()
             self.board.battleship.configure(fg = self.mod_color)
 
     def submarine_handler(self):
         print("submarine button was pushed")
         if "submarine" not in self.ship_types_placed and self.delete_mode == False:
             self.ship_to_place = True
-            self.ship = submarine()
             self.board.submarine.configure(fg = self.mod_color)
         
     def cruiser_handler(self):
         print("cruiser button was pushed")
         if "cruiser" not in self.ship_types_placed and self.delete_mode == False:
             self.ship_to_place = True
-            self.ship = cruiser()
             self.board.cruiser.configure(fg = self.mod_color)
         
     def destroyer_handler(self):
         print("destroyer button was pushed")
         if "destroyer" not in self.ship_types_placed and self.delete_mode == False:
             self.ship_to_place = True
-            self.ship = destroyer()
             self.board.destroyer.configure(fg = self.mod_color)
 
     def reset_cells2(self):
