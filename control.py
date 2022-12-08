@@ -368,6 +368,7 @@ class Control:
                 self.curr_player = self.player1
                 self.update_cells()
                 self.board.ship_frame.destroy()
+                self.done_placing_ships = True
                 self.board.player['text'] = "PLAYER 1S TURN"
 
             
