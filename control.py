@@ -105,16 +105,29 @@ class Control:
                     # switching to vertical from horixontal
                     switch_point = column-self.ship_start
                     if (row-switch_point >= 0 ) and (row-switch_point+self.ship.length <= self.NUM_ROWS): # if new ship won't go out of bounds, continue on
+                            try_other_way = False
                             self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name) # clear original ship
                             for first_half in range(0, self.ship.length):
                                 if self.curr_player.shipCells[row-switch_point+first_half][column].ship == True and self.curr_player.shipCells[row-switch_point +first_half][column].id != self.ship.name:
                                     self.ship.change_orientation()
                                     self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
                                     self.place_ship(row, self.ship_start, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                    try_other_way = True
                                     break
                 
                                 else:
                                     self.ship_board_update(row-switch_point+first_half, column)
+                            if try_other_way == True:
+                                for first_half in range(self.ship.length*-1, 0):
+                                    if self.curr_player.shipCells[row-switch_point+first_half][column].ship == True and self.curr_player.shipCells[row-switch_point +first_half][column].id != self.ship.name:
+                                        self.ship.change_orientation()
+                                        self.clear_ship(row-switch_point, column, self.ship.length*-1, 0, not self.ship.horizontal, self.ship.name)
+                                        self.place_ship(row, self.ship_start, self.ship.length*-1, 0, self.ship.horizontal, self.ship.name)
+                                        try_other_way = True
+                                        break
+                                else:
+                                    self.ship_board_update(row-switch_point+first_half, column)
+
                     else:
                         self.ship.change_orientation()
 
