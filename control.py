@@ -242,11 +242,36 @@ class Control:
         if (self.curr_player.numOfHits == 17):
             self.board.window.destroy()
             self.end_game_setup()
+            
         #If no one has won, we update window to show other players ships and attacking board
         else:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
+    """
+    Allows the computer to make a hit
+    """
+    def computer_hit(self) -> None:
+        rand_x = -1
+        rand_y = -1
+       
+       # checking whether there was already a hit to that location
+        while self.curr_player.attackingCells[rand_x][rand_y].hit == True:
+            print("searching")
+            rand_x = random.randint(0,9)
+            rand_y = random.randint(0,9)
+        
+        if self.other_player.shipCells[rand_x][rand_y].ship == True:
+            self.curr_player.incrementHits()
+            print("comp hit!")
+
+        #Changing the hit bool in the selected cell in both players boards
+        self.other_player.shipCells[rand_x][rand_y].hit = True
+        self.curr_player.attackingCells[rand_x][rand_y].hit = True 
+
+        self.update_player()
+        
+  
     """
     Switches player and updates the screen
     """
@@ -258,21 +283,29 @@ class Control:
         else:
             self.curr_player = self.player1
             self.other_player = self.player2
+        print("it is player " + str(self.curr_player.playerNum) + "s turn")
 
         #Updating the game board, hits and player turn
         self.board.your_hits['text'] = "Your Hits: " + str(self.curr_player.numOfHits)
         self.board.opponent['text'] = "Opponent: " + str(self.other_player.numOfHits)
-        if (self.curr_player.playerNum == 2):
-            self.board.player['text'] = "PLAYER 2S TURN"
+        
+        if self.curr_player.is_human == True:
+            if self.player2.is_human == True:
+                if (self.curr_player.playerNum == 2):
+                    self.board.player['text'] = "PLAYER 2S TURN"
+                else:
+                    self.board.player['text'] = "PLAYER 1S TURN"
+
+                self.player_switch_screen_management(False)
+
+            #Updates window for the curr_player
+            self.update_cells()
         else:
-            self.board.player['text'] = "PLAYER 1S TURN"
+            print("computer_turn")
+            self.computer_hit()
 
-        #Testing code
-        print("it is player " + str(self.curr_player.playerNum) + "s turn")
-        self.player_switch_screen_management(False)
-        #Updates window for the curr_player
-        self.update_cells()
-
+                
+           
     """
     For endgame, displays winner and allows for reset of game
     """
@@ -399,6 +432,7 @@ class Control:
                 self.curr_player = self.player1
                 self.update_cells()
                 self.board.ship_frame.destroy()
+                self.done_placing_ships = True
                 self.board.player['text'] = "PLAYER 1S TURN"
 
         # ensures player 2 is done placing ships 
