@@ -234,52 +234,32 @@ class Control:
             self.board.window.destroy()
             self.end_game_setup()
             
-
         #If no one has won, we update window to show other players ships and attacking board
         else:
-            # MARISSA ADDED THIS: computer makes a random hit
-            if self.player2.is_human == False:
-                rand_x = random.randint(0,9)
-                rand_y = random.randint(0,9)
-                while self.curr_player.attackingCells[rand_y][rand_x].hit == False:
-                    rand_x = random.randint(0,9)
-                    rand_y = random.randint(0,9)
-                self.cell_click_handler1(rand_x, rand_y)
-                if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
-                    self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
-                    self.curr_player.incrementHits()
-                #No ship in the cell attacked
-                else:
-                    self.board.cells[self.lastRow][self.lastColumn].configure(bg='grey')
+            self.board.window.update()
+            self.board.window.after(1000, self.update_player())
 
-                #Changing the hit bool in the selected cell in both players boards
-                self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
-                self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+    def computer_hit(self):
+        rand_x = -1
+        rand_y = -1
+       
+        while self.curr_player.attackingCells[rand_x][rand_y].hit == True:
+            print("searching")
+            rand_x = random.randint(0,9)
+            rand_y = random.randint(0,9)
+            #self.curr_player.attackingCells[rand_y][rand_x].hit = True
+        
+        if self.other_player.shipCells[rand_x][rand_y].ship == True:
+            self.curr_player.incrementHits()
+            print("comp hit!")
 
-                #resets lastRow and lastColumn
-                self.lastRow = -1
-                self.lastColumn = -1
+        #Changing the hit bool in the selected cell in both players boards
+        self.other_player.shipCells[rand_x][rand_y].hit = True
+        self.curr_player.attackingCells[rand_x][rand_y].hit = True 
 
-                if (self.curr_player.playerNum == 1):
-                    self.curr_player = self.player2
-                    self.other_player = self.player1
-                else:
-                    self.curr_player = self.player1
-                    self.other_player = self.player2
-                
-                #Updates window for the curr_player
-                self.update_cells()
-
-            else:
-                self.board.window.update()
-                self.board.window.after(1000, self.update_player())
-
-    
-
+        self.update_player()
         
     def update_player(self):   
-
-       
         #Updates curr_player and other_player
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
@@ -287,21 +267,25 @@ class Control:
         else:
             self.curr_player = self.player1
             self.other_player = self.player2
+        print("it is player " + str(self.curr_player.playerNum) + "s turn")
 
         #Updating the game board, hits and player turn
         self.board.your_hits['text'] = "Your Hits: " + str(self.curr_player.numOfHits)
         self.board.opponent['text'] = "Opponent: " + str(self.other_player.numOfHits)
-        if (self.curr_player.playerNum == 2):
-            self.board.player['text'] = "PLAYER 2S TURN"
+        
+        if self.curr_player.is_human == True:
+            if self.player2.is_human == True:
+                if (self.curr_player.playerNum == 2):
+                    self.board.player['text'] = "PLAYER 2S TURN"
+                else:
+                    self.board.player['text'] = "PLAYER 1S TURN"
+                self.player_switch_screen_management(False)
+
+            #Updates window for the curr_player
+            self.update_cells()
         else:
-            self.board.player['text'] = "PLAYER 1S TURN"
-
-        #Testing code
-        print("it is player " + str(self.curr_player.playerNum) + "s turn")
-        self.player_switch_screen_management(False)
-
-        #Updates window for the curr_player
-        self.update_cells()
+            print("computer_turn")
+            self.computer_hit()
 
                 
            
