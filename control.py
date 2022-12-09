@@ -225,6 +225,7 @@ class Control:
         #If the cell that is attacked is one with a ship
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].successful_hit = True
             self.curr_player.incrementHits()
         #No ship in the cell attacked
         else:
@@ -248,29 +249,7 @@ class Control:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
-    """
-    Allows the computer to make a hit
-    """
-    def computer_hit(self) -> None:
-        rand_x = -1
-        rand_y = -1
-       
-       # checking whether there was already a hit to that location
-        while self.curr_player.attackingCells[rand_x][rand_y].hit == True:
-            print("searching")
-            rand_x = random.randint(0,9)
-            rand_y = random.randint(0,9)
-        
-        if self.other_player.shipCells[rand_x][rand_y].ship == True:
-            self.curr_player.incrementHits()
-            print("comp hit!")
-
-        #Changing the hit bool in the selected cell in both players boards
-        self.other_player.shipCells[rand_x][rand_y].hit = True
-        self.curr_player.attackingCells[rand_x][rand_y].hit = True 
-
-        self.update_player()
-        
+   
   
     """
     Switches player and updates the screen
@@ -302,7 +281,8 @@ class Control:
             self.update_cells()
         else:
             print("computer_turn")
-            self.computer_hit()
+            self.player2.computer_hit(self.other_player.shipCells)
+            self.update_player()
 
                 
            

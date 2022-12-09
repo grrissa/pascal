@@ -18,14 +18,14 @@ class player(object):
         for r in range(10):
             row = []
             for c in range(10):
-                row.append(cell(False, False, "NA"))
+                row.append(cell(False, False, "NA", False))
             shipCells.append(row)
 
         attackingCells = []
         for r in range(10):
             row = []
             for c in range(10):
-                row.append(cell(False, False, "NA"))
+                row.append(cell(False, False, "NA", False))
             attackingCells.append(row)
 
         self.shipCells = shipCells
