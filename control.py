@@ -295,7 +295,7 @@ class Control:
             self.update_cells()
         else:
             print("computer_turn")
-            self.player2.computer_hit(self.other_player.shipCells)
+            self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
             self.update_player()
 
                 
