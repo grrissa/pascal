@@ -31,6 +31,7 @@ class player(object):
         self.shipCells = shipCells
         self.attackingCells = attackingCells
         self.numOfHits = 0
+        self.playerShips = {}
 
     def incrementHits(self) -> None:
         self.numOfHits += 1

@@ -11,6 +11,7 @@ class ship(object):
     def __init__(self, length:int, horitontal:bool) -> None:
         self.length = length
         self.horizontal = True
+        self.timeHit = 0
 
     def change_orientation(self):
         if self.horizontal == True:
@@ -20,3 +21,8 @@ class ship(object):
 
     def set_orientation(self, orientation):
         self.horizontal = orientation
+
+    def isSunk(self)->bool:
+        if self.timeHit == self.length:
+            return True
+        return False
