@@ -176,6 +176,17 @@ class Control:
         self.board.cells2[row][column].configure(bg = "gray")
         self.curr_player.shipCells[row][column].ship = True
         self.curr_player.shipCells[row][column].id = self.ship.name
+        if self.ship.name == "destroyer":
+            self.curr_player.playerShips["destroyer"] = destroyer()
+        elif self.ship.name == "submarine":
+            self.curr_player.playerShips["submarine"] = submarine()
+        elif self.ship.name == "cruiser":
+            self.curr_player.playerShips["cruiser"] = cruiser()
+        elif self.ship.name == "battleship":
+            self.curr_player.playerShips["battleship"] = battleship()
+        else:
+            self.curr_player.playerShips["carrier"] = carrier()
+
 
     """
     Sets up for loop for placing ships
@@ -186,8 +197,8 @@ class Control:
                 self.ship_board_update(row, c+column)
         else:
             for r in range(start_range, end_range):
-                self.ship_board_update(row+r, column)
-
+                self.ship_board_update(r+row, column)
+    
     """
     Removes ships from board that are not valid or deleted
     """
@@ -221,6 +232,10 @@ class Control:
 
         #If the cell that is attacked is one with a ship
         if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+            temp = self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id)
+            temp.timeHit += 1
+            if temp.isSunk() == True:
+                self.board.shipSinkNotification['text'] = "Player " + str(self.other_player.playerNum) + "'s " + self.other_player.shipCells[self.lastRow][self.lastColumn].id + " has sunk!"
             self.board.cells[self.lastRow][self.lastColumn].configure(bg='red')
             self.curr_player.incrementHits()
         #No ship in the cell attacked
@@ -272,7 +287,9 @@ class Control:
     """
     Switches player and updates the screen
     """
-    def update_player(self) -> None:   
+    def update_player(self) -> None:  
+        self.board.shipSinkNotification['text'] = ""
+
         #Updates curr_player and other_player
         if (self.curr_player.playerNum == 1):
             self.curr_player = self.player2
