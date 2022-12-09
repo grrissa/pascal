@@ -252,21 +252,22 @@ class Control:
         self.lastColumn = -1
 
         #Endgame checker when condition is met, window is destroyed and a winner menu is displayed
-        if (self.curr_player.numOfHits == 17):
-            self.board.window.destroy()
-            self.end_game_setup()
+        
             
         #If no one has won, we update window to show other players ships and attacking board
-        else:
-            self.board.window.update()
-            self.board.window.after(1000, self.update_player())
+        
+        self.board.window.update()
+        self.board.window.after(1000, self.update_player())
 
    
-  
+    
     """
     Switches player and updates the screen
     """
     def update_player(self) -> None:  
+        if (self.curr_player.numOfHits == 17):
+            self.board.window.destroy()
+            self.end_game_setup()
         self.board.shipSinkNotification['text'] = ""
 
         #Updates curr_player and other_player

@@ -28,7 +28,7 @@ class computerPlayer(player):
     def random_ints(self):
         return random.randint(0,9), random.randint(0,9)
 
-    def computer_hit(self, other_player_ships, other_player_sunk_data):
+    def computer_hit(self, other_player_ships, other_player_sunk_data, ):
         next_x = -1
         next_y = -1
         # if we should make a random computer hit or a smart computer hit
@@ -92,6 +92,7 @@ class computerPlayer(player):
             if other_player_ships[next_x][next_y].ship == True:
                 temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
                 temp.timeHit += 1
+                self.numOfHits +=1
                 if temp.isSunk() == True:
                     self.last_missile_success = False
                     self.curr_direction = 0
@@ -113,6 +114,7 @@ class computerPlayer(player):
                 temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
                 temp.timeHit += 1
                 self.attackingCells[next_x][next_y].successful_hit = True
+                self.numOfHits += 1
                 print("comp hit!")
         #Changing the hit bool in the selected cell in both players boards
         other_player_ships[next_x][next_y].hit = True
