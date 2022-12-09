@@ -29,7 +29,7 @@ class computerPlayer(player):
         
         if other_player_ships[rand_x][rand_y].ship == True:
             self.incrementHits()
-            self.attackingCells[self.lastRow][self.lastColumn].successful_hit = True
+            self.attackingCells[rand_x][rand_y].successful_hit = True
             print("comp hit!")
 
         #Changing the hit bool in the selected cell in both players boards
