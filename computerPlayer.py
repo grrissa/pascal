@@ -100,8 +100,10 @@ class computerPlayer(player):
                         else:
                             self.curr_direction = 2
                         self.flip_attack = False
+
                 if other_player_ships[next_x][next_y].ship == False:
                     self.flip_attack = True
+
             if other_player_ships[next_x][next_y].ship == True:
                 temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
                 temp.timeHit += 1
