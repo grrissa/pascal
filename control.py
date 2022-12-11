@@ -268,36 +268,37 @@ class Control:
         if (self.curr_player.numOfHits == 17):
             self.board.window.destroy()
             self.end_game_setup()
-        self.board.shipSinkNotification['text'] = ""
+        else: #game not over yet
+            self.board.shipSinkNotification['text'] = ""
 
-        #Updates curr_player and other_player
-        if (self.curr_player.playerNum == 1):
-            self.curr_player = self.player2
-            self.other_player = self.player1
-        else:
-            self.curr_player = self.player1
-            self.other_player = self.player2
-        print("it is player " + str(self.curr_player.playerNum) + "s turn")
+            #Updates curr_player and other_player
+            if (self.curr_player.playerNum == 1):
+                self.curr_player = self.player2
+                self.other_player = self.player1
+            else:
+                self.curr_player = self.player1
+                self.other_player = self.player2
+            print("it is player " + str(self.curr_player.playerNum) + "s turn")
 
-        #Updating the game board, hits and player turn
-        self.board.your_hits['text'] = "Your Hits: " + str(self.curr_player.numOfHits)
-        self.board.opponent['text'] = "Opponent: " + str(self.other_player.numOfHits)
-        
-        if self.curr_player.is_human == True:
-            if self.player2.is_human == True:
-                if (self.curr_player.playerNum == 2):
-                    self.board.player['text'] = "PLAYER 2S TURN"
-                else:
-                    self.board.player['text'] = "PLAYER 1S TURN"
+            #Updating the game board, hits and player turn
+            self.board.your_hits['text'] = "Your Hits: " + str(self.curr_player.numOfHits)
+            self.board.opponent['text'] = "Opponent: " + str(self.other_player.numOfHits)
+            
+            if self.curr_player.is_human == True:
+                if self.player2.is_human == True:
+                    if (self.curr_player.playerNum == 2):
+                        self.board.player['text'] = "PLAYER 2S TURN"
+                    else:
+                        self.board.player['text'] = "PLAYER 1S TURN"
 
-                self.player_switch_screen_management(False)
+                    self.player_switch_screen_management(False)
 
-            #Updates window for the curr_player
-            self.update_cells()
-        else:
-            print("computer_turn")
-            self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
-            self.update_player()
+                #Updates window for the curr_player
+                self.update_cells()
+            else:
+                print("computer_turn")
+                self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
+                self.update_player()
 
                 
            

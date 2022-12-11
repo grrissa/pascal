@@ -60,9 +60,7 @@ class computerPlayer(player):
                         valid = True
                     elif count > 4:
                         valid = True
-                        while False not in self.check_neighbors(next_x, next_y) and self.attackingCells[next_x][next_y].hit == True:
-                            print("searching1")
-                            next_x, next_y = self.random_ints()
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
                 if other_player_ships[next_x][next_y].ship == True:
                     self.curr_direction = self.direction
                     print("Curr direction " + str(self.curr_direction))
@@ -89,9 +87,7 @@ class computerPlayer(player):
                         valid = True
                     elif count >4:
                         valid = True
-                        while False not in self.check_neighbors(next_x, next_y) and self.attackingCells[next_x][next_y].hit == True:
-                            print("searching1")
-                            next_x, next_y = self.random_ints()
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
                     else:
                         center_x = self.original_success[0]
                         center_y = self.original_success[1]
@@ -119,26 +115,31 @@ class computerPlayer(player):
                 self.attackingCells[next_x][next_y].successful_hit = True
                 print("comp hit!")
         else:
-            print("random")
-            next_x, next_y = self.random_ints()
-            # checking whether there was already a hit to that location
-            while self.attackingCells[next_x][next_y].hit == True and False not in self.check_neighbors(next_x, next_y):
-                print("searching")
-                next_x, next_y = self.random_ints()
-        # updating the board for the ships
-            if other_player_ships[next_x][next_y].ship == True:
-                self.last_missile_success = True
-                self.original_success = (next_x, next_y)
-                temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
-                temp.timeHit += 1
-                self.attackingCells[next_x][next_y].successful_hit = True
-                self.numOfHits += 1
-                print("comp hit!")
+            next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
         #Changing the hit bool in the selected cell in both players boards
         other_player_ships[next_x][next_y].hit = True
         self.attackingCells[next_x][next_y].hit = True 
         
         self.last_hit = (next_x, next_y)
+
+    def random_hit(self, other_player_ships, other_player_sunk_data):
+        print("random")
+        next_x, next_y = self.random_ints()
+        # checking whether there was already a hit to that location
+        while self.attackingCells[next_x][next_y].hit == True or False not in self.check_neighbors(next_x, next_y):
+            print("searching")
+            next_x, next_y = self.random_ints()
+        # updating the board for the ships
+        print(str(next_x) + " "+str(next_y))
+        if other_player_ships[next_x][next_y].ship == True:
+            self.last_missile_success = True
+            self.original_success = (next_x, next_y)
+            temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+            temp.timeHit += 1
+            self.attackingCells[next_x][next_y].successful_hit = True
+            self.numOfHits += 1
+            print("comp hit!")
+        return next_x, next_y
 
     def out_of_bounds(self, x, y):
         if x < 0 or x > 9 or y < 0 or y > 9:
