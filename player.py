@@ -10,10 +10,13 @@ Professor: A. Nuzen
 from cell import cell
 class player(object):
     def __init__(self, playerNum, score:int, is_turn:bool) -> None:
+        """
+        Constructor for player object
+        """
         self.playerNum = playerNum
         self.score = score
         self.is_turn = is_turn
-        
+
         shipCells = []
         for r in range(10):
             row = []
@@ -34,7 +37,13 @@ class player(object):
         self.playerShips = {}
 
     def incrementHits(self) -> None:
+        """
+        Increment the number of hits that a player has made
+        """
         self.numOfHits += 1
 
     def __str__(self) -> str:
+        """
+        String representation of the player object
+        """
         return ("Player %d", self.playerNum)

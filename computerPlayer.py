@@ -10,13 +10,14 @@ Professor: A. Nuzen
 import time
 from player import player
 import random
-
 class computerPlayer(player):
     def __init__(self, playerNum, score:int, is_turn:bool) -> None:
+        """
+        Constructor for computerPlayer object
+        """
         super().__init__(playerNum, score, is_turn)
         self.is_human = False
         self.max_ship_length_left = 5
-
         self.last_missile_success = False
         self.direction = 0
         self.curr_direction = 0
@@ -24,17 +25,17 @@ class computerPlayer(player):
         self.last_hit = (-1, -1)
         self.flip_attack = False
 
-    """
-    Function generates random cell coordinates and returns them as a tuple of ints
-    """
     def random_ints(self):
+        """
+        Function generates random cell coordinates and returns them as a tuple of ints
+        """
         return random.randint(0,9), random.randint(0,9)
 
-    """
-    Will make either a computer generated smart hit or a random hit depending on the 
-    outcome of the previous hit
-    """
     def computer_hit(self, other_player_ships, other_player_sunk_data):
+        """
+        Will make either a computer generated smart hit or a random hit depending on the 
+        outcome of the previous hit
+        """
         next_x = -1
         next_y = -1
         # if we should make a random computer hit or a smart computer hit
@@ -135,10 +136,10 @@ class computerPlayer(player):
         
         self.last_hit = (next_x, next_y)
 
-    """
-    Generates a completely random set of coordinates
-    """
     def random_hit(self, other_player_ships, other_player_sunk_data):
+        """
+        Generates a completely random set of coordinates
+        """
         next_x, next_y = self.random_ints()
 
         # checking whether there was already a hit to that location
@@ -154,20 +155,21 @@ class computerPlayer(player):
             temp.timeHit += 1
             self.attackingCells[next_x][next_y].successful_hit = True
             self.numOfHits += 1
-
         return next_x, next_y
 
-    """ checks if coordinate pairs are out of bounds """
     def out_of_bounds(self, x, y):
+        """ 
+        Checks if coordinate pairs are out of bounds 
+        """
         if x < 0 or x > 9 or y < 0 or y > 9:
             return True
         else:
             return False
-            
-    """
-    Returns information about contents of neighboring cells
-    """
+
     def check_neighbors(self, x, y):
+        """
+        Returns information about contents of neighboring cells
+        """
         if(x+1 >= 10):
             to_right = True
         else:
@@ -184,7 +186,6 @@ class computerPlayer(player):
             to_bottom = True
         else:
             to_bottom = self.attackingCells[x][y+1].hit == True and self.attackingCells[x][y+1].successful_hit == False
-
         return [to_top, to_right, to_bottom, to_left]
     
 

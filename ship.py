@@ -9,20 +9,26 @@ Professor: A. Nuzen
 
 class ship(object):
     def __init__(self, length:int, horitontal:bool) -> None:
+        """
+        Constructor for ship object
+        """
         self.length = length
         self.horizontal = True
         self.timeHit = 0
 
     def change_orientation(self):
+        """
+        Funtion to change the orientation of a ship object
+        """
         if self.horizontal == True:
             self.horizontal = False
         else:
             self.horizontal = True
 
-    def set_orientation(self, orientation):
-        self.horizontal = orientation
-
     def isSunk(self)->bool:
+        """
+        Function to check if the ship is sunk
+        """
         if self.timeHit == self.length:
             return True
         return False

@@ -1,8 +1,18 @@
-import tkinter as tk
+"""
+Description: GUI for when a player wins the game
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
+"""
 
+import tkinter as tk
 class EndGame:
     def __init__(self):
-        """ Initialize view of the game """
+        """ 
+        Initializer for the endgame screen 
+        """
         # Constants
         self.CONTROL_FRAME_HEIGHT = 700
 
@@ -35,9 +45,13 @@ class EndGame:
         return (repeat_button, quit_button, who_won)
 
     def set_repeat_handler(self, handler):
-        """ set handler for clicking on start button to the function handler """
+        """ 
+        set handler for clicking on start button to the function handler 
+        """
         self.repeat_button.configure(command = handler)
 
     def set_quit_handler(self, handler):
-        """ set handler for clicking on pause button to the function handler """
+        """ 
+        set handler for clicking on pause button to the function handler 
+        """
         self.quit_button.configure(command = handler)
