@@ -83,7 +83,7 @@ class computerPlayer(player):
                     next_y = center_y
                     count +=1
                     print(str(next_x) + " " + str(next_y))
-                    if ((self.attackingCells[next_x][next_y].hit != True and not self.out_of_bounds(next_x, next_y)) and (self.flip_attack == False)):
+                    if ((not self.out_of_bounds(next_x, next_y) and self.attackingCells[next_x][next_y].hit != True) and (self.flip_attack == False)):
                         valid = True
                     elif count >4:
                         valid = True
