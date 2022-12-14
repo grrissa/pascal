@@ -26,10 +26,6 @@ class Control:
         self.lastRow = -1
         self.lastColumn = -1
 
-        #Not sure if we need this code
-        # self.lastRow2 = -1
-        # self.lastColumn2 = -1
-
         #Initilizes a human player (Always going to be at least 1)
         self.player1 = humanPlayer(1, 0, True)
 

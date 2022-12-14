@@ -49,7 +49,7 @@ class Gameboard:
         self.control_frame = tk.Frame(self.window, width = num_cols * self.CELL_SIZE, 
                                 height = self.CONTROL_FRAME_HEIGHT)
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
-        ( self.start_button, self.quit_button, self.label1,
+        (self.quit_button, self.label1,
             self.confirm_button, self.your_hits, self.opponent, self.player, self.shipSinkNotification) = self.add_control()
 
         self.switch_frame = tk.Frame(self.window, relief = "solid", background = "black")
@@ -133,9 +133,6 @@ class Gameboard:
         """ 
         Create control buttons and welcome message, and add them to the control frame 
         """
-        start_button = tk.Button(self.control_frame, text="Start", font=("Helvetica", 10))
-        start_button.grid(row=1, column=1)
-
         quit_button = tk.Button(self.control_frame, text="Quit", font=("Helvetica", 10), command=quit)
         quit_button.grid(row=1, column=2)
 
@@ -157,7 +154,8 @@ class Gameboard:
         shipSinkNotification = tk.Label(self.control_frame, text="", font=("Helvetica", 20))
         shipSinkNotification.grid(row=8)
 
-        return (start_button, quit_button, label1, confirm_button, your_hits, opponent, player, shipSinkNotification)
+        return (quit_button, label1, confirm_button, your_hits, opponent, player, shipSinkNotification)
+
     def add_cells(self):
         """ Add cells to the view """
         cells = []
