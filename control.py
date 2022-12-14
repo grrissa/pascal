@@ -168,6 +168,8 @@ class Control:
                 else: # illegal ship is true
                     self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
                     self.update_ship_labels(self.ship.name, "black")
+            else:
+                self.update_ship_labels(self.ship.name, "black")
 
     """
     Updates the board and user lists when ship is placed
