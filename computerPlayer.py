@@ -24,20 +24,27 @@ class computerPlayer(player):
         self.last_hit = (-1, -1)
         self.flip_attack = False
 
-
+    """
+    Function generates random cell coordinates and returns them as a tuple of ints
+    """
     def random_ints(self):
         return random.randint(0,9), random.randint(0,9)
 
+    """
+    Will make either a computer generated smart hit or a random hit depending on the 
+    outcome of the previous hit
+    """
     def computer_hit(self, other_player_ships, other_player_sunk_data):
         next_x = -1
         next_y = -1
         # if we should make a random computer hit or a smart computer hit
         if self.last_missile_success == True:
-            print("entered")
+
             # After first hit, checking neighboring cells to see which direction we should go
             if self.curr_direction == 0:
                 valid = False
                 count = 0
+
                 #Random int 1-4 to choose where we go next (1 = North, 2 = East, 3 = West, 4 = South)
                 while valid == False:
                     count += 1
@@ -54,8 +61,8 @@ class computerPlayer(player):
                     else:
                         next_x = self.original_success[0] - 1
                         next_y = self.original_success[1]
-                    print("yay")
-                    #print(next_y)
+
+                    # checking on whether these points are valid
                     if not( self.out_of_bounds(next_x, next_y) or self.attackingCells[next_x][next_y].hit == True):
                         valid = True
                     elif count > 4:
@@ -63,13 +70,14 @@ class computerPlayer(player):
                         next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
                 if other_player_ships[next_x][next_y].ship == True:
                     self.curr_direction = self.direction
-                    print("Curr direction " + str(self.curr_direction))
+
             else:
                 valid = False
                 center_x = self.last_hit[0]
                 center_y = self.last_hit[1]
-                print("DB")
                 count = 0
+
+                # will attempt a hit in a neighboring cell
                 while valid == False:
                     if self.curr_direction == 1:
                         center_y -= 1
@@ -82,7 +90,8 @@ class computerPlayer(player):
                     next_x = center_x
                     next_y = center_y
                     count +=1
-                    print(str(next_x) + " " + str(next_y))
+
+                    # checking if this hit is valid or whether to flip sides
                     if ((not self.out_of_bounds(next_x, next_y) and self.attackingCells[next_x][next_y].hit != True) and (self.flip_attack == False)):
                         valid = True
                     elif count >4:
@@ -104,6 +113,7 @@ class computerPlayer(player):
                 if other_player_ships[next_x][next_y].ship == False:
                     self.flip_attack = True
 
+            # reset direction variables
             if other_player_ships[next_x][next_y].ship == True:
                 temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
                 temp.timeHit += 1
@@ -115,24 +125,28 @@ class computerPlayer(player):
                     self.original_success = (-1,-1)
                     self.last_hit = (-1, -1)
                 self.attackingCells[next_x][next_y].successful_hit = True
-                print("comp hit!")
+
         else:
             next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+
         #Changing the hit bool in the selected cell in both players boards
         other_player_ships[next_x][next_y].hit = True
         self.attackingCells[next_x][next_y].hit = True 
         
         self.last_hit = (next_x, next_y)
 
+    """
+    Generates a completely random set of coordinates
+    """
     def random_hit(self, other_player_ships, other_player_sunk_data):
-        print("random")
         next_x, next_y = self.random_ints()
+
         # checking whether there was already a hit to that location
         while self.attackingCells[next_x][next_y].hit == True or False not in self.check_neighbors(next_x, next_y):
             print("searching")
             next_x, next_y = self.random_ints()
+
         # updating the board for the ships
-        print(str(next_x) + " "+str(next_y))
         if other_player_ships[next_x][next_y].ship == True:
             self.last_missile_success = True
             self.original_success = (next_x, next_y)
@@ -140,15 +154,19 @@ class computerPlayer(player):
             temp.timeHit += 1
             self.attackingCells[next_x][next_y].successful_hit = True
             self.numOfHits += 1
-            print("comp hit!")
+
         return next_x, next_y
 
+    """ checks if coordinate pairs are out of bounds """
     def out_of_bounds(self, x, y):
         if x < 0 or x > 9 or y < 0 or y > 9:
             return True
         else:
             return False
             
+    """
+    Returns information about contents of neighboring cells
+    """
     def check_neighbors(self, x, y):
         if(x+1 >= 10):
             to_right = True
