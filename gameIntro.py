@@ -9,7 +9,7 @@ Professor: A. Nuzen
 import tkinter as tk
 
 class GameIntro:
-    def __init__(self):
+    def __init__(self)->None:
         """ 
         Initializer for the game intro screen
         """
@@ -26,7 +26,7 @@ class GameIntro:
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         (self.human_button, self.ai_button) = self.add_control()
 
-    def add_control(self):
+    def add_control(self)->tuple:
         """ 
         Create control buttons and welcome message, and add them to the control frame 
         """
@@ -41,13 +41,13 @@ class GameIntro:
 
         return (human_button, ai_button)
 
-    def set_human_handler(self, handler):
+    def set_human_handler(self, handler)->None:
         """ 
         Set handler for clicking on start button to the function handler 
         """
         self.human_button.configure(command = handler)
 
-    def set_ai_handler(self, handler):
+    def set_ai_handler(self, handler)->None:
         """ 
         Set handler for clicking on pause button to the function handler 
         """

@@ -9,7 +9,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 class EndGame:
-    def __init__(self):
+    def __init__(self)->None:
         """ 
         Initializer for the endgame screen 
         """
@@ -26,7 +26,7 @@ class EndGame:
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         (self.repeat_button, self.quit_button, self.who_won) = self.add_control()
 
-    def add_control(self):
+    def add_control(self)->list:
         """ 
         Create control buttons and welcome message, and add them to the control frame 
         """
@@ -44,13 +44,13 @@ class EndGame:
 
         return (repeat_button, quit_button, who_won)
 
-    def set_repeat_handler(self, handler):
+    def set_repeat_handler(self, handler)->None:
         """ 
         set handler for clicking on start button to the function handler 
         """
         self.repeat_button.configure(command = handler)
 
-    def set_quit_handler(self, handler):
+    def set_quit_handler(self, handler)->None:
         """ 
         set handler for clicking on pause button to the function handler 
         """

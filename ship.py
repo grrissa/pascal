@@ -16,7 +16,7 @@ class ship(object):
         self.horizontal = True
         self.timeHit = 0
 
-    def change_orientation(self):
+    def change_orientation(self)->None:
         """
         Funtion to change the orientation of a ship object
         """

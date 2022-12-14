@@ -48,7 +48,7 @@ import time
 from player import player
 import random
 class computerPlayer(player):
-    def __init__(self, playerNum, score:int, is_turn:bool) -&gt; None:
+    def __init__(self, playerNum, score:int, is_turn:bool)-&gt;None:
         &#34;&#34;&#34;
         Constructor for computerPlayer object
         &#34;&#34;&#34;
@@ -62,13 +62,13 @@ class computerPlayer(player):
         self.last_hit = (-1, -1)
         self.flip_attack = False
 
-    def random_ints(self):
+    def random_ints(self)-&gt;tuple:
         &#34;&#34;&#34;
         Function generates random cell coordinates and returns them as a tuple of ints
         &#34;&#34;&#34;
         return random.randint(0,9), random.randint(0,9)
 
-    def computer_hit(self, other_player_ships, other_player_sunk_data):
+    def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
         &#34;&#34;&#34;
         Will make either a computer generated smart hit or a random hit depending on the 
         outcome of the previous hit
@@ -173,7 +173,7 @@ class computerPlayer(player):
         
         self.last_hit = (next_x, next_y)
 
-    def random_hit(self, other_player_ships, other_player_sunk_data):
+    def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
         &#34;&#34;&#34;
         Generates a completely random set of coordinates
         &#34;&#34;&#34;
@@ -194,7 +194,7 @@ class computerPlayer(player):
             self.numOfHits += 1
         return next_x, next_y
 
-    def out_of_bounds(self, x, y):
+    def out_of_bounds(self, x, y)-&gt;bool:
         &#34;&#34;&#34; 
         Checks if coordinate pairs are out of bounds 
         &#34;&#34;&#34;
@@ -203,7 +203,7 @@ class computerPlayer(player):
         else:
             return False
 
-    def check_neighbors(self, x, y):
+    def check_neighbors(self, x, y)-&gt;list:
         &#34;&#34;&#34;
         Returns information about contents of neighboring cells
         &#34;&#34;&#34;
@@ -247,7 +247,7 @@ class computerPlayer(player):
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class computerPlayer(player):
-    def __init__(self, playerNum, score:int, is_turn:bool) -&gt; None:
+    def __init__(self, playerNum, score:int, is_turn:bool)-&gt;None:
         &#34;&#34;&#34;
         Constructor for computerPlayer object
         &#34;&#34;&#34;
@@ -261,13 +261,13 @@ class computerPlayer(player):
         self.last_hit = (-1, -1)
         self.flip_attack = False
 
-    def random_ints(self):
+    def random_ints(self)-&gt;tuple:
         &#34;&#34;&#34;
         Function generates random cell coordinates and returns them as a tuple of ints
         &#34;&#34;&#34;
         return random.randint(0,9), random.randint(0,9)
 
-    def computer_hit(self, other_player_ships, other_player_sunk_data):
+    def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
         &#34;&#34;&#34;
         Will make either a computer generated smart hit or a random hit depending on the 
         outcome of the previous hit
@@ -372,7 +372,7 @@ class computerPlayer(player):
         
         self.last_hit = (next_x, next_y)
 
-    def random_hit(self, other_player_ships, other_player_sunk_data):
+    def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
         &#34;&#34;&#34;
         Generates a completely random set of coordinates
         &#34;&#34;&#34;
@@ -393,7 +393,7 @@ class computerPlayer(player):
             self.numOfHits += 1
         return next_x, next_y
 
-    def out_of_bounds(self, x, y):
+    def out_of_bounds(self, x, y)-&gt;bool:
         &#34;&#34;&#34; 
         Checks if coordinate pairs are out of bounds 
         &#34;&#34;&#34;
@@ -402,7 +402,7 @@ class computerPlayer(player):
         else:
             return False
 
-    def check_neighbors(self, x, y):
+    def check_neighbors(self, x, y)-&gt;list:
         &#34;&#34;&#34;
         Returns information about contents of neighboring cells
         &#34;&#34;&#34;
@@ -431,7 +431,7 @@ class computerPlayer(player):
 <h3>Methods</h3>
 <dl>
 <dt id="computerPlayer.computerPlayer.check_neighbors"><code class="name flex">
-<span>def <span class="ident">check_neighbors</span></span>(<span>self, x, y)</span>
+<span>def <span class="ident">check_neighbors</span></span>(<span>self, x, y) ‑> list</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Returns information about contents of neighboring cells</p></div>
@@ -439,7 +439,7 @@ class computerPlayer(player):
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def check_neighbors(self, x, y):
+<pre><code class="python">def check_neighbors(self, x, y)-&gt;list:
     &#34;&#34;&#34;
     Returns information about contents of neighboring cells
     &#34;&#34;&#34;
@@ -463,7 +463,7 @@ class computerPlayer(player):
 </details>
 </dd>
 <dt id="computerPlayer.computerPlayer.computer_hit"><code class="name flex">
-<span>def <span class="ident">computer_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data)</span>
+<span>def <span class="ident">computer_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Will make either a computer generated smart hit or a random hit depending on the
@@ -472,7 +472,7 @@ outcome of the previous hit</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def computer_hit(self, other_player_ships, other_player_sunk_data):
+<pre><code class="python">def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
     &#34;&#34;&#34;
     Will make either a computer generated smart hit or a random hit depending on the 
     outcome of the previous hit
@@ -579,7 +579,7 @@ outcome of the previous hit</p></div>
 </details>
 </dd>
 <dt id="computerPlayer.computerPlayer.out_of_bounds"><code class="name flex">
-<span>def <span class="ident">out_of_bounds</span></span>(<span>self, x, y)</span>
+<span>def <span class="ident">out_of_bounds</span></span>(<span>self, x, y) ‑> bool</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Checks if coordinate pairs are out of bounds</p></div>
@@ -587,7 +587,7 @@ outcome of the previous hit</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def out_of_bounds(self, x, y):
+<pre><code class="python">def out_of_bounds(self, x, y)-&gt;bool:
     &#34;&#34;&#34; 
     Checks if coordinate pairs are out of bounds 
     &#34;&#34;&#34;
@@ -598,7 +598,7 @@ outcome of the previous hit</p></div>
 </details>
 </dd>
 <dt id="computerPlayer.computerPlayer.random_hit"><code class="name flex">
-<span>def <span class="ident">random_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data)</span>
+<span>def <span class="ident">random_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data) ‑> tuple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Generates a completely random set of coordinates</p></div>
@@ -606,7 +606,7 @@ outcome of the previous hit</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def random_hit(self, other_player_ships, other_player_sunk_data):
+<pre><code class="python">def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
     &#34;&#34;&#34;
     Generates a completely random set of coordinates
     &#34;&#34;&#34;
@@ -629,7 +629,7 @@ outcome of the previous hit</p></div>
 </details>
 </dd>
 <dt id="computerPlayer.computerPlayer.random_ints"><code class="name flex">
-<span>def <span class="ident">random_ints</span></span>(<span>self)</span>
+<span>def <span class="ident">random_ints</span></span>(<span>self) ‑> tuple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Function generates random cell coordinates and returns them as a tuple of ints</p></div>
@@ -637,7 +637,7 @@ outcome of the previous hit</p></div>
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def random_ints(self):
+<pre><code class="python">def random_ints(self)-&gt;tuple:
     &#34;&#34;&#34;
     Function generates random cell coordinates and returns them as a tuple of ints
     &#34;&#34;&#34;

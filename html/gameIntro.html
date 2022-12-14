@@ -46,7 +46,7 @@ Professor: A. Nuzen
 import tkinter as tk
 
 class GameIntro:
-    def __init__(self):
+    def __init__(self)-&gt;None:
         &#34;&#34;&#34; 
         Initializer for the game intro screen
         &#34;&#34;&#34;
@@ -63,7 +63,7 @@ class GameIntro:
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         (self.human_button, self.ai_button) = self.add_control()
 
-    def add_control(self):
+    def add_control(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create control buttons and welcome message, and add them to the control frame 
         &#34;&#34;&#34;
@@ -78,13 +78,13 @@ class GameIntro:
 
         return (human_button, ai_button)
 
-    def set_human_handler(self, handler):
+    def set_human_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on start button to the function handler 
         &#34;&#34;&#34;
         self.human_button.configure(command = handler)
 
-    def set_ai_handler(self, handler):
+    def set_ai_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on pause button to the function handler 
         &#34;&#34;&#34;
@@ -110,7 +110,7 @@ class GameIntro:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class GameIntro:
-    def __init__(self):
+    def __init__(self)-&gt;None:
         &#34;&#34;&#34; 
         Initializer for the game intro screen
         &#34;&#34;&#34;
@@ -127,7 +127,7 @@ class GameIntro:
         self.control_frame.grid(row = 1, column = 2, padx=40, pady=40)
         (self.human_button, self.ai_button) = self.add_control()
 
-    def add_control(self):
+    def add_control(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create control buttons and welcome message, and add them to the control frame 
         &#34;&#34;&#34;
@@ -142,13 +142,13 @@ class GameIntro:
 
         return (human_button, ai_button)
 
-    def set_human_handler(self, handler):
+    def set_human_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on start button to the function handler 
         &#34;&#34;&#34;
         self.human_button.configure(command = handler)
 
-    def set_ai_handler(self, handler):
+    def set_ai_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on pause button to the function handler 
         &#34;&#34;&#34;
@@ -157,7 +157,7 @@ class GameIntro:
 <h3>Methods</h3>
 <dl>
 <dt id="gameIntro.GameIntro.add_control"><code class="name flex">
-<span>def <span class="ident">add_control</span></span>(<span>self)</span>
+<span>def <span class="ident">add_control</span></span>(<span>self) ‑> tuple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create control buttons and welcome message, and add them to the control frame</p></div>
@@ -165,7 +165,7 @@ class GameIntro:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_control(self):
+<pre><code class="python">def add_control(self)-&gt;tuple:
     &#34;&#34;&#34; 
     Create control buttons and welcome message, and add them to the control frame 
     &#34;&#34;&#34;
@@ -182,7 +182,7 @@ class GameIntro:
 </details>
 </dd>
 <dt id="gameIntro.GameIntro.set_ai_handler"><code class="name flex">
-<span>def <span class="ident">set_ai_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_ai_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on pause button to the function handler</p></div>
@@ -190,7 +190,7 @@ class GameIntro:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_ai_handler(self, handler):
+<pre><code class="python">def set_ai_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on pause button to the function handler 
     &#34;&#34;&#34;
@@ -198,7 +198,7 @@ class GameIntro:
 </details>
 </dd>
 <dt id="gameIntro.GameIntro.set_human_handler"><code class="name flex">
-<span>def <span class="ident">set_human_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_human_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on start button to the function handler</p></div>
@@ -206,7 +206,7 @@ class GameIntro:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_human_handler(self, handler):
+<pre><code class="python">def set_human_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on start button to the function handler 
     &#34;&#34;&#34;

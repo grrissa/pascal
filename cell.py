@@ -16,7 +16,7 @@ class cell(object):
         self.id = i
         self.successful_hit = sh
 
-    def __repr__(self):
+    def __repr__(self)->str:
         """
         String representation of a cell object
         """

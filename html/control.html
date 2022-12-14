@@ -60,7 +60,7 @@ from computerPlayer import computerPlayer
 from enum import IntEnum
 import random
 class Control:
-    def __init__(self):
+    def __init__(self)-&gt;None:
         &#34;&#34;&#34; Initializes a game of battleship &#34;&#34;&#34;
         # Define parameters
         self.NUM_ROWS = 10
@@ -99,7 +99,7 @@ class Control:
         # Start the simulation
         self.board1.window.mainloop()
 
-    def cell_click_handler1(self, row:int, column:int) -&gt; None:
+    def cell_click_handler1(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         This handler is for the top 100 cells of the window, mostly for making hits
         &#34;&#34;&#34;
@@ -115,7 +115,7 @@ class Control:
                 self.lastRow = row
                 self.lastColumn = column
 
-    def cell_click_handler2(self, row:int, column:int) -&gt; None:
+    def cell_click_handler2(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         This handler is for the bottom 100 cells of the window, for placing ships
         &#34;&#34;&#34;
@@ -206,7 +206,7 @@ class Control:
             else:
                 self.update_ship_labels(self.ship.name, &#34;black&#34;)
 
-    def ship_board_update(self, row:int, column:int) -&gt; None:
+    def ship_board_update(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         Updates the board and user lists when ship is placed
         &#34;&#34;&#34;
@@ -224,7 +224,7 @@ class Control:
         else:
             self.curr_player.playerShips[&#34;carrier&#34;] = carrier()
 
-    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Sets up for loop for placing ships
         &#34;&#34;&#34;
@@ -235,7 +235,7 @@ class Control:
             for r in range(start_range, end_range):
                 self.ship_board_update(r+row, column)
 
-    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Removes ships from board that are not valid or deleted
         &#34;&#34;&#34;
@@ -254,7 +254,7 @@ class Control:
                         self.curr_player.shipCells[r+row][column].ship = False
                         self.curr_player.shipCells[r+row][column].id = &#34;&#34;
 
-    def confirm_hit_handler(self) -&gt; None:
+    def confirm_hit_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handler for the confirm hit button
         &#34;&#34;&#34;
@@ -286,7 +286,7 @@ class Control:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
-    def update_player(self) -&gt; None:
+    def update_player(self)-&gt;None:
         &#34;&#34;&#34;
         Switches player and updates the screen
         &#34;&#34;&#34;
@@ -323,7 +323,7 @@ class Control:
                 self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
                 self.update_player()
 
-    def end_game_setup(self) -&gt; None:
+    def end_game_setup(self)-&gt;None:
         &#34;&#34;&#34;
         For endgame, displays winner and allows for reset of game
         &#34;&#34;&#34;
@@ -333,7 +333,7 @@ class Control:
         self.end_board.set_repeat_handler(self.repeat_handler)
         self.end_board.window.mainloop()
 
-    def board_setup(self) -&gt; None:
+    def board_setup(self)-&gt;None:
         &#34;&#34;&#34;
         Sets up gameboard once type of game is chosen
         &#34;&#34;&#34;
@@ -359,7 +359,7 @@ class Control:
         self.player_switch_screen_management()
         self.board.window.mainloop()
 
-    def initializing_board_handlers(self) -&gt; None:
+    def initializing_board_handlers(self)-&gt;None:
         &#34;&#34;&#34;
         Initializes all handlers for the gameboard
         &#34;&#34;&#34;
@@ -373,7 +373,7 @@ class Control:
         self.board.set_random_ships_handler(self.place_random_ships)
         self.board.set_switch_players_handler(self.player_switch_screen_management)
 
-    def player_switch_screen_management(self, delete: bool = True) -&gt; None:
+    def player_switch_screen_management(self, delete: bool = True)-&gt;None:
         &#34;&#34;&#34;
         Covers board when players switch to ensure fairness of game
         &#34;&#34;&#34;
@@ -384,7 +384,7 @@ class Control:
             self.board.switch_players.configure(fg = &#34;black&#34;)
             self.board.switch_players.configure(text = &#34;Player &#34;+str(self.curr_player.playerNum) +&#34;: Ready to Play!&#34;)
 
-    def delete_mode_func(self, ship_name:str)-&gt; None:
+    def delete_mode_func(self, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Deletes ships from board
         &#34;&#34;&#34;
@@ -399,7 +399,7 @@ class Control:
         self.ship_types_placed.remove(ship_name)
         self.update_ship_labels(ship_name, &#34;black&#34;)
 
-    def update_ship_labels(self, ship_name:str, color:str) -&gt; None:
+    def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
         &#34;&#34;&#34;
         Changes the button text colors when pressed
         &#34;&#34;&#34;
@@ -414,7 +414,7 @@ class Control:
         elif ship_name == &#34;cruiser&#34;:
             self.board.cruiser.configure(fg = color)
 
-    def delete_ship_handler(self) -&gt; None:
+    def delete_ship_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles the delete mode switches
         &#34;&#34;&#34;
@@ -425,7 +425,7 @@ class Control:
             self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: OFF&#34;
             self.delete_mode = False
 
-    def done_placing_ships_handler(self) -&gt; None:
+    def done_placing_ships_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Switches player and ensures player is done placing ships
         &#34;&#34;&#34;
@@ -458,7 +458,7 @@ class Control:
             self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
             self.done_placing_ships = True
 
-    def ship_list(self) -&gt; list:
+    def ship_list(self)-&gt;list:
         &#34;&#34;&#34;
         Returns a list containing the ship objects that have been placed
         &#34;&#34;&#34;
@@ -468,7 +468,7 @@ class Control:
                 ship_list.append(ship)
         return ship_list
 
-    def place_random_ships(self) -&gt; None:
+    def place_random_ships(self)-&gt;None:
         &#34;&#34;&#34;
         Places ships on board randomly
         &#34;&#34;&#34;
@@ -482,7 +482,7 @@ class Control:
                 while self.ship.name not in self.ship_types_placed:
                     self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
-    def carrier_handler(self) -&gt; None:
+    def carrier_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the carrier ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -491,7 +491,7 @@ class Control:
             self.ship = carrier()
             self.board.carrier.configure(fg = self.mod_color)
    
-    def battleship_handler(self) -&gt; None:
+    def battleship_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the battleship ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;  
@@ -500,7 +500,7 @@ class Control:
             self.ship = battleship()
             self.board.battleship.configure(fg = self.mod_color)
 
-    def submarine_handler(self) -&gt; None:
+    def submarine_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the submarine ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -509,7 +509,7 @@ class Control:
             self.ship = submarine()
             self.board.submarine.configure(fg = self.mod_color)
 
-    def cruiser_handler(self) -&gt; None:
+    def cruiser_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the cruiser ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -518,7 +518,7 @@ class Control:
             self.ship = cruiser()
             self.board.cruiser.configure(fg = self.mod_color)
 
-    def destroyer_handler(self) -&gt; None:
+    def destroyer_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the destroyer ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -527,7 +527,7 @@ class Control:
             self.ship = destroyer()
             self.board.destroyer.configure(fg = self.mod_color)
 
-    def reset_cells2(self) -&gt; None:
+    def reset_cells2(self)-&gt;None:
         &#34;&#34;&#34;
         Resets all cells on bottom board to blue
         &#34;&#34;&#34;
@@ -535,7 +535,7 @@ class Control:
             for c in range(self.NUM_COLS):
                 self.board.cells2[r][c].configure(bg=&#34;blue&#34;)   
 
-    def update_cells(self) -&gt; None:
+    def update_cells(self)-&gt;None:
         &#34;&#34;&#34;
         Updates window with the curr_players ship and attacking board
         &#34;&#34;&#34;
@@ -567,7 +567,7 @@ class Control:
                 else:
                     self.board.cells2[r][c].configure(bg=&#34;blue&#34;)         
 
-    def human_handler(self) -&gt; None:
+    def human_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when human vs human button is pushed
         &#34;&#34;&#34;
@@ -576,7 +576,7 @@ class Control:
         self.board1.window.destroy()
         self.board_setup()
 
-    def ai_handler(self) -&gt; None:
+    def ai_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when human vs computer is pushed
         &#34;&#34;&#34;  
@@ -585,13 +585,13 @@ class Control:
         self.board1.window.destroy()
         self.board_setup()
     
-    def quit_handler(self) -&gt; None:
+    def quit_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Once game has ended, allow for window to be quit
         &#34;&#34;&#34;
         self.end_board.window.destroy()
 
-    def repeat_handler(self) -&gt; None:
+    def repeat_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Allows game to be repeated
         &#34;&#34;&#34;
@@ -621,7 +621,7 @@ if __name__ == &#34;__main__&#34;:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Control:
-    def __init__(self):
+    def __init__(self)-&gt;None:
         &#34;&#34;&#34; Initializes a game of battleship &#34;&#34;&#34;
         # Define parameters
         self.NUM_ROWS = 10
@@ -660,7 +660,7 @@ if __name__ == &#34;__main__&#34;:
         # Start the simulation
         self.board1.window.mainloop()
 
-    def cell_click_handler1(self, row:int, column:int) -&gt; None:
+    def cell_click_handler1(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         This handler is for the top 100 cells of the window, mostly for making hits
         &#34;&#34;&#34;
@@ -676,7 +676,7 @@ if __name__ == &#34;__main__&#34;:
                 self.lastRow = row
                 self.lastColumn = column
 
-    def cell_click_handler2(self, row:int, column:int) -&gt; None:
+    def cell_click_handler2(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         This handler is for the bottom 100 cells of the window, for placing ships
         &#34;&#34;&#34;
@@ -767,7 +767,7 @@ if __name__ == &#34;__main__&#34;:
             else:
                 self.update_ship_labels(self.ship.name, &#34;black&#34;)
 
-    def ship_board_update(self, row:int, column:int) -&gt; None:
+    def ship_board_update(self, row:int, column:int)-&gt;None:
         &#34;&#34;&#34;
         Updates the board and user lists when ship is placed
         &#34;&#34;&#34;
@@ -785,7 +785,7 @@ if __name__ == &#34;__main__&#34;:
         else:
             self.curr_player.playerShips[&#34;carrier&#34;] = carrier()
 
-    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Sets up for loop for placing ships
         &#34;&#34;&#34;
@@ -796,7 +796,7 @@ if __name__ == &#34;__main__&#34;:
             for r in range(start_range, end_range):
                 self.ship_board_update(r+row, column)
 
-    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Removes ships from board that are not valid or deleted
         &#34;&#34;&#34;
@@ -815,7 +815,7 @@ if __name__ == &#34;__main__&#34;:
                         self.curr_player.shipCells[r+row][column].ship = False
                         self.curr_player.shipCells[r+row][column].id = &#34;&#34;
 
-    def confirm_hit_handler(self) -&gt; None:
+    def confirm_hit_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handler for the confirm hit button
         &#34;&#34;&#34;
@@ -847,7 +847,7 @@ if __name__ == &#34;__main__&#34;:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
-    def update_player(self) -&gt; None:
+    def update_player(self)-&gt;None:
         &#34;&#34;&#34;
         Switches player and updates the screen
         &#34;&#34;&#34;
@@ -884,7 +884,7 @@ if __name__ == &#34;__main__&#34;:
                 self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
                 self.update_player()
 
-    def end_game_setup(self) -&gt; None:
+    def end_game_setup(self)-&gt;None:
         &#34;&#34;&#34;
         For endgame, displays winner and allows for reset of game
         &#34;&#34;&#34;
@@ -894,7 +894,7 @@ if __name__ == &#34;__main__&#34;:
         self.end_board.set_repeat_handler(self.repeat_handler)
         self.end_board.window.mainloop()
 
-    def board_setup(self) -&gt; None:
+    def board_setup(self)-&gt;None:
         &#34;&#34;&#34;
         Sets up gameboard once type of game is chosen
         &#34;&#34;&#34;
@@ -920,7 +920,7 @@ if __name__ == &#34;__main__&#34;:
         self.player_switch_screen_management()
         self.board.window.mainloop()
 
-    def initializing_board_handlers(self) -&gt; None:
+    def initializing_board_handlers(self)-&gt;None:
         &#34;&#34;&#34;
         Initializes all handlers for the gameboard
         &#34;&#34;&#34;
@@ -934,7 +934,7 @@ if __name__ == &#34;__main__&#34;:
         self.board.set_random_ships_handler(self.place_random_ships)
         self.board.set_switch_players_handler(self.player_switch_screen_management)
 
-    def player_switch_screen_management(self, delete: bool = True) -&gt; None:
+    def player_switch_screen_management(self, delete: bool = True)-&gt;None:
         &#34;&#34;&#34;
         Covers board when players switch to ensure fairness of game
         &#34;&#34;&#34;
@@ -945,7 +945,7 @@ if __name__ == &#34;__main__&#34;:
             self.board.switch_players.configure(fg = &#34;black&#34;)
             self.board.switch_players.configure(text = &#34;Player &#34;+str(self.curr_player.playerNum) +&#34;: Ready to Play!&#34;)
 
-    def delete_mode_func(self, ship_name:str)-&gt; None:
+    def delete_mode_func(self, ship_name:str)-&gt;None:
         &#34;&#34;&#34;
         Deletes ships from board
         &#34;&#34;&#34;
@@ -960,7 +960,7 @@ if __name__ == &#34;__main__&#34;:
         self.ship_types_placed.remove(ship_name)
         self.update_ship_labels(ship_name, &#34;black&#34;)
 
-    def update_ship_labels(self, ship_name:str, color:str) -&gt; None:
+    def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
         &#34;&#34;&#34;
         Changes the button text colors when pressed
         &#34;&#34;&#34;
@@ -975,7 +975,7 @@ if __name__ == &#34;__main__&#34;:
         elif ship_name == &#34;cruiser&#34;:
             self.board.cruiser.configure(fg = color)
 
-    def delete_ship_handler(self) -&gt; None:
+    def delete_ship_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles the delete mode switches
         &#34;&#34;&#34;
@@ -986,7 +986,7 @@ if __name__ == &#34;__main__&#34;:
             self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: OFF&#34;
             self.delete_mode = False
 
-    def done_placing_ships_handler(self) -&gt; None:
+    def done_placing_ships_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Switches player and ensures player is done placing ships
         &#34;&#34;&#34;
@@ -1019,7 +1019,7 @@ if __name__ == &#34;__main__&#34;:
             self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
             self.done_placing_ships = True
 
-    def ship_list(self) -&gt; list:
+    def ship_list(self)-&gt;list:
         &#34;&#34;&#34;
         Returns a list containing the ship objects that have been placed
         &#34;&#34;&#34;
@@ -1029,7 +1029,7 @@ if __name__ == &#34;__main__&#34;:
                 ship_list.append(ship)
         return ship_list
 
-    def place_random_ships(self) -&gt; None:
+    def place_random_ships(self)-&gt;None:
         &#34;&#34;&#34;
         Places ships on board randomly
         &#34;&#34;&#34;
@@ -1043,7 +1043,7 @@ if __name__ == &#34;__main__&#34;:
                 while self.ship.name not in self.ship_types_placed:
                     self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
-    def carrier_handler(self) -&gt; None:
+    def carrier_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the carrier ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -1052,7 +1052,7 @@ if __name__ == &#34;__main__&#34;:
             self.ship = carrier()
             self.board.carrier.configure(fg = self.mod_color)
    
-    def battleship_handler(self) -&gt; None:
+    def battleship_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the battleship ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;  
@@ -1061,7 +1061,7 @@ if __name__ == &#34;__main__&#34;:
             self.ship = battleship()
             self.board.battleship.configure(fg = self.mod_color)
 
-    def submarine_handler(self) -&gt; None:
+    def submarine_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the submarine ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -1070,7 +1070,7 @@ if __name__ == &#34;__main__&#34;:
             self.ship = submarine()
             self.board.submarine.configure(fg = self.mod_color)
 
-    def cruiser_handler(self) -&gt; None:
+    def cruiser_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the cruiser ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -1079,7 +1079,7 @@ if __name__ == &#34;__main__&#34;:
             self.ship = cruiser()
             self.board.cruiser.configure(fg = self.mod_color)
 
-    def destroyer_handler(self) -&gt; None:
+    def destroyer_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when the destroyer ship type button is pushed, and ensures push is legal
         &#34;&#34;&#34;
@@ -1088,7 +1088,7 @@ if __name__ == &#34;__main__&#34;:
             self.ship = destroyer()
             self.board.destroyer.configure(fg = self.mod_color)
 
-    def reset_cells2(self) -&gt; None:
+    def reset_cells2(self)-&gt;None:
         &#34;&#34;&#34;
         Resets all cells on bottom board to blue
         &#34;&#34;&#34;
@@ -1096,7 +1096,7 @@ if __name__ == &#34;__main__&#34;:
             for c in range(self.NUM_COLS):
                 self.board.cells2[r][c].configure(bg=&#34;blue&#34;)   
 
-    def update_cells(self) -&gt; None:
+    def update_cells(self)-&gt;None:
         &#34;&#34;&#34;
         Updates window with the curr_players ship and attacking board
         &#34;&#34;&#34;
@@ -1128,7 +1128,7 @@ if __name__ == &#34;__main__&#34;:
                 else:
                     self.board.cells2[r][c].configure(bg=&#34;blue&#34;)         
 
-    def human_handler(self) -&gt; None:
+    def human_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when human vs human button is pushed
         &#34;&#34;&#34;
@@ -1137,7 +1137,7 @@ if __name__ == &#34;__main__&#34;:
         self.board1.window.destroy()
         self.board_setup()
 
-    def ai_handler(self) -&gt; None:
+    def ai_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Handles when human vs computer is pushed
         &#34;&#34;&#34;  
@@ -1146,13 +1146,13 @@ if __name__ == &#34;__main__&#34;:
         self.board1.window.destroy()
         self.board_setup()
     
-    def quit_handler(self) -&gt; None:
+    def quit_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Once game has ended, allow for window to be quit
         &#34;&#34;&#34;
         self.end_board.window.destroy()
 
-    def repeat_handler(self) -&gt; None:
+    def repeat_handler(self)-&gt;None:
         &#34;&#34;&#34;
         Allows game to be repeated
         &#34;&#34;&#34;
@@ -1170,7 +1170,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ai_handler(self) -&gt; None:
+<pre><code class="python">def ai_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when human vs computer is pushed
     &#34;&#34;&#34;  
@@ -1189,7 +1189,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def battleship_handler(self) -&gt; None:
+<pre><code class="python">def battleship_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when the battleship ship type button is pushed, and ensures push is legal
     &#34;&#34;&#34;  
@@ -1208,7 +1208,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def board_setup(self) -&gt; None:
+<pre><code class="python">def board_setup(self)-&gt;None:
     &#34;&#34;&#34;
     Sets up gameboard once type of game is chosen
     &#34;&#34;&#34;
@@ -1244,7 +1244,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def carrier_handler(self) -&gt; None:
+<pre><code class="python">def carrier_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when the carrier ship type button is pushed, and ensures push is legal
     &#34;&#34;&#34;
@@ -1263,7 +1263,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def cell_click_handler1(self, row:int, column:int) -&gt; None:
+<pre><code class="python">def cell_click_handler1(self, row:int, column:int)-&gt;None:
     &#34;&#34;&#34;
     This handler is for the top 100 cells of the window, mostly for making hits
     &#34;&#34;&#34;
@@ -1289,7 +1289,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def cell_click_handler2(self, row:int, column:int) -&gt; None:
+<pre><code class="python">def cell_click_handler2(self, row:int, column:int)-&gt;None:
     &#34;&#34;&#34;
     This handler is for the bottom 100 cells of the window, for placing ships
     &#34;&#34;&#34;
@@ -1390,7 +1390,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+<pre><code class="python">def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
     &#34;&#34;&#34;
     Removes ships from board that are not valid or deleted
     &#34;&#34;&#34;
@@ -1419,7 +1419,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def confirm_hit_handler(self) -&gt; None:
+<pre><code class="python">def confirm_hit_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handler for the confirm hit button
     &#34;&#34;&#34;
@@ -1461,7 +1461,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def cruiser_handler(self) -&gt; None:
+<pre><code class="python">def cruiser_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when the cruiser ship type button is pushed, and ensures push is legal
     &#34;&#34;&#34;
@@ -1480,7 +1480,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def delete_mode_func(self, ship_name:str)-&gt; None:
+<pre><code class="python">def delete_mode_func(self, ship_name:str)-&gt;None:
     &#34;&#34;&#34;
     Deletes ships from board
     &#34;&#34;&#34;
@@ -1505,7 +1505,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def delete_ship_handler(self) -&gt; None:
+<pre><code class="python">def delete_ship_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles the delete mode switches
     &#34;&#34;&#34;
@@ -1526,7 +1526,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def destroyer_handler(self) -&gt; None:
+<pre><code class="python">def destroyer_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when the destroyer ship type button is pushed, and ensures push is legal
     &#34;&#34;&#34;
@@ -1545,7 +1545,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def done_placing_ships_handler(self) -&gt; None:
+<pre><code class="python">def done_placing_ships_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Switches player and ensures player is done placing ships
     &#34;&#34;&#34;
@@ -1588,7 +1588,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def end_game_setup(self) -&gt; None:
+<pre><code class="python">def end_game_setup(self)-&gt;None:
     &#34;&#34;&#34;
     For endgame, displays winner and allows for reset of game
     &#34;&#34;&#34;
@@ -1608,7 +1608,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def human_handler(self) -&gt; None:
+<pre><code class="python">def human_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when human vs human button is pushed
     &#34;&#34;&#34;
@@ -1627,7 +1627,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def initializing_board_handlers(self) -&gt; None:
+<pre><code class="python">def initializing_board_handlers(self)-&gt;None:
     &#34;&#34;&#34;
     Initializes all handlers for the gameboard
     &#34;&#34;&#34;
@@ -1651,7 +1651,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def place_random_ships(self) -&gt; None:
+<pre><code class="python">def place_random_ships(self)-&gt;None:
     &#34;&#34;&#34;
     Places ships on board randomly
     &#34;&#34;&#34;
@@ -1675,7 +1675,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -&gt; None:
+<pre><code class="python">def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
     &#34;&#34;&#34;
     Sets up for loop for placing ships
     &#34;&#34;&#34;
@@ -1696,7 +1696,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def player_switch_screen_management(self, delete: bool = True) -&gt; None:
+<pre><code class="python">def player_switch_screen_management(self, delete: bool = True)-&gt;None:
     &#34;&#34;&#34;
     Covers board when players switch to ensure fairness of game
     &#34;&#34;&#34;
@@ -1717,7 +1717,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def quit_handler(self) -&gt; None:
+<pre><code class="python">def quit_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Once game has ended, allow for window to be quit
     &#34;&#34;&#34;
@@ -1733,7 +1733,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def repeat_handler(self) -&gt; None:
+<pre><code class="python">def repeat_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Allows game to be repeated
     &#34;&#34;&#34;
@@ -1750,7 +1750,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def reset_cells2(self) -&gt; None:
+<pre><code class="python">def reset_cells2(self)-&gt;None:
     &#34;&#34;&#34;
     Resets all cells on bottom board to blue
     &#34;&#34;&#34;
@@ -1768,7 +1768,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ship_board_update(self, row:int, column:int) -&gt; None:
+<pre><code class="python">def ship_board_update(self, row:int, column:int)-&gt;None:
     &#34;&#34;&#34;
     Updates the board and user lists when ship is placed
     &#34;&#34;&#34;
@@ -1796,7 +1796,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ship_list(self) -&gt; list:
+<pre><code class="python">def ship_list(self)-&gt;list:
     &#34;&#34;&#34;
     Returns a list containing the ship objects that have been placed
     &#34;&#34;&#34;
@@ -1816,7 +1816,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def submarine_handler(self) -&gt; None:
+<pre><code class="python">def submarine_handler(self)-&gt;None:
     &#34;&#34;&#34;
     Handles when the submarine ship type button is pushed, and ensures push is legal
     &#34;&#34;&#34;
@@ -1835,7 +1835,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def update_cells(self) -&gt; None:
+<pre><code class="python">def update_cells(self)-&gt;None:
     &#34;&#34;&#34;
     Updates window with the curr_players ship and attacking board
     &#34;&#34;&#34;
@@ -1877,7 +1877,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def update_player(self) -&gt; None:
+<pre><code class="python">def update_player(self)-&gt;None:
     &#34;&#34;&#34;
     Switches player and updates the screen
     &#34;&#34;&#34;
@@ -1924,7 +1924,7 @@ if __name__ == &#34;__main__&#34;:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def update_ship_labels(self, ship_name:str, color:str) -&gt; None:
+<pre><code class="python">def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
     &#34;&#34;&#34;
     Changes the button text colors when pressed
     &#34;&#34;&#34;

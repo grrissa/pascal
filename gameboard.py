@@ -9,7 +9,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 class Gameboard:
-    def __init__(self, num_rows, num_cols):
+    def __init__(self, num_rows, num_cols)->None:
         """ 
         Initialize the GUI gameboard
         """
@@ -63,13 +63,13 @@ class Gameboard:
         switch_players.pack()
         return switch_players
 
-    def set_switch_players_handler(self, handler):
+    def set_switch_players_handler(self, handler)->None:
         """ 
         Set handler for clicking on reset button to the function handler 
         """
         self.switch_players.configure(command = handler)
     
-    def ship_buttons(self):
+    def ship_buttons(self)->tuple:
         """ 
         Create buttons to choose ship
         """
@@ -99,55 +99,55 @@ class Gameboard:
 
         return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
 
-    def set_done_placing_ships_handler(self, handler):
+    def set_done_placing_ships_handler(self, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler
         """
         self.done_placing_ships.configure(command = handler)
     
-    def set_random_ships_handler(self, handler):
+    def set_random_ships_handler(self, handler)->None:
         """
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.place_random_ships.configure(command = handler)
 
-    def set_delete_ship_handler(self, handler):
+    def set_delete_ship_handler(self, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.delete_ship.configure(command = handler)
 
-    def set_carrier_handler(self, handler):
+    def set_carrier_handler(self, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.carrier.configure(command = handler)
 
-    def set_battleship_handler(self, handler):
+    def set_battleship_handler(self, handler)->None:
         """ 
         Set handler for clicking on start button to the function handler 
         """
         self.battleship.configure(command = handler)
 
-    def set_submarine_handler(self, handler):
+    def set_submarine_handler(self, handler)->None:
         """ 
         Set handler for clicking on pause button to the function handler 
         """
         self.submarine.configure(command = handler)
 
-    def set_cruiser_handler(self, handler):
+    def set_cruiser_handler(self, handler)->None:
         """ 
         Set handler for clicking on step button to the function handler 
         """
         self.cruiser.configure(command = handler)
 
-    def set_destroyer_handler(self, handler):
+    def set_destroyer_handler(self, handler)->None:
         """ 
         Set handler for clicking on reset button to the function handler 
         """
         self.destroyer.configure(command = handler)
 
-    def add_control(self):
+    def add_control(self)->tuple:
         """ 
         Create control buttons and welcome message, and add them to the control frame 
         """
@@ -174,7 +174,7 @@ class Gameboard:
 
         return (quit_button, label1, confirm_button, your_hits, opponent, player, shipSinkNotification)
 
-    def add_cells(self):
+    def add_cells(self)->list:
         """ 
         Add cells to the view 
         """
@@ -190,25 +190,25 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler):
+    def set_cell_click_handler_top(self, row, column, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.cells[row][column].bind('<Button-1>', handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler):
+    def set_cell_click_handler_bottom(self, row, column, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.cells2[row][column].bind('<Button-1>', handler)
 
-    def set_confirm_hit_handler(self, handler):
+    def set_confirm_hit_handler(self, handler)->None:
         """
         Set handler for clicking the confirm hit button on the gameboard
         """
         self.confirm_button.bind('<Button-1>', handler)
 
-    def quit(self):
+    def quit(self)->None:
         """ 
         Functionality for quit button 
         """

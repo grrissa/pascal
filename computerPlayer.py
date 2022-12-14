@@ -11,7 +11,7 @@ import time
 from player import player
 import random
 class computerPlayer(player):
-    def __init__(self, playerNum, score:int, is_turn:bool) -> None:
+    def __init__(self, playerNum, score:int, is_turn:bool)->None:
         """
         Constructor for computerPlayer object
         """
@@ -25,13 +25,13 @@ class computerPlayer(player):
         self.last_hit = (-1, -1)
         self.flip_attack = False
 
-    def random_ints(self):
+    def random_ints(self)->tuple:
         """
         Function generates random cell coordinates and returns them as a tuple of ints
         """
         return random.randint(0,9), random.randint(0,9)
 
-    def computer_hit(self, other_player_ships, other_player_sunk_data):
+    def computer_hit(self, other_player_ships, other_player_sunk_data)->None:
         """
         Will make either a computer generated smart hit or a random hit depending on the 
         outcome of the previous hit
@@ -136,7 +136,7 @@ class computerPlayer(player):
         
         self.last_hit = (next_x, next_y)
 
-    def random_hit(self, other_player_ships, other_player_sunk_data):
+    def random_hit(self, other_player_ships, other_player_sunk_data)->tuple:
         """
         Generates a completely random set of coordinates
         """
@@ -157,7 +157,7 @@ class computerPlayer(player):
             self.numOfHits += 1
         return next_x, next_y
 
-    def out_of_bounds(self, x, y):
+    def out_of_bounds(self, x, y)->bool:
         """ 
         Checks if coordinate pairs are out of bounds 
         """
@@ -166,7 +166,7 @@ class computerPlayer(player):
         else:
             return False
 
-    def check_neighbors(self, x, y):
+    def check_neighbors(self, x, y)->list:
         """
         Returns information about contents of neighboring cells
         """

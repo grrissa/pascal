@@ -23,7 +23,7 @@ from computerPlayer import computerPlayer
 from enum import IntEnum
 import random
 class Control:
-    def __init__(self):
+    def __init__(self)->None:
         """ Initializes a game of battleship """
         # Define parameters
         self.NUM_ROWS = 10
@@ -62,7 +62,7 @@ class Control:
         # Start the simulation
         self.board1.window.mainloop()
 
-    def cell_click_handler1(self, row:int, column:int) -> None:
+    def cell_click_handler1(self, row:int, column:int)->None:
         """
         This handler is for the top 100 cells of the window, mostly for making hits
         """
@@ -78,7 +78,7 @@ class Control:
                 self.lastRow = row
                 self.lastColumn = column
 
-    def cell_click_handler2(self, row:int, column:int) -> None:
+    def cell_click_handler2(self, row:int, column:int)->None:
         """
         This handler is for the bottom 100 cells of the window, for placing ships
         """
@@ -169,7 +169,7 @@ class Control:
             else:
                 self.update_ship_labels(self.ship.name, "black")
 
-    def ship_board_update(self, row:int, column:int) -> None:
+    def ship_board_update(self, row:int, column:int)->None:
         """
         Updates the board and user lists when ship is placed
         """
@@ -187,7 +187,7 @@ class Control:
         else:
             self.curr_player.playerShips["carrier"] = carrier()
 
-    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -> None:
+    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)->None:
         """
         Sets up for loop for placing ships
         """
@@ -198,7 +198,7 @@ class Control:
             for r in range(start_range, end_range):
                 self.ship_board_update(r+row, column)
 
-    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str) -> None:
+    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)->None:
         """
         Removes ships from board that are not valid or deleted
         """
@@ -217,7 +217,7 @@ class Control:
                         self.curr_player.shipCells[r+row][column].ship = False
                         self.curr_player.shipCells[r+row][column].id = ""
 
-    def confirm_hit_handler(self) -> None:
+    def confirm_hit_handler(self)->None:
         """
         Handler for the confirm hit button
         """
@@ -249,7 +249,7 @@ class Control:
             self.board.window.update()
             self.board.window.after(1000, self.update_player())
 
-    def update_player(self) -> None:
+    def update_player(self)->None:
         """
         Switches player and updates the screen
         """
@@ -286,7 +286,7 @@ class Control:
                 self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
                 self.update_player()
 
-    def end_game_setup(self) -> None:
+    def end_game_setup(self)->None:
         """
         For endgame, displays winner and allows for reset of game
         """
@@ -296,7 +296,7 @@ class Control:
         self.end_board.set_repeat_handler(self.repeat_handler)
         self.end_board.window.mainloop()
 
-    def board_setup(self) -> None:
+    def board_setup(self)->None:
         """
         Sets up gameboard once type of game is chosen
         """
@@ -322,7 +322,7 @@ class Control:
         self.player_switch_screen_management()
         self.board.window.mainloop()
 
-    def initializing_board_handlers(self) -> None:
+    def initializing_board_handlers(self)->None:
         """
         Initializes all handlers for the gameboard
         """
@@ -336,7 +336,7 @@ class Control:
         self.board.set_random_ships_handler(self.place_random_ships)
         self.board.set_switch_players_handler(self.player_switch_screen_management)
 
-    def player_switch_screen_management(self, delete: bool = True) -> None:
+    def player_switch_screen_management(self, delete: bool = True)->None:
         """
         Covers board when players switch to ensure fairness of game
         """
@@ -347,7 +347,7 @@ class Control:
             self.board.switch_players.configure(fg = "black")
             self.board.switch_players.configure(text = "Player "+str(self.curr_player.playerNum) +": Ready to Play!")
 
-    def delete_mode_func(self, ship_name:str)-> None:
+    def delete_mode_func(self, ship_name:str)->None:
         """
         Deletes ships from board
         """
@@ -362,7 +362,7 @@ class Control:
         self.ship_types_placed.remove(ship_name)
         self.update_ship_labels(ship_name, "black")
 
-    def update_ship_labels(self, ship_name:str, color:str) -> None:
+    def update_ship_labels(self, ship_name:str, color:str)->None:
         """
         Changes the button text colors when pressed
         """
@@ -377,7 +377,7 @@ class Control:
         elif ship_name == "cruiser":
             self.board.cruiser.configure(fg = color)
 
-    def delete_ship_handler(self) -> None:
+    def delete_ship_handler(self)->None:
         """
         Handles the delete mode switches
         """
@@ -388,7 +388,7 @@ class Control:
             self.board.delete_ship['text'] = "Delete Mode: OFF"
             self.delete_mode = False
 
-    def done_placing_ships_handler(self) -> None:
+    def done_placing_ships_handler(self)->None:
         """
         Switches player and ensures player is done placing ships
         """
@@ -421,7 +421,7 @@ class Control:
             self.board.player['text'] = "PLAYER 1S TURN"
             self.done_placing_ships = True
 
-    def ship_list(self) -> list:
+    def ship_list(self)->list:
         """
         Returns a list containing the ship objects that have been placed
         """
@@ -431,7 +431,7 @@ class Control:
                 ship_list.append(ship)
         return ship_list
 
-    def place_random_ships(self) -> None:
+    def place_random_ships(self)->None:
         """
         Places ships on board randomly
         """
@@ -445,7 +445,7 @@ class Control:
                 while self.ship.name not in self.ship_types_placed:
                     self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
 
-    def carrier_handler(self) -> None:
+    def carrier_handler(self)->None:
         """
         Handles when the carrier ship type button is pushed, and ensures push is legal
         """
@@ -454,7 +454,7 @@ class Control:
             self.ship = carrier()
             self.board.carrier.configure(fg = self.mod_color)
    
-    def battleship_handler(self) -> None:
+    def battleship_handler(self)->None:
         """
         Handles when the battleship ship type button is pushed, and ensures push is legal
         """  
@@ -463,7 +463,7 @@ class Control:
             self.ship = battleship()
             self.board.battleship.configure(fg = self.mod_color)
 
-    def submarine_handler(self) -> None:
+    def submarine_handler(self)->None:
         """
         Handles when the submarine ship type button is pushed, and ensures push is legal
         """
@@ -472,7 +472,7 @@ class Control:
             self.ship = submarine()
             self.board.submarine.configure(fg = self.mod_color)
 
-    def cruiser_handler(self) -> None:
+    def cruiser_handler(self)->None:
         """
         Handles when the cruiser ship type button is pushed, and ensures push is legal
         """
@@ -481,7 +481,7 @@ class Control:
             self.ship = cruiser()
             self.board.cruiser.configure(fg = self.mod_color)
 
-    def destroyer_handler(self) -> None:
+    def destroyer_handler(self)->None:
         """
         Handles when the destroyer ship type button is pushed, and ensures push is legal
         """
@@ -490,7 +490,7 @@ class Control:
             self.ship = destroyer()
             self.board.destroyer.configure(fg = self.mod_color)
 
-    def reset_cells2(self) -> None:
+    def reset_cells2(self)->None:
         """
         Resets all cells on bottom board to blue
         """
@@ -498,7 +498,7 @@ class Control:
             for c in range(self.NUM_COLS):
                 self.board.cells2[r][c].configure(bg="blue")   
 
-    def update_cells(self) -> None:
+    def update_cells(self)->None:
         """
         Updates window with the curr_players ship and attacking board
         """
@@ -530,7 +530,7 @@ class Control:
                 else:
                     self.board.cells2[r][c].configure(bg="blue")         
 
-    def human_handler(self) -> None:
+    def human_handler(self)->None:
         """
         Handles when human vs human button is pushed
         """
@@ -539,7 +539,7 @@ class Control:
         self.board1.window.destroy()
         self.board_setup()
 
-    def ai_handler(self) -> None:
+    def ai_handler(self)->None:
         """
         Handles when human vs computer is pushed
         """  
@@ -548,13 +548,13 @@ class Control:
         self.board1.window.destroy()
         self.board_setup()
     
-    def quit_handler(self) -> None:
+    def quit_handler(self)->None:
         """
         Once game has ended, allow for window to be quit
         """
         self.end_board.window.destroy()
 
-    def repeat_handler(self) -> None:
+    def repeat_handler(self)->None:
         """
         Allows game to be repeated
         """

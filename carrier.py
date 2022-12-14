@@ -9,7 +9,7 @@ Professor: A. Nuzen
 
 from ship import ship
 class carrier(ship):
-    def __init__(self, name:str = "carrier", length:int = 5,  horizontal:bool = True) -> None:
+    def __init__(self, name:str = "carrier", length:int = 5,  horizontal:bool = True)->None:
         """
         Constructor for battleship object
         """

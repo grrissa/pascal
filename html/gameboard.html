@@ -46,7 +46,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 class Gameboard:
-    def __init__(self, num_rows, num_cols):
+    def __init__(self, num_rows, num_cols)-&gt;None:
         &#34;&#34;&#34; 
         Initialize the GUI gameboard
         &#34;&#34;&#34;
@@ -100,13 +100,13 @@ class Gameboard:
         switch_players.pack()
         return switch_players
 
-    def set_switch_players_handler(self, handler):
+    def set_switch_players_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on reset button to the function handler 
         &#34;&#34;&#34;
         self.switch_players.configure(command = handler)
     
-    def ship_buttons(self):
+    def ship_buttons(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create buttons to choose ship
         &#34;&#34;&#34;
@@ -136,55 +136,55 @@ class Gameboard:
 
         return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
 
-    def set_done_placing_ships_handler(self, handler):
+    def set_done_placing_ships_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler
         &#34;&#34;&#34;
         self.done_placing_ships.configure(command = handler)
     
-    def set_random_ships_handler(self, handler):
+    def set_random_ships_handler(self, handler)-&gt;None:
         &#34;&#34;&#34;
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.place_random_ships.configure(command = handler)
 
-    def set_delete_ship_handler(self, handler):
+    def set_delete_ship_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.delete_ship.configure(command = handler)
 
-    def set_carrier_handler(self, handler):
+    def set_carrier_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.carrier.configure(command = handler)
 
-    def set_battleship_handler(self, handler):
+    def set_battleship_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on start button to the function handler 
         &#34;&#34;&#34;
         self.battleship.configure(command = handler)
 
-    def set_submarine_handler(self, handler):
+    def set_submarine_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on pause button to the function handler 
         &#34;&#34;&#34;
         self.submarine.configure(command = handler)
 
-    def set_cruiser_handler(self, handler):
+    def set_cruiser_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on step button to the function handler 
         &#34;&#34;&#34;
         self.cruiser.configure(command = handler)
 
-    def set_destroyer_handler(self, handler):
+    def set_destroyer_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on reset button to the function handler 
         &#34;&#34;&#34;
         self.destroyer.configure(command = handler)
 
-    def add_control(self):
+    def add_control(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create control buttons and welcome message, and add them to the control frame 
         &#34;&#34;&#34;
@@ -211,7 +211,7 @@ class Gameboard:
 
         return (quit_button, label1, confirm_button, your_hits, opponent, player, shipSinkNotification)
 
-    def add_cells(self):
+    def add_cells(self)-&gt;list:
         &#34;&#34;&#34; 
         Add cells to the view 
         &#34;&#34;&#34;
@@ -227,25 +227,25 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler):
+    def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler):
+    def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells2[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_confirm_hit_handler(self, handler):
+    def set_confirm_hit_handler(self, handler)-&gt;None:
         &#34;&#34;&#34;
         Set handler for clicking the confirm hit button on the gameboard
         &#34;&#34;&#34;
         self.confirm_button.bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def quit(self):
+    def quit(self)-&gt;None:
         &#34;&#34;&#34; 
         Functionality for quit button 
         &#34;&#34;&#34;
@@ -272,7 +272,7 @@ class Gameboard:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Gameboard:
-    def __init__(self, num_rows, num_cols):
+    def __init__(self, num_rows, num_cols)-&gt;None:
         &#34;&#34;&#34; 
         Initialize the GUI gameboard
         &#34;&#34;&#34;
@@ -326,13 +326,13 @@ class Gameboard:
         switch_players.pack()
         return switch_players
 
-    def set_switch_players_handler(self, handler):
+    def set_switch_players_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on reset button to the function handler 
         &#34;&#34;&#34;
         self.switch_players.configure(command = handler)
     
-    def ship_buttons(self):
+    def ship_buttons(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create buttons to choose ship
         &#34;&#34;&#34;
@@ -362,55 +362,55 @@ class Gameboard:
 
         return (delete_ship, done_placing_ships, carrier, battleship, submarine, cruiser, destroyer, random_ships)
 
-    def set_done_placing_ships_handler(self, handler):
+    def set_done_placing_ships_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler
         &#34;&#34;&#34;
         self.done_placing_ships.configure(command = handler)
     
-    def set_random_ships_handler(self, handler):
+    def set_random_ships_handler(self, handler)-&gt;None:
         &#34;&#34;&#34;
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.place_random_ships.configure(command = handler)
 
-    def set_delete_ship_handler(self, handler):
+    def set_delete_ship_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.delete_ship.configure(command = handler)
 
-    def set_carrier_handler(self, handler):
+    def set_carrier_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.carrier.configure(command = handler)
 
-    def set_battleship_handler(self, handler):
+    def set_battleship_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on start button to the function handler 
         &#34;&#34;&#34;
         self.battleship.configure(command = handler)
 
-    def set_submarine_handler(self, handler):
+    def set_submarine_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on pause button to the function handler 
         &#34;&#34;&#34;
         self.submarine.configure(command = handler)
 
-    def set_cruiser_handler(self, handler):
+    def set_cruiser_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on step button to the function handler 
         &#34;&#34;&#34;
         self.cruiser.configure(command = handler)
 
-    def set_destroyer_handler(self, handler):
+    def set_destroyer_handler(self, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on reset button to the function handler 
         &#34;&#34;&#34;
         self.destroyer.configure(command = handler)
 
-    def add_control(self):
+    def add_control(self)-&gt;tuple:
         &#34;&#34;&#34; 
         Create control buttons and welcome message, and add them to the control frame 
         &#34;&#34;&#34;
@@ -437,7 +437,7 @@ class Gameboard:
 
         return (quit_button, label1, confirm_button, your_hits, opponent, player, shipSinkNotification)
 
-    def add_cells(self):
+    def add_cells(self)-&gt;list:
         &#34;&#34;&#34; 
         Add cells to the view 
         &#34;&#34;&#34;
@@ -453,25 +453,25 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler):
+    def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler):
+    def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells2[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_confirm_hit_handler(self, handler):
+    def set_confirm_hit_handler(self, handler)-&gt;None:
         &#34;&#34;&#34;
         Set handler for clicking the confirm hit button on the gameboard
         &#34;&#34;&#34;
         self.confirm_button.bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def quit(self):
+    def quit(self)-&gt;None:
         &#34;&#34;&#34; 
         Functionality for quit button 
         &#34;&#34;&#34;
@@ -480,7 +480,7 @@ class Gameboard:
 <h3>Methods</h3>
 <dl>
 <dt id="gameboard.Gameboard.add_cells"><code class="name flex">
-<span>def <span class="ident">add_cells</span></span>(<span>self)</span>
+<span>def <span class="ident">add_cells</span></span>(<span>self) ‑> list</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Add cells to the view</p></div>
@@ -488,7 +488,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_cells(self):
+<pre><code class="python">def add_cells(self)-&gt;list:
     &#34;&#34;&#34; 
     Add cells to the view 
     &#34;&#34;&#34;
@@ -506,7 +506,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.add_control"><code class="name flex">
-<span>def <span class="ident">add_control</span></span>(<span>self)</span>
+<span>def <span class="ident">add_control</span></span>(<span>self) ‑> tuple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create control buttons and welcome message, and add them to the control frame</p></div>
@@ -514,7 +514,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def add_control(self):
+<pre><code class="python">def add_control(self)-&gt;tuple:
     &#34;&#34;&#34; 
     Create control buttons and welcome message, and add them to the control frame 
     &#34;&#34;&#34;
@@ -561,7 +561,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.quit"><code class="name flex">
-<span>def <span class="ident">quit</span></span>(<span>self)</span>
+<span>def <span class="ident">quit</span></span>(<span>self) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Functionality for quit button</p></div>
@@ -569,7 +569,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def quit(self):
+<pre><code class="python">def quit(self)-&gt;None:
     &#34;&#34;&#34; 
     Functionality for quit button 
     &#34;&#34;&#34;
@@ -577,7 +577,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_battleship_handler"><code class="name flex">
-<span>def <span class="ident">set_battleship_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_battleship_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on start button to the function handler</p></div>
@@ -585,7 +585,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_battleship_handler(self, handler):
+<pre><code class="python">def set_battleship_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on start button to the function handler 
     &#34;&#34;&#34;
@@ -593,7 +593,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_carrier_handler"><code class="name flex">
-<span>def <span class="ident">set_carrier_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_carrier_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -601,7 +601,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_carrier_handler(self, handler):
+<pre><code class="python">def set_carrier_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -609,7 +609,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_cell_click_handler_bottom"><code class="name flex">
-<span>def <span class="ident">set_cell_click_handler_bottom</span></span>(<span>self, row, column, handler)</span>
+<span>def <span class="ident">set_cell_click_handler_bottom</span></span>(<span>self, row, column, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -617,7 +617,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_cell_click_handler_bottom(self, row, column, handler):
+<pre><code class="python">def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -625,7 +625,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_cell_click_handler_top"><code class="name flex">
-<span>def <span class="ident">set_cell_click_handler_top</span></span>(<span>self, row, column, handler)</span>
+<span>def <span class="ident">set_cell_click_handler_top</span></span>(<span>self, row, column, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -633,7 +633,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_cell_click_handler_top(self, row, column, handler):
+<pre><code class="python">def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -641,7 +641,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_confirm_hit_handler"><code class="name flex">
-<span>def <span class="ident">set_confirm_hit_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_confirm_hit_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking the confirm hit button on the gameboard</p></div>
@@ -649,7 +649,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_confirm_hit_handler(self, handler):
+<pre><code class="python">def set_confirm_hit_handler(self, handler)-&gt;None:
     &#34;&#34;&#34;
     Set handler for clicking the confirm hit button on the gameboard
     &#34;&#34;&#34;
@@ -657,7 +657,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_cruiser_handler"><code class="name flex">
-<span>def <span class="ident">set_cruiser_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_cruiser_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on step button to the function handler</p></div>
@@ -665,7 +665,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_cruiser_handler(self, handler):
+<pre><code class="python">def set_cruiser_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on step button to the function handler 
     &#34;&#34;&#34;
@@ -673,7 +673,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_delete_ship_handler"><code class="name flex">
-<span>def <span class="ident">set_delete_ship_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_delete_ship_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -681,7 +681,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_delete_ship_handler(self, handler):
+<pre><code class="python">def set_delete_ship_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -689,7 +689,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_destroyer_handler"><code class="name flex">
-<span>def <span class="ident">set_destroyer_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_destroyer_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on reset button to the function handler</p></div>
@@ -697,7 +697,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_destroyer_handler(self, handler):
+<pre><code class="python">def set_destroyer_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on reset button to the function handler 
     &#34;&#34;&#34;
@@ -705,7 +705,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_done_placing_ships_handler"><code class="name flex">
-<span>def <span class="ident">set_done_placing_ships_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_done_placing_ships_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -713,7 +713,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_done_placing_ships_handler(self, handler):
+<pre><code class="python">def set_done_placing_ships_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler
     &#34;&#34;&#34;
@@ -721,7 +721,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_random_ships_handler"><code class="name flex">
-<span>def <span class="ident">set_random_ships_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_random_ships_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -729,7 +729,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_random_ships_handler(self, handler):
+<pre><code class="python">def set_random_ships_handler(self, handler)-&gt;None:
     &#34;&#34;&#34;
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -737,7 +737,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_submarine_handler"><code class="name flex">
-<span>def <span class="ident">set_submarine_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_submarine_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on pause button to the function handler</p></div>
@@ -745,7 +745,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_submarine_handler(self, handler):
+<pre><code class="python">def set_submarine_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on pause button to the function handler 
     &#34;&#34;&#34;
@@ -753,7 +753,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_switch_players_handler"><code class="name flex">
-<span>def <span class="ident">set_switch_players_handler</span></span>(<span>self, handler)</span>
+<span>def <span class="ident">set_switch_players_handler</span></span>(<span>self, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on reset button to the function handler</p></div>
@@ -761,7 +761,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_switch_players_handler(self, handler):
+<pre><code class="python">def set_switch_players_handler(self, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on reset button to the function handler 
     &#34;&#34;&#34;
@@ -769,7 +769,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.ship_buttons"><code class="name flex">
-<span>def <span class="ident">ship_buttons</span></span>(<span>self)</span>
+<span>def <span class="ident">ship_buttons</span></span>(<span>self) ‑> tuple</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Create buttons to choose ship</p></div>
@@ -777,7 +777,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def ship_buttons(self):
+<pre><code class="python">def ship_buttons(self)-&gt;tuple:
     &#34;&#34;&#34; 
     Create buttons to choose ship
     &#34;&#34;&#34;
