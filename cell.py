@@ -7,19 +7,18 @@ Professor: A. Nuzen
 </pre>
 """
 class cell(object):
-    """
-    @Class Cell
-    @constructor(hit:bool, ship:bool, id:str)
-    @return: None
-    @purpose: 
-    1/ create cell class 
-    """
     def __init__(self, h:bool, s:bool, i:str, sh:bool)->None:
+        """
+        Constructor for cell object
+        """
         self.hit = h
         self.ship = s
         self.id = i
         self.successful_hit = sh
 
-    def __repr__(self):
+    def __repr__(self)->str:
+        """
+        String representation of a cell object
+        """
         return str(self.hit) + " "+str(self.ship) + " "+self.id + " "+self.successful_hit
 

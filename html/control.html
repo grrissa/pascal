@@ -1,0 +1,1998 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>control API documentation</title>
+<meta name="description" content="Description: File that is used to run the game
+&lt;pre&gt;
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>control</code></h1>
+</header>
+<section id="section-intro">
+<p>Description: File that is used to run the game</p>
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Description: File that is used to run the game
+&lt;pre&gt;
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+&lt;/pre&gt;
+&#34;&#34;&#34;
+
+import tkinter as tk
+from gameboard import Gameboard
+from gameIntro import GameIntro
+from endgame import EndGame
+from battleship import battleship
+from destroyer import destroyer
+from cruiser import cruiser
+from submarine import submarine
+from carrier import carrier
+from ship import ship
+from humanPlayer import humanPlayer
+from cell import cell
+from computerPlayer import computerPlayer
+from enum import IntEnum
+import random
+class Control:
+    def __init__(self)-&gt;None:
+        &#34;&#34;&#34; Initializes a game of battleship &#34;&#34;&#34;
+        # Define parameters
+        self.NUM_ROWS = 10
+        self.NUM_COLS = 10
+
+        #Keeps track of users last clicked cell
+        self.lastRow = -1
+        self.lastColumn = -1
+
+        #Initilizes a human player (Always going to be at least 1)
+        self.player1 = humanPlayer(1, 0, True)
+
+        #Variables to keep track of which player is the one making the move and which player is not
+        self.curr_player = self.player1
+        self.other_player = 0
+        
+        # Create view
+        self.board1 = GameIntro()
+        self.last_cell_clicked = [-1, -1]
+
+        self.ship = ship(0, False)
+        self.ship_to_place = False
+        self.ready_to_hit = False
+        self.ships_placed = 0
+        self.done_placing_ships = False
+        self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
+       
+        self.board1.set_human_handler(self.human_handler)
+        self.board1.set_ai_handler(self.ai_handler)
+
+        self.ship_types_placed = []
+        self.last_ship = ship(0, False)
+        self.change_orientation = False
+        self.delete_mode = False
+        self.mod_color = &#34;gray&#34;
+        # Start the simulation
+        self.board1.window.mainloop()
+
+    def cell_click_handler1(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        This handler is for the top 100 cells of the window, mostly for making hits
+        &#34;&#34;&#34;
+        if self.done_placing_ships == True:
+            #When the user clicks for the second time, we want to reset their last clicked cell to blue
+            if (self.lastRow != -1):
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;blue&#39;)
+
+            #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
+            #Only able to click cells that they have not previously shot a missle at
+            if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
+                self.board.cells[row][column].configure(bg=&#39;yellow&#39;)
+                self.lastRow = row
+                self.lastColumn = column
+
+    def cell_click_handler2(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        This handler is for the bottom 100 cells of the window, for placing ships
+        &#34;&#34;&#34;
+        if self.delete_mode == True: #ensures it does not place ship if delete mode is on
+            if self.curr_player.shipCells[row][column].ship == True:
+                self.delete_mode_func(self.curr_player.shipCells[row][column].id)
+        else:
+            switch_point = -1
+            if self.ship == self.last_ship and self.curr_player.shipCells[row][column].id == self.ship.name:
+                self.ship.change_orientation()
+                self.ship_start = 0
+                if not self.ship.horizontal == True: # was horizontal switching to vertical
+                    for c in range(self.NUM_COLS):
+                        if self.curr_player.shipCells[row][c].id == self.ship.name: # first instance of ship in row
+                            self.ship_start = c
+                            break
+                    # switching to vertical from horixontal
+                    switch_point = column-self.ship_start
+                    if (row-switch_point &gt;= 0 ) and (row-switch_point+self.ship.length &lt;= self.NUM_ROWS): # if new ship won&#39;t go out of bounds, continue on
+                            self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name) # clear original ship
+                            for first_half in range(0, self.ship.length):
+                                #check if their is another ship in the way of changing direction
+                                if self.curr_player.shipCells[row-switch_point+first_half][column].ship == True and self.curr_player.shipCells[row-switch_point +first_half][column].id != self.ship.name:
+                                    self.ship.change_orientation()
+                                    self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                    self.place_ship(row, self.ship_start, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                    break
+                
+                                else:
+                                    self.ship_board_update(row-switch_point+first_half, column)
+                    else: #change orientation back
+                        self.ship.change_orientation()
+
+                else: # was vertical switching to horizontal
+                    for r in range(self.NUM_ROWS):
+                        if self.curr_player.shipCells[r][column].id == self.ship.name: # first instance of ship in row
+                            self.ship_start = r
+                            break
+                    switch_point = row-self.ship_start
+                    if (column-switch_point &gt;= 0) and (column-switch_point+self.ship.length &lt;= self.NUM_COLS): # if new ship won&#39;t go out of bounds, continue on
+                            self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                            for first_half in range(0, self.ship.length):
+                                #check if their is another ship in the way of changing direction
+                                if self.curr_player.shipCells[row][column-switch_point+first_half].ship == True and self.curr_player.shipCells[row][column-switch_point+first_half].id != self.ship.name:
+                                    self.ship.change_orientation()
+                                    self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                    self.place_ship(self.ship_start, column, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                    break
+                                else:
+                                    self.ship_board_update(row, column-switch_point+first_half)
+                    else: #change orientaation back
+                        self.ship.change_orientation()
+
+            #first time placing ship
+            elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False: 
+                illegal_ship = True
+                illegal_index = 0
+                if self.ship.horizontal == True: # place ship horizontally
+                    if self.ship.length + column &lt;= self.NUM_COLS:
+                        for c in range(self.ship.length):
+                            if self.curr_player.shipCells[row][c+column].ship == True and self.curr_player.shipCells[row][c+column].id != self.ship.name:
+                                illegal_ship = True
+                                illegal_index = c
+                                break
+                            else:
+                                self.ship_board_update(row, column+c)
+                                illegal_ship = False
+                elif self.ship.horizontal == False: #for the computer player to be able to place vertically the first time
+                    if self.ship.length + row &lt;= self.NUM_ROWS:
+                        for r in range(self.ship.length):
+                            if self.curr_player.shipCells[row+r][column].ship == True and self.curr_player.shipCells[row+r][column].id != self.ship.name:
+                                illegal_ship = True
+                                illegal_index = r
+                                break
+                            else:
+                                self.ship_board_update(row+r, column)
+                                illegal_ship = False
+   
+                if illegal_ship == False:
+                    self.ship_to_place = False
+                    self.ship_types_placed.append(self.ship.name)
+                    self.ships_placed += 1
+                    self.last_ship = self.ship
+                    self.update_ship_labels(self.ship.name, self.mod_color)
+                else: # illegal ship is true
+                    self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+                    self.update_ship_labels(self.ship.name, &#34;black&#34;)
+            else:
+                self.update_ship_labels(self.ship.name, &#34;black&#34;)
+
+    def ship_board_update(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        Updates the board and user lists when ship is placed
+        &#34;&#34;&#34;
+        self.board.cells2[row][column].configure(bg = &#34;gray&#34;)
+        self.curr_player.shipCells[row][column].ship = True
+        self.curr_player.shipCells[row][column].id = self.ship.name
+        if self.ship.name == &#34;destroyer&#34;:
+            self.curr_player.playerShips[&#34;destroyer&#34;] = destroyer()
+        elif self.ship.name == &#34;submarine&#34;:
+            self.curr_player.playerShips[&#34;submarine&#34;] = submarine()
+        elif self.ship.name == &#34;cruiser&#34;:
+            self.curr_player.playerShips[&#34;cruiser&#34;] = cruiser()
+        elif self.ship.name == &#34;battleship&#34;:
+            self.curr_player.playerShips[&#34;battleship&#34;] = battleship()
+        else:
+            self.curr_player.playerShips[&#34;carrier&#34;] = carrier()
+
+    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Sets up for loop for placing ships
+        &#34;&#34;&#34;
+        if horizontal == True:
+            for c in range(start_range, end_range):
+                self.ship_board_update(row, c+column)
+        else:
+            for r in range(start_range, end_range):
+                self.ship_board_update(r+row, column)
+
+    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Removes ships from board that are not valid or deleted
+        &#34;&#34;&#34;
+        if horizontal == True:
+            if column + end_range &lt;= self.NUM_COLS:
+                for c in range(start_range, end_range):
+                    if self.curr_player.shipCells[row][c+column].id == ship_name:
+                        self.board.cells2[row][c+column].configure(bg = &#34;blue&#34;)
+                        self.curr_player.shipCells[row][c+column].ship = False
+                        self.curr_player.shipCells[row][c+column].id = &#34;&#34;
+        else:
+            if row + end_range &lt;= self.NUM_ROWS:
+                for r in range(start_range, end_range):
+                    if self.curr_player.shipCells[row+r][column].id == ship_name:
+                        self.board.cells2[r+row][column].configure(bg = &#34;blue&#34;)
+                        self.curr_player.shipCells[r+row][column].ship = False
+                        self.curr_player.shipCells[r+row][column].id = &#34;&#34;
+
+    def confirm_hit_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handler for the confirm hit button
+        &#34;&#34;&#34;
+        #Checks to see if the user has chosen a cell to attack or if cell has been attacked already, if not do nothing (Button has no function)
+        if (self.lastRow != -1 or self.other_player.shipCells[self.lastRow][self.lastColumn].hit == True):
+            #If the cell that is attacked is one with a ship
+            if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+                temp = self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id)
+                temp.timeHit += 1
+                if temp.isSunk() == True:
+                    self.board.shipSinkNotification[&#39;text&#39;] = &#34;Player &#34; + str(self.other_player.playerNum) + &#34;&#39;s &#34; + self.other_player.shipCells[self.lastRow][self.lastColumn].id + &#34; has sunk!&#34;
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;red&#39;)
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].successful_hit = True
+                self.curr_player.incrementHits()
+            #No ship in the cell attacked
+            else:
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;grey&#39;)
+
+            #Changing the hit bool in the selected cell in both players boards
+            self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+
+            #resets lastRow and lastColumn
+            self.lastRow = -1
+            self.lastColumn = -1 
+                
+            #If no one has won, we update window to show other players ships and attacking board
+            
+            self.board.window.update()
+            self.board.window.after(1000, self.update_player())
+
+    def update_player(self)-&gt;None:
+        &#34;&#34;&#34;
+        Switches player and updates the screen
+        &#34;&#34;&#34;
+        if (self.curr_player.numOfHits == 17): #check game over
+            self.board.window.destroy()
+            self.end_game_setup()
+        else: #game not over yet
+            self.board.shipSinkNotification[&#39;text&#39;] = &#34;&#34;
+
+            #Updates curr_player and other_player
+            if (self.curr_player.playerNum == 1):
+                self.curr_player = self.player2
+                self.other_player = self.player1
+            else:
+                self.curr_player = self.player1
+                self.other_player = self.player2
+
+            #Updating the game board, hits and player turn
+            self.board.your_hits[&#39;text&#39;] = &#34;Your Hits: &#34; + str(self.curr_player.numOfHits)
+            self.board.opponent[&#39;text&#39;] = &#34;Opponent: &#34; + str(self.other_player.numOfHits)
+            
+            if self.curr_player.is_human == True:
+                if self.player2.is_human == True:
+                    if (self.curr_player.playerNum == 2):
+                        self.board.player[&#39;text&#39;] = &#34;PLAYER 2S TURN&#34;
+                    else:
+                        self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+                    self.player_switch_screen_management(False)
+
+                #Updates window for the curr_player
+                self.update_cells()
+            else:
+                self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
+                self.update_player()
+
+    def end_game_setup(self)-&gt;None:
+        &#34;&#34;&#34;
+        For endgame, displays winner and allows for reset of game
+        &#34;&#34;&#34;
+        self.end_board = EndGame()
+        self.end_board.who_won[&#39;text&#39;] = &#34;PLAYER &#34; + str(self.curr_player.playerNum) + &#34; WON&#34;
+        self.end_board.set_quit_handler(self.quit_handler)
+        self.end_board.set_repeat_handler(self.repeat_handler)
+        self.end_board.window.mainloop()
+
+    def board_setup(self)-&gt;None:
+        &#34;&#34;&#34;
+        Sets up gameboard once type of game is chosen
+        &#34;&#34;&#34;
+        # Cell clicks.  (Note that a separate handler function is defined for 
+        # each cell.)
+        self.board = Gameboard(self.NUM_ROWS, self.NUM_COLS)
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                def handler(event, row = r, column = c):
+                    self.cell_click_handler1(row, column)
+                self.board.set_cell_click_handler_top(r, c, handler)
+
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                def handler(event, row = r, column = c):
+                    self.cell_click_handler2(row, column)
+                self.board.set_cell_click_handler_bottom(r, c, handler)
+        def handler(event):
+            self.confirm_hit_handler()
+        self.board.set_confirm_hit_handler(handler)
+
+        self.initializing_board_handlers()
+        self.player_switch_screen_management()
+        self.board.window.mainloop()
+
+    def initializing_board_handlers(self)-&gt;None:
+        &#34;&#34;&#34;
+        Initializes all handlers for the gameboard
+        &#34;&#34;&#34;
+        self.board.set_battleship_handler(self.battleship_handler)
+        self.board.set_carrier_handler(self.carrier_handler)
+        self.board.set_submarine_handler(self.submarine_handler)
+        self.board.set_cruiser_handler(self.cruiser_handler)
+        self.board.set_destroyer_handler(self.destroyer_handler)
+        self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
+        self.board.set_delete_ship_handler(self.delete_ship_handler)
+        self.board.set_random_ships_handler(self.place_random_ships)
+        self.board.set_switch_players_handler(self.player_switch_screen_management)
+
+    def player_switch_screen_management(self, delete:bool = True)-&gt;None:
+        &#34;&#34;&#34;
+        Covers board when players switch to ensure fairness of game
+        &#34;&#34;&#34;
+        if delete == True:
+            self.board.switch_frame.grid_remove()
+        else:
+            self.board.switch_frame.grid()
+            self.board.switch_players.configure(fg = &#34;black&#34;)
+            self.board.switch_players.configure(text = &#34;Player &#34;+str(self.curr_player.playerNum) +&#34;: Ready to Play!&#34;)
+
+    def delete_mode_func(self, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Deletes ships from board
+        &#34;&#34;&#34;
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                if (self.curr_player.shipCells[r][c].id == ship_name):
+                    self.board.cells2[r][c].configure(bg=&#34;blue&#34;)  
+                    self.curr_player.shipCells[r][c].id = &#34;&#34;
+                    self.curr_player.shipCells[r][c].ship = False
+        
+        self.ships_placed -= 1
+        self.ship_types_placed.remove(ship_name)
+        self.update_ship_labels(ship_name, &#34;black&#34;)
+
+    def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
+        &#34;&#34;&#34;
+        Changes the button text colors when pressed
+        &#34;&#34;&#34;
+        if ship_name == &#34;carrier&#34;:
+            self.board.carrier.configure(fg = color)
+        elif ship_name == &#34;destroyer&#34;:
+            self.board.destroyer.configure(fg = color)
+        elif ship_name == &#34;battleship&#34;:
+            self.board.battleship.configure(fg = color)
+        elif ship_name == &#34;submarine&#34;:
+            self.board.submarine.configure(fg = color)
+        elif ship_name == &#34;cruiser&#34;:
+            self.board.cruiser.configure(fg = color)
+
+    def delete_ship_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles the delete mode switches
+        &#34;&#34;&#34;
+        if self.delete_mode == False:
+            self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: ON&#34;
+            self.delete_mode = True
+        else:
+            self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: OFF&#34;
+            self.delete_mode = False
+
+    def done_placing_ships_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Switches player and ensures player is done placing ships
+        &#34;&#34;&#34;
+        # checks to ensure first player is done
+        if self.ships_placed == 5 and self.curr_player == self.player1:
+            self.curr_player = self.player2
+            self.ships_placed = 0
+            self.reset_cells2()
+            for s in self.ship_types_placed:
+                self.update_ship_labels(s, &#34;black&#34;)
+            self.ship_types_placed = []
+            self.board.player[&#39;text&#39;] = &#34;PLAYER 2: Place your ships&#34;
+            
+            # if against a computer player, place computer ships automatically and allow player one to hit
+            if self.player2.is_human == False: 
+                # randomly placing ships
+                self.place_random_ships()
+                self.curr_player = self.player1
+                self.update_cells()
+                self.board.ship_frame.destroy()
+                self.done_placing_ships = True
+                self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+        # ensures player 2 is done placing ships 
+        elif self.ships_placed == 5 and self.curr_player == self.player2:
+            self.curr_player = self.player1
+            self.player_switch_screen_management(False)
+            self.update_cells()
+            self.board.ship_frame.destroy()
+            self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+            self.done_placing_ships = True
+
+    def ship_list(self)-&gt;list:
+        &#34;&#34;&#34;
+        Returns a list containing the ship objects that have been placed
+        &#34;&#34;&#34;
+        ship_list = []
+        for ship in self.ship_types:
+            if ship.name not in self.ship_types_placed:
+                ship_list.append(ship)
+        return ship_list
+
+    def place_random_ships(self)-&gt;None:
+        &#34;&#34;&#34;
+        Places ships on board randomly
+        &#34;&#34;&#34;
+        if self.ships_placed != 5 and self.delete_mode == False:
+            ship_list = self.ship_list()
+            for ship in ship_list:
+                self.ship_to_place = True
+                self.ship = ship
+                self.ship.orientation = bool(random.randint(0,1))
+                self.update_ship_labels(self.ship.name, self.mod_color)
+                while self.ship.name not in self.ship_types_placed:
+                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
+
+    def carrier_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the carrier ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;carrier&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = carrier()
+            self.board.carrier.configure(fg = self.mod_color)
+   
+    def battleship_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the battleship ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;  
+        if &#34;battleship&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = battleship()
+            self.board.battleship.configure(fg = self.mod_color)
+
+    def submarine_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the submarine ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;submarine&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = submarine()
+            self.board.submarine.configure(fg = self.mod_color)
+
+    def cruiser_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the cruiser ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;cruiser&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = cruiser()
+            self.board.cruiser.configure(fg = self.mod_color)
+
+    def destroyer_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the destroyer ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;destroyer&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = destroyer()
+            self.board.destroyer.configure(fg = self.mod_color)
+
+    def reset_cells2(self)-&gt;None:
+        &#34;&#34;&#34;
+        Resets all cells on bottom board to blue
+        &#34;&#34;&#34;
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                self.board.cells2[r][c].configure(bg=&#34;blue&#34;)   
+
+    def update_cells(self)-&gt;None:
+        &#34;&#34;&#34;
+        Updates window with the curr_players ship and attacking board
+        &#34;&#34;&#34;
+        #Nested for loop to go through all cells
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                #For upper 100 cells
+                #If there was a ship, and its been hit
+                if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg=&#34;red&#34;)
+                #If there was a hit with no ship
+                elif (self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg=&#34;grey&#34;)
+                #No hit or ship
+                else:
+                    self.board.cells[r][c].configure(bg=&#34;blue&#34;)
+
+                #For lower 100 cells
+                #If there was a ship, and its been hit
+                if (self.curr_player.shipCells[r][c].ship == True and self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg=&#34;orange&#34;)
+                #If there is a ship no hit
+                elif(self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg=&#34;grey&#34;)
+                #If there was a hit no ship
+                elif(self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg=&#34;black&#34;)
+                #No ship no hit
+                else:
+                    self.board.cells2[r][c].configure(bg=&#34;blue&#34;)         
+
+    def human_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when human vs human button is pushed
+        &#34;&#34;&#34;
+        self.player2 = humanPlayer(2, 0, False)
+        self.other_player = self.player2
+        self.board1.window.destroy()
+        self.board_setup()
+
+    def ai_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when human vs computer is pushed
+        &#34;&#34;&#34;  
+        self.player2 = computerPlayer(2, 0, False)
+        self.other_player = self.player2
+        self.board1.window.destroy()
+        self.board_setup()
+    
+    def quit_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Once game has ended, allow for window to be quit
+        &#34;&#34;&#34;
+        self.end_board.window.destroy()
+
+    def repeat_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Allows game to be repeated
+        &#34;&#34;&#34;
+        self.end_board.window.destroy()
+        self.__init__()
+
+if __name__ == &#34;__main__&#34;:
+    battleship = Control()</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="control.Control"><code class="flex name class">
+<span>class <span class="ident">Control</span></span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initializes a game of battleship</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Control:
+    def __init__(self)-&gt;None:
+        &#34;&#34;&#34; Initializes a game of battleship &#34;&#34;&#34;
+        # Define parameters
+        self.NUM_ROWS = 10
+        self.NUM_COLS = 10
+
+        #Keeps track of users last clicked cell
+        self.lastRow = -1
+        self.lastColumn = -1
+
+        #Initilizes a human player (Always going to be at least 1)
+        self.player1 = humanPlayer(1, 0, True)
+
+        #Variables to keep track of which player is the one making the move and which player is not
+        self.curr_player = self.player1
+        self.other_player = 0
+        
+        # Create view
+        self.board1 = GameIntro()
+        self.last_cell_clicked = [-1, -1]
+
+        self.ship = ship(0, False)
+        self.ship_to_place = False
+        self.ready_to_hit = False
+        self.ships_placed = 0
+        self.done_placing_ships = False
+        self.ship_types = [battleship(), carrier(), cruiser(), submarine(), destroyer()]
+       
+        self.board1.set_human_handler(self.human_handler)
+        self.board1.set_ai_handler(self.ai_handler)
+
+        self.ship_types_placed = []
+        self.last_ship = ship(0, False)
+        self.change_orientation = False
+        self.delete_mode = False
+        self.mod_color = &#34;gray&#34;
+        # Start the simulation
+        self.board1.window.mainloop()
+
+    def cell_click_handler1(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        This handler is for the top 100 cells of the window, mostly for making hits
+        &#34;&#34;&#34;
+        if self.done_placing_ships == True:
+            #When the user clicks for the second time, we want to reset their last clicked cell to blue
+            if (self.lastRow != -1):
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;blue&#39;)
+
+            #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
+            #Only able to click cells that they have not previously shot a missle at
+            if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
+                self.board.cells[row][column].configure(bg=&#39;yellow&#39;)
+                self.lastRow = row
+                self.lastColumn = column
+
+    def cell_click_handler2(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        This handler is for the bottom 100 cells of the window, for placing ships
+        &#34;&#34;&#34;
+        if self.delete_mode == True: #ensures it does not place ship if delete mode is on
+            if self.curr_player.shipCells[row][column].ship == True:
+                self.delete_mode_func(self.curr_player.shipCells[row][column].id)
+        else:
+            switch_point = -1
+            if self.ship == self.last_ship and self.curr_player.shipCells[row][column].id == self.ship.name:
+                self.ship.change_orientation()
+                self.ship_start = 0
+                if not self.ship.horizontal == True: # was horizontal switching to vertical
+                    for c in range(self.NUM_COLS):
+                        if self.curr_player.shipCells[row][c].id == self.ship.name: # first instance of ship in row
+                            self.ship_start = c
+                            break
+                    # switching to vertical from horixontal
+                    switch_point = column-self.ship_start
+                    if (row-switch_point &gt;= 0 ) and (row-switch_point+self.ship.length &lt;= self.NUM_ROWS): # if new ship won&#39;t go out of bounds, continue on
+                            self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name) # clear original ship
+                            for first_half in range(0, self.ship.length):
+                                #check if their is another ship in the way of changing direction
+                                if self.curr_player.shipCells[row-switch_point+first_half][column].ship == True and self.curr_player.shipCells[row-switch_point +first_half][column].id != self.ship.name:
+                                    self.ship.change_orientation()
+                                    self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                    self.place_ship(row, self.ship_start, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                    break
+                
+                                else:
+                                    self.ship_board_update(row-switch_point+first_half, column)
+                    else: #change orientation back
+                        self.ship.change_orientation()
+
+                else: # was vertical switching to horizontal
+                    for r in range(self.NUM_ROWS):
+                        if self.curr_player.shipCells[r][column].id == self.ship.name: # first instance of ship in row
+                            self.ship_start = r
+                            break
+                    switch_point = row-self.ship_start
+                    if (column-switch_point &gt;= 0) and (column-switch_point+self.ship.length &lt;= self.NUM_COLS): # if new ship won&#39;t go out of bounds, continue on
+                            self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                            for first_half in range(0, self.ship.length):
+                                #check if their is another ship in the way of changing direction
+                                if self.curr_player.shipCells[row][column-switch_point+first_half].ship == True and self.curr_player.shipCells[row][column-switch_point+first_half].id != self.ship.name:
+                                    self.ship.change_orientation()
+                                    self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                    self.place_ship(self.ship_start, column, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                    break
+                                else:
+                                    self.ship_board_update(row, column-switch_point+first_half)
+                    else: #change orientaation back
+                        self.ship.change_orientation()
+
+            #first time placing ship
+            elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False: 
+                illegal_ship = True
+                illegal_index = 0
+                if self.ship.horizontal == True: # place ship horizontally
+                    if self.ship.length + column &lt;= self.NUM_COLS:
+                        for c in range(self.ship.length):
+                            if self.curr_player.shipCells[row][c+column].ship == True and self.curr_player.shipCells[row][c+column].id != self.ship.name:
+                                illegal_ship = True
+                                illegal_index = c
+                                break
+                            else:
+                                self.ship_board_update(row, column+c)
+                                illegal_ship = False
+                elif self.ship.horizontal == False: #for the computer player to be able to place vertically the first time
+                    if self.ship.length + row &lt;= self.NUM_ROWS:
+                        for r in range(self.ship.length):
+                            if self.curr_player.shipCells[row+r][column].ship == True and self.curr_player.shipCells[row+r][column].id != self.ship.name:
+                                illegal_ship = True
+                                illegal_index = r
+                                break
+                            else:
+                                self.ship_board_update(row+r, column)
+                                illegal_ship = False
+   
+                if illegal_ship == False:
+                    self.ship_to_place = False
+                    self.ship_types_placed.append(self.ship.name)
+                    self.ships_placed += 1
+                    self.last_ship = self.ship
+                    self.update_ship_labels(self.ship.name, self.mod_color)
+                else: # illegal ship is true
+                    self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+                    self.update_ship_labels(self.ship.name, &#34;black&#34;)
+            else:
+                self.update_ship_labels(self.ship.name, &#34;black&#34;)
+
+    def ship_board_update(self, row:int, column:int)-&gt;None:
+        &#34;&#34;&#34;
+        Updates the board and user lists when ship is placed
+        &#34;&#34;&#34;
+        self.board.cells2[row][column].configure(bg = &#34;gray&#34;)
+        self.curr_player.shipCells[row][column].ship = True
+        self.curr_player.shipCells[row][column].id = self.ship.name
+        if self.ship.name == &#34;destroyer&#34;:
+            self.curr_player.playerShips[&#34;destroyer&#34;] = destroyer()
+        elif self.ship.name == &#34;submarine&#34;:
+            self.curr_player.playerShips[&#34;submarine&#34;] = submarine()
+        elif self.ship.name == &#34;cruiser&#34;:
+            self.curr_player.playerShips[&#34;cruiser&#34;] = cruiser()
+        elif self.ship.name == &#34;battleship&#34;:
+            self.curr_player.playerShips[&#34;battleship&#34;] = battleship()
+        else:
+            self.curr_player.playerShips[&#34;carrier&#34;] = carrier()
+
+    def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Sets up for loop for placing ships
+        &#34;&#34;&#34;
+        if horizontal == True:
+            for c in range(start_range, end_range):
+                self.ship_board_update(row, c+column)
+        else:
+            for r in range(start_range, end_range):
+                self.ship_board_update(r+row, column)
+
+    def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Removes ships from board that are not valid or deleted
+        &#34;&#34;&#34;
+        if horizontal == True:
+            if column + end_range &lt;= self.NUM_COLS:
+                for c in range(start_range, end_range):
+                    if self.curr_player.shipCells[row][c+column].id == ship_name:
+                        self.board.cells2[row][c+column].configure(bg = &#34;blue&#34;)
+                        self.curr_player.shipCells[row][c+column].ship = False
+                        self.curr_player.shipCells[row][c+column].id = &#34;&#34;
+        else:
+            if row + end_range &lt;= self.NUM_ROWS:
+                for r in range(start_range, end_range):
+                    if self.curr_player.shipCells[row+r][column].id == ship_name:
+                        self.board.cells2[r+row][column].configure(bg = &#34;blue&#34;)
+                        self.curr_player.shipCells[r+row][column].ship = False
+                        self.curr_player.shipCells[r+row][column].id = &#34;&#34;
+
+    def confirm_hit_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handler for the confirm hit button
+        &#34;&#34;&#34;
+        #Checks to see if the user has chosen a cell to attack or if cell has been attacked already, if not do nothing (Button has no function)
+        if (self.lastRow != -1 or self.other_player.shipCells[self.lastRow][self.lastColumn].hit == True):
+            #If the cell that is attacked is one with a ship
+            if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+                temp = self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id)
+                temp.timeHit += 1
+                if temp.isSunk() == True:
+                    self.board.shipSinkNotification[&#39;text&#39;] = &#34;Player &#34; + str(self.other_player.playerNum) + &#34;&#39;s &#34; + self.other_player.shipCells[self.lastRow][self.lastColumn].id + &#34; has sunk!&#34;
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;red&#39;)
+                self.curr_player.attackingCells[self.lastRow][self.lastColumn].successful_hit = True
+                self.curr_player.incrementHits()
+            #No ship in the cell attacked
+            else:
+                self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;grey&#39;)
+
+            #Changing the hit bool in the selected cell in both players boards
+            self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+
+            #resets lastRow and lastColumn
+            self.lastRow = -1
+            self.lastColumn = -1 
+                
+            #If no one has won, we update window to show other players ships and attacking board
+            
+            self.board.window.update()
+            self.board.window.after(1000, self.update_player())
+
+    def update_player(self)-&gt;None:
+        &#34;&#34;&#34;
+        Switches player and updates the screen
+        &#34;&#34;&#34;
+        if (self.curr_player.numOfHits == 17): #check game over
+            self.board.window.destroy()
+            self.end_game_setup()
+        else: #game not over yet
+            self.board.shipSinkNotification[&#39;text&#39;] = &#34;&#34;
+
+            #Updates curr_player and other_player
+            if (self.curr_player.playerNum == 1):
+                self.curr_player = self.player2
+                self.other_player = self.player1
+            else:
+                self.curr_player = self.player1
+                self.other_player = self.player2
+
+            #Updating the game board, hits and player turn
+            self.board.your_hits[&#39;text&#39;] = &#34;Your Hits: &#34; + str(self.curr_player.numOfHits)
+            self.board.opponent[&#39;text&#39;] = &#34;Opponent: &#34; + str(self.other_player.numOfHits)
+            
+            if self.curr_player.is_human == True:
+                if self.player2.is_human == True:
+                    if (self.curr_player.playerNum == 2):
+                        self.board.player[&#39;text&#39;] = &#34;PLAYER 2S TURN&#34;
+                    else:
+                        self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+                    self.player_switch_screen_management(False)
+
+                #Updates window for the curr_player
+                self.update_cells()
+            else:
+                self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
+                self.update_player()
+
+    def end_game_setup(self)-&gt;None:
+        &#34;&#34;&#34;
+        For endgame, displays winner and allows for reset of game
+        &#34;&#34;&#34;
+        self.end_board = EndGame()
+        self.end_board.who_won[&#39;text&#39;] = &#34;PLAYER &#34; + str(self.curr_player.playerNum) + &#34; WON&#34;
+        self.end_board.set_quit_handler(self.quit_handler)
+        self.end_board.set_repeat_handler(self.repeat_handler)
+        self.end_board.window.mainloop()
+
+    def board_setup(self)-&gt;None:
+        &#34;&#34;&#34;
+        Sets up gameboard once type of game is chosen
+        &#34;&#34;&#34;
+        # Cell clicks.  (Note that a separate handler function is defined for 
+        # each cell.)
+        self.board = Gameboard(self.NUM_ROWS, self.NUM_COLS)
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                def handler(event, row = r, column = c):
+                    self.cell_click_handler1(row, column)
+                self.board.set_cell_click_handler_top(r, c, handler)
+
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                def handler(event, row = r, column = c):
+                    self.cell_click_handler2(row, column)
+                self.board.set_cell_click_handler_bottom(r, c, handler)
+        def handler(event):
+            self.confirm_hit_handler()
+        self.board.set_confirm_hit_handler(handler)
+
+        self.initializing_board_handlers()
+        self.player_switch_screen_management()
+        self.board.window.mainloop()
+
+    def initializing_board_handlers(self)-&gt;None:
+        &#34;&#34;&#34;
+        Initializes all handlers for the gameboard
+        &#34;&#34;&#34;
+        self.board.set_battleship_handler(self.battleship_handler)
+        self.board.set_carrier_handler(self.carrier_handler)
+        self.board.set_submarine_handler(self.submarine_handler)
+        self.board.set_cruiser_handler(self.cruiser_handler)
+        self.board.set_destroyer_handler(self.destroyer_handler)
+        self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
+        self.board.set_delete_ship_handler(self.delete_ship_handler)
+        self.board.set_random_ships_handler(self.place_random_ships)
+        self.board.set_switch_players_handler(self.player_switch_screen_management)
+
+    def player_switch_screen_management(self, delete:bool = True)-&gt;None:
+        &#34;&#34;&#34;
+        Covers board when players switch to ensure fairness of game
+        &#34;&#34;&#34;
+        if delete == True:
+            self.board.switch_frame.grid_remove()
+        else:
+            self.board.switch_frame.grid()
+            self.board.switch_players.configure(fg = &#34;black&#34;)
+            self.board.switch_players.configure(text = &#34;Player &#34;+str(self.curr_player.playerNum) +&#34;: Ready to Play!&#34;)
+
+    def delete_mode_func(self, ship_name:str)-&gt;None:
+        &#34;&#34;&#34;
+        Deletes ships from board
+        &#34;&#34;&#34;
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                if (self.curr_player.shipCells[r][c].id == ship_name):
+                    self.board.cells2[r][c].configure(bg=&#34;blue&#34;)  
+                    self.curr_player.shipCells[r][c].id = &#34;&#34;
+                    self.curr_player.shipCells[r][c].ship = False
+        
+        self.ships_placed -= 1
+        self.ship_types_placed.remove(ship_name)
+        self.update_ship_labels(ship_name, &#34;black&#34;)
+
+    def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
+        &#34;&#34;&#34;
+        Changes the button text colors when pressed
+        &#34;&#34;&#34;
+        if ship_name == &#34;carrier&#34;:
+            self.board.carrier.configure(fg = color)
+        elif ship_name == &#34;destroyer&#34;:
+            self.board.destroyer.configure(fg = color)
+        elif ship_name == &#34;battleship&#34;:
+            self.board.battleship.configure(fg = color)
+        elif ship_name == &#34;submarine&#34;:
+            self.board.submarine.configure(fg = color)
+        elif ship_name == &#34;cruiser&#34;:
+            self.board.cruiser.configure(fg = color)
+
+    def delete_ship_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles the delete mode switches
+        &#34;&#34;&#34;
+        if self.delete_mode == False:
+            self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: ON&#34;
+            self.delete_mode = True
+        else:
+            self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: OFF&#34;
+            self.delete_mode = False
+
+    def done_placing_ships_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Switches player and ensures player is done placing ships
+        &#34;&#34;&#34;
+        # checks to ensure first player is done
+        if self.ships_placed == 5 and self.curr_player == self.player1:
+            self.curr_player = self.player2
+            self.ships_placed = 0
+            self.reset_cells2()
+            for s in self.ship_types_placed:
+                self.update_ship_labels(s, &#34;black&#34;)
+            self.ship_types_placed = []
+            self.board.player[&#39;text&#39;] = &#34;PLAYER 2: Place your ships&#34;
+            
+            # if against a computer player, place computer ships automatically and allow player one to hit
+            if self.player2.is_human == False: 
+                # randomly placing ships
+                self.place_random_ships()
+                self.curr_player = self.player1
+                self.update_cells()
+                self.board.ship_frame.destroy()
+                self.done_placing_ships = True
+                self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+        # ensures player 2 is done placing ships 
+        elif self.ships_placed == 5 and self.curr_player == self.player2:
+            self.curr_player = self.player1
+            self.player_switch_screen_management(False)
+            self.update_cells()
+            self.board.ship_frame.destroy()
+            self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+            self.done_placing_ships = True
+
+    def ship_list(self)-&gt;list:
+        &#34;&#34;&#34;
+        Returns a list containing the ship objects that have been placed
+        &#34;&#34;&#34;
+        ship_list = []
+        for ship in self.ship_types:
+            if ship.name not in self.ship_types_placed:
+                ship_list.append(ship)
+        return ship_list
+
+    def place_random_ships(self)-&gt;None:
+        &#34;&#34;&#34;
+        Places ships on board randomly
+        &#34;&#34;&#34;
+        if self.ships_placed != 5 and self.delete_mode == False:
+            ship_list = self.ship_list()
+            for ship in ship_list:
+                self.ship_to_place = True
+                self.ship = ship
+                self.ship.orientation = bool(random.randint(0,1))
+                self.update_ship_labels(self.ship.name, self.mod_color)
+                while self.ship.name not in self.ship_types_placed:
+                    self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))
+
+    def carrier_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the carrier ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;carrier&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = carrier()
+            self.board.carrier.configure(fg = self.mod_color)
+   
+    def battleship_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the battleship ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;  
+        if &#34;battleship&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = battleship()
+            self.board.battleship.configure(fg = self.mod_color)
+
+    def submarine_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the submarine ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;submarine&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = submarine()
+            self.board.submarine.configure(fg = self.mod_color)
+
+    def cruiser_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the cruiser ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;cruiser&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = cruiser()
+            self.board.cruiser.configure(fg = self.mod_color)
+
+    def destroyer_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when the destroyer ship type button is pushed, and ensures push is legal
+        &#34;&#34;&#34;
+        if &#34;destroyer&#34; not in self.ship_types_placed and self.delete_mode == False:
+            self.ship_to_place = True
+            self.ship = destroyer()
+            self.board.destroyer.configure(fg = self.mod_color)
+
+    def reset_cells2(self)-&gt;None:
+        &#34;&#34;&#34;
+        Resets all cells on bottom board to blue
+        &#34;&#34;&#34;
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                self.board.cells2[r][c].configure(bg=&#34;blue&#34;)   
+
+    def update_cells(self)-&gt;None:
+        &#34;&#34;&#34;
+        Updates window with the curr_players ship and attacking board
+        &#34;&#34;&#34;
+        #Nested for loop to go through all cells
+        for r in range(self.NUM_ROWS):
+            for c in range(self.NUM_COLS):
+                #For upper 100 cells
+                #If there was a ship, and its been hit
+                if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg=&#34;red&#34;)
+                #If there was a hit with no ship
+                elif (self.curr_player.attackingCells[r][c].hit == True):
+                    self.board.cells[r][c].configure(bg=&#34;grey&#34;)
+                #No hit or ship
+                else:
+                    self.board.cells[r][c].configure(bg=&#34;blue&#34;)
+
+                #For lower 100 cells
+                #If there was a ship, and its been hit
+                if (self.curr_player.shipCells[r][c].ship == True and self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg=&#34;orange&#34;)
+                #If there is a ship no hit
+                elif(self.curr_player.shipCells[r][c].ship == True):
+                    self.board.cells2[r][c].configure(bg=&#34;grey&#34;)
+                #If there was a hit no ship
+                elif(self.other_player.attackingCells[r][c].hit == True):
+                    self.board.cells2[r][c].configure(bg=&#34;black&#34;)
+                #No ship no hit
+                else:
+                    self.board.cells2[r][c].configure(bg=&#34;blue&#34;)         
+
+    def human_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when human vs human button is pushed
+        &#34;&#34;&#34;
+        self.player2 = humanPlayer(2, 0, False)
+        self.other_player = self.player2
+        self.board1.window.destroy()
+        self.board_setup()
+
+    def ai_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Handles when human vs computer is pushed
+        &#34;&#34;&#34;  
+        self.player2 = computerPlayer(2, 0, False)
+        self.other_player = self.player2
+        self.board1.window.destroy()
+        self.board_setup()
+    
+    def quit_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Once game has ended, allow for window to be quit
+        &#34;&#34;&#34;
+        self.end_board.window.destroy()
+
+    def repeat_handler(self)-&gt;None:
+        &#34;&#34;&#34;
+        Allows game to be repeated
+        &#34;&#34;&#34;
+        self.end_board.window.destroy()
+        self.__init__()</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="control.Control.ai_handler"><code class="name flex">
+<span>def <span class="ident">ai_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when human vs computer is pushed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ai_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when human vs computer is pushed
+    &#34;&#34;&#34;  
+    self.player2 = computerPlayer(2, 0, False)
+    self.other_player = self.player2
+    self.board1.window.destroy()
+    self.board_setup()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.battleship_handler"><code class="name flex">
+<span>def <span class="ident">battleship_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when the battleship ship type button is pushed, and ensures push is legal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def battleship_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when the battleship ship type button is pushed, and ensures push is legal
+    &#34;&#34;&#34;  
+    if &#34;battleship&#34; not in self.ship_types_placed and self.delete_mode == False:
+        self.ship_to_place = True
+        self.ship = battleship()
+        self.board.battleship.configure(fg = self.mod_color)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.board_setup"><code class="name flex">
+<span>def <span class="ident">board_setup</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets up gameboard once type of game is chosen</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def board_setup(self)-&gt;None:
+    &#34;&#34;&#34;
+    Sets up gameboard once type of game is chosen
+    &#34;&#34;&#34;
+    # Cell clicks.  (Note that a separate handler function is defined for 
+    # each cell.)
+    self.board = Gameboard(self.NUM_ROWS, self.NUM_COLS)
+    for r in range(self.NUM_ROWS):
+        for c in range(self.NUM_COLS):
+            def handler(event, row = r, column = c):
+                self.cell_click_handler1(row, column)
+            self.board.set_cell_click_handler_top(r, c, handler)
+
+    for r in range(self.NUM_ROWS):
+        for c in range(self.NUM_COLS):
+            def handler(event, row = r, column = c):
+                self.cell_click_handler2(row, column)
+            self.board.set_cell_click_handler_bottom(r, c, handler)
+    def handler(event):
+        self.confirm_hit_handler()
+    self.board.set_confirm_hit_handler(handler)
+
+    self.initializing_board_handlers()
+    self.player_switch_screen_management()
+    self.board.window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.carrier_handler"><code class="name flex">
+<span>def <span class="ident">carrier_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when the carrier ship type button is pushed, and ensures push is legal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def carrier_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when the carrier ship type button is pushed, and ensures push is legal
+    &#34;&#34;&#34;
+    if &#34;carrier&#34; not in self.ship_types_placed and self.delete_mode == False:
+        self.ship_to_place = True
+        self.ship = carrier()
+        self.board.carrier.configure(fg = self.mod_color)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.cell_click_handler1"><code class="name flex">
+<span>def <span class="ident">cell_click_handler1</span></span>(<span>self, row: int, column: int) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This handler is for the top 100 cells of the window, mostly for making hits</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cell_click_handler1(self, row:int, column:int)-&gt;None:
+    &#34;&#34;&#34;
+    This handler is for the top 100 cells of the window, mostly for making hits
+    &#34;&#34;&#34;
+    if self.done_placing_ships == True:
+        #When the user clicks for the second time, we want to reset their last clicked cell to blue
+        if (self.lastRow != -1):
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;blue&#39;)
+
+        #When the user clicks a cell, we store where the clicked and change the color of the place they clicked from blue to yellow
+        #Only able to click cells that they have not previously shot a missle at
+        if (self.ships_placed == 5 and self.other_player.shipCells[row][column].hit == False): 
+            self.board.cells[row][column].configure(bg=&#39;yellow&#39;)
+            self.lastRow = row
+            self.lastColumn = column</code></pre>
+</details>
+</dd>
+<dt id="control.Control.cell_click_handler2"><code class="name flex">
+<span>def <span class="ident">cell_click_handler2</span></span>(<span>self, row: int, column: int) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>This handler is for the bottom 100 cells of the window, for placing ships</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cell_click_handler2(self, row:int, column:int)-&gt;None:
+    &#34;&#34;&#34;
+    This handler is for the bottom 100 cells of the window, for placing ships
+    &#34;&#34;&#34;
+    if self.delete_mode == True: #ensures it does not place ship if delete mode is on
+        if self.curr_player.shipCells[row][column].ship == True:
+            self.delete_mode_func(self.curr_player.shipCells[row][column].id)
+    else:
+        switch_point = -1
+        if self.ship == self.last_ship and self.curr_player.shipCells[row][column].id == self.ship.name:
+            self.ship.change_orientation()
+            self.ship_start = 0
+            if not self.ship.horizontal == True: # was horizontal switching to vertical
+                for c in range(self.NUM_COLS):
+                    if self.curr_player.shipCells[row][c].id == self.ship.name: # first instance of ship in row
+                        self.ship_start = c
+                        break
+                # switching to vertical from horixontal
+                switch_point = column-self.ship_start
+                if (row-switch_point &gt;= 0 ) and (row-switch_point+self.ship.length &lt;= self.NUM_ROWS): # if new ship won&#39;t go out of bounds, continue on
+                        self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name) # clear original ship
+                        for first_half in range(0, self.ship.length):
+                            #check if their is another ship in the way of changing direction
+                            if self.curr_player.shipCells[row-switch_point+first_half][column].ship == True and self.curr_player.shipCells[row-switch_point +first_half][column].id != self.ship.name:
+                                self.ship.change_orientation()
+                                self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                self.place_ship(row, self.ship_start, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                break
+            
+                            else:
+                                self.ship_board_update(row-switch_point+first_half, column)
+                else: #change orientation back
+                    self.ship.change_orientation()
+
+            else: # was vertical switching to horizontal
+                for r in range(self.NUM_ROWS):
+                    if self.curr_player.shipCells[r][column].id == self.ship.name: # first instance of ship in row
+                        self.ship_start = r
+                        break
+                switch_point = row-self.ship_start
+                if (column-switch_point &gt;= 0) and (column-switch_point+self.ship.length &lt;= self.NUM_COLS): # if new ship won&#39;t go out of bounds, continue on
+                        self.clear_ship(row-switch_point, column, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                        for first_half in range(0, self.ship.length):
+                            #check if their is another ship in the way of changing direction
+                            if self.curr_player.shipCells[row][column-switch_point+first_half].ship == True and self.curr_player.shipCells[row][column-switch_point+first_half].id != self.ship.name:
+                                self.ship.change_orientation()
+                                self.clear_ship(row, column-switch_point, 0, self.ship.length, not self.ship.horizontal, self.ship.name)
+                                self.place_ship(self.ship_start, column, 0, self.ship.length, self.ship.horizontal, self.ship.name)
+                                break
+                            else:
+                                self.ship_board_update(row, column-switch_point+first_half)
+                else: #change orientaation back
+                    self.ship.change_orientation()
+
+        #first time placing ship
+        elif (self.ship_to_place == True and self.ship not in self.ship_types_placed) and self.curr_player.shipCells[row][column].ship == False: 
+            illegal_ship = True
+            illegal_index = 0
+            if self.ship.horizontal == True: # place ship horizontally
+                if self.ship.length + column &lt;= self.NUM_COLS:
+                    for c in range(self.ship.length):
+                        if self.curr_player.shipCells[row][c+column].ship == True and self.curr_player.shipCells[row][c+column].id != self.ship.name:
+                            illegal_ship = True
+                            illegal_index = c
+                            break
+                        else:
+                            self.ship_board_update(row, column+c)
+                            illegal_ship = False
+            elif self.ship.horizontal == False: #for the computer player to be able to place vertically the first time
+                if self.ship.length + row &lt;= self.NUM_ROWS:
+                    for r in range(self.ship.length):
+                        if self.curr_player.shipCells[row+r][column].ship == True and self.curr_player.shipCells[row+r][column].id != self.ship.name:
+                            illegal_ship = True
+                            illegal_index = r
+                            break
+                        else:
+                            self.ship_board_update(row+r, column)
+                            illegal_ship = False
+
+            if illegal_ship == False:
+                self.ship_to_place = False
+                self.ship_types_placed.append(self.ship.name)
+                self.ships_placed += 1
+                self.last_ship = self.ship
+                self.update_ship_labels(self.ship.name, self.mod_color)
+            else: # illegal ship is true
+                self.clear_ship(row, column, 0, illegal_index, self.ship.horizontal, self.ship.name)
+                self.update_ship_labels(self.ship.name, &#34;black&#34;)
+        else:
+            self.update_ship_labels(self.ship.name, &#34;black&#34;)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.clear_ship"><code class="name flex">
+<span>def <span class="ident">clear_ship</span></span>(<span>self, row: int, column: int, start_range: int, end_range: int, horizontal: bool, ship_name: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Removes ships from board that are not valid or deleted</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def clear_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+    &#34;&#34;&#34;
+    Removes ships from board that are not valid or deleted
+    &#34;&#34;&#34;
+    if horizontal == True:
+        if column + end_range &lt;= self.NUM_COLS:
+            for c in range(start_range, end_range):
+                if self.curr_player.shipCells[row][c+column].id == ship_name:
+                    self.board.cells2[row][c+column].configure(bg = &#34;blue&#34;)
+                    self.curr_player.shipCells[row][c+column].ship = False
+                    self.curr_player.shipCells[row][c+column].id = &#34;&#34;
+    else:
+        if row + end_range &lt;= self.NUM_ROWS:
+            for r in range(start_range, end_range):
+                if self.curr_player.shipCells[row+r][column].id == ship_name:
+                    self.board.cells2[r+row][column].configure(bg = &#34;blue&#34;)
+                    self.curr_player.shipCells[r+row][column].ship = False
+                    self.curr_player.shipCells[r+row][column].id = &#34;&#34;</code></pre>
+</details>
+</dd>
+<dt id="control.Control.confirm_hit_handler"><code class="name flex">
+<span>def <span class="ident">confirm_hit_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handler for the confirm hit button</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def confirm_hit_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handler for the confirm hit button
+    &#34;&#34;&#34;
+    #Checks to see if the user has chosen a cell to attack or if cell has been attacked already, if not do nothing (Button has no function)
+    if (self.lastRow != -1 or self.other_player.shipCells[self.lastRow][self.lastColumn].hit == True):
+        #If the cell that is attacked is one with a ship
+        if self.other_player.shipCells[self.lastRow][self.lastColumn].ship == True:
+            temp = self.other_player.playerShips.get(self.other_player.shipCells[self.lastRow][self.lastColumn].id)
+            temp.timeHit += 1
+            if temp.isSunk() == True:
+                self.board.shipSinkNotification[&#39;text&#39;] = &#34;Player &#34; + str(self.other_player.playerNum) + &#34;&#39;s &#34; + self.other_player.shipCells[self.lastRow][self.lastColumn].id + &#34; has sunk!&#34;
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;red&#39;)
+            self.curr_player.attackingCells[self.lastRow][self.lastColumn].successful_hit = True
+            self.curr_player.incrementHits()
+        #No ship in the cell attacked
+        else:
+            self.board.cells[self.lastRow][self.lastColumn].configure(bg=&#39;grey&#39;)
+
+        #Changing the hit bool in the selected cell in both players boards
+        self.other_player.shipCells[self.lastRow][self.lastColumn].hit = True
+        self.curr_player.attackingCells[self.lastRow][self.lastColumn].hit = True
+
+        #resets lastRow and lastColumn
+        self.lastRow = -1
+        self.lastColumn = -1 
+            
+        #If no one has won, we update window to show other players ships and attacking board
+        
+        self.board.window.update()
+        self.board.window.after(1000, self.update_player())</code></pre>
+</details>
+</dd>
+<dt id="control.Control.cruiser_handler"><code class="name flex">
+<span>def <span class="ident">cruiser_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when the cruiser ship type button is pushed, and ensures push is legal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def cruiser_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when the cruiser ship type button is pushed, and ensures push is legal
+    &#34;&#34;&#34;
+    if &#34;cruiser&#34; not in self.ship_types_placed and self.delete_mode == False:
+        self.ship_to_place = True
+        self.ship = cruiser()
+        self.board.cruiser.configure(fg = self.mod_color)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.delete_mode_func"><code class="name flex">
+<span>def <span class="ident">delete_mode_func</span></span>(<span>self, ship_name: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Deletes ships from board</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_mode_func(self, ship_name:str)-&gt;None:
+    &#34;&#34;&#34;
+    Deletes ships from board
+    &#34;&#34;&#34;
+    for r in range(self.NUM_ROWS):
+        for c in range(self.NUM_COLS):
+            if (self.curr_player.shipCells[r][c].id == ship_name):
+                self.board.cells2[r][c].configure(bg=&#34;blue&#34;)  
+                self.curr_player.shipCells[r][c].id = &#34;&#34;
+                self.curr_player.shipCells[r][c].ship = False
+    
+    self.ships_placed -= 1
+    self.ship_types_placed.remove(ship_name)
+    self.update_ship_labels(ship_name, &#34;black&#34;)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.delete_ship_handler"><code class="name flex">
+<span>def <span class="ident">delete_ship_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles the delete mode switches</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def delete_ship_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles the delete mode switches
+    &#34;&#34;&#34;
+    if self.delete_mode == False:
+        self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: ON&#34;
+        self.delete_mode = True
+    else:
+        self.board.delete_ship[&#39;text&#39;] = &#34;Delete Mode: OFF&#34;
+        self.delete_mode = False</code></pre>
+</details>
+</dd>
+<dt id="control.Control.destroyer_handler"><code class="name flex">
+<span>def <span class="ident">destroyer_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when the destroyer ship type button is pushed, and ensures push is legal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def destroyer_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when the destroyer ship type button is pushed, and ensures push is legal
+    &#34;&#34;&#34;
+    if &#34;destroyer&#34; not in self.ship_types_placed and self.delete_mode == False:
+        self.ship_to_place = True
+        self.ship = destroyer()
+        self.board.destroyer.configure(fg = self.mod_color)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.done_placing_ships_handler"><code class="name flex">
+<span>def <span class="ident">done_placing_ships_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Switches player and ensures player is done placing ships</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def done_placing_ships_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Switches player and ensures player is done placing ships
+    &#34;&#34;&#34;
+    # checks to ensure first player is done
+    if self.ships_placed == 5 and self.curr_player == self.player1:
+        self.curr_player = self.player2
+        self.ships_placed = 0
+        self.reset_cells2()
+        for s in self.ship_types_placed:
+            self.update_ship_labels(s, &#34;black&#34;)
+        self.ship_types_placed = []
+        self.board.player[&#39;text&#39;] = &#34;PLAYER 2: Place your ships&#34;
+        
+        # if against a computer player, place computer ships automatically and allow player one to hit
+        if self.player2.is_human == False: 
+            # randomly placing ships
+            self.place_random_ships()
+            self.curr_player = self.player1
+            self.update_cells()
+            self.board.ship_frame.destroy()
+            self.done_placing_ships = True
+            self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+    # ensures player 2 is done placing ships 
+    elif self.ships_placed == 5 and self.curr_player == self.player2:
+        self.curr_player = self.player1
+        self.player_switch_screen_management(False)
+        self.update_cells()
+        self.board.ship_frame.destroy()
+        self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+        self.done_placing_ships = True</code></pre>
+</details>
+</dd>
+<dt id="control.Control.end_game_setup"><code class="name flex">
+<span>def <span class="ident">end_game_setup</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>For endgame, displays winner and allows for reset of game</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def end_game_setup(self)-&gt;None:
+    &#34;&#34;&#34;
+    For endgame, displays winner and allows for reset of game
+    &#34;&#34;&#34;
+    self.end_board = EndGame()
+    self.end_board.who_won[&#39;text&#39;] = &#34;PLAYER &#34; + str(self.curr_player.playerNum) + &#34; WON&#34;
+    self.end_board.set_quit_handler(self.quit_handler)
+    self.end_board.set_repeat_handler(self.repeat_handler)
+    self.end_board.window.mainloop()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.human_handler"><code class="name flex">
+<span>def <span class="ident">human_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when human vs human button is pushed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def human_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when human vs human button is pushed
+    &#34;&#34;&#34;
+    self.player2 = humanPlayer(2, 0, False)
+    self.other_player = self.player2
+    self.board1.window.destroy()
+    self.board_setup()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.initializing_board_handlers"><code class="name flex">
+<span>def <span class="ident">initializing_board_handlers</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Initializes all handlers for the gameboard</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def initializing_board_handlers(self)-&gt;None:
+    &#34;&#34;&#34;
+    Initializes all handlers for the gameboard
+    &#34;&#34;&#34;
+    self.board.set_battleship_handler(self.battleship_handler)
+    self.board.set_carrier_handler(self.carrier_handler)
+    self.board.set_submarine_handler(self.submarine_handler)
+    self.board.set_cruiser_handler(self.cruiser_handler)
+    self.board.set_destroyer_handler(self.destroyer_handler)
+    self.board.set_done_placing_ships_handler(self.done_placing_ships_handler)
+    self.board.set_delete_ship_handler(self.delete_ship_handler)
+    self.board.set_random_ships_handler(self.place_random_ships)
+    self.board.set_switch_players_handler(self.player_switch_screen_management)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.place_random_ships"><code class="name flex">
+<span>def <span class="ident">place_random_ships</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Places ships on board randomly</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def place_random_ships(self)-&gt;None:
+    &#34;&#34;&#34;
+    Places ships on board randomly
+    &#34;&#34;&#34;
+    if self.ships_placed != 5 and self.delete_mode == False:
+        ship_list = self.ship_list()
+        for ship in ship_list:
+            self.ship_to_place = True
+            self.ship = ship
+            self.ship.orientation = bool(random.randint(0,1))
+            self.update_ship_labels(self.ship.name, self.mod_color)
+            while self.ship.name not in self.ship_types_placed:
+                self.cell_click_handler2(random.randint(0,9), random.randint(0, 9))</code></pre>
+</details>
+</dd>
+<dt id="control.Control.place_ship"><code class="name flex">
+<span>def <span class="ident">place_ship</span></span>(<span>self, row: int, column: int, start_range: int, end_range: int, horizontal: bool, ship_name: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Sets up for loop for placing ships</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def place_ship(self, row:int, column:int, start_range:int, end_range:int, horizontal:bool, ship_name:str)-&gt;None:
+    &#34;&#34;&#34;
+    Sets up for loop for placing ships
+    &#34;&#34;&#34;
+    if horizontal == True:
+        for c in range(start_range, end_range):
+            self.ship_board_update(row, c+column)
+    else:
+        for r in range(start_range, end_range):
+            self.ship_board_update(r+row, column)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.player_switch_screen_management"><code class="name flex">
+<span>def <span class="ident">player_switch_screen_management</span></span>(<span>self, delete: bool = True) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Covers board when players switch to ensure fairness of game</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def player_switch_screen_management(self, delete:bool = True)-&gt;None:
+    &#34;&#34;&#34;
+    Covers board when players switch to ensure fairness of game
+    &#34;&#34;&#34;
+    if delete == True:
+        self.board.switch_frame.grid_remove()
+    else:
+        self.board.switch_frame.grid()
+        self.board.switch_players.configure(fg = &#34;black&#34;)
+        self.board.switch_players.configure(text = &#34;Player &#34;+str(self.curr_player.playerNum) +&#34;: Ready to Play!&#34;)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.quit_handler"><code class="name flex">
+<span>def <span class="ident">quit_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Once game has ended, allow for window to be quit</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def quit_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Once game has ended, allow for window to be quit
+    &#34;&#34;&#34;
+    self.end_board.window.destroy()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.repeat_handler"><code class="name flex">
+<span>def <span class="ident">repeat_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Allows game to be repeated</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def repeat_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Allows game to be repeated
+    &#34;&#34;&#34;
+    self.end_board.window.destroy()
+    self.__init__()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.reset_cells2"><code class="name flex">
+<span>def <span class="ident">reset_cells2</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Resets all cells on bottom board to blue</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def reset_cells2(self)-&gt;None:
+    &#34;&#34;&#34;
+    Resets all cells on bottom board to blue
+    &#34;&#34;&#34;
+    for r in range(self.NUM_ROWS):
+        for c in range(self.NUM_COLS):
+            self.board.cells2[r][c].configure(bg=&#34;blue&#34;)   </code></pre>
+</details>
+</dd>
+<dt id="control.Control.ship_board_update"><code class="name flex">
+<span>def <span class="ident">ship_board_update</span></span>(<span>self, row: int, column: int) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates the board and user lists when ship is placed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ship_board_update(self, row:int, column:int)-&gt;None:
+    &#34;&#34;&#34;
+    Updates the board and user lists when ship is placed
+    &#34;&#34;&#34;
+    self.board.cells2[row][column].configure(bg = &#34;gray&#34;)
+    self.curr_player.shipCells[row][column].ship = True
+    self.curr_player.shipCells[row][column].id = self.ship.name
+    if self.ship.name == &#34;destroyer&#34;:
+        self.curr_player.playerShips[&#34;destroyer&#34;] = destroyer()
+    elif self.ship.name == &#34;submarine&#34;:
+        self.curr_player.playerShips[&#34;submarine&#34;] = submarine()
+    elif self.ship.name == &#34;cruiser&#34;:
+        self.curr_player.playerShips[&#34;cruiser&#34;] = cruiser()
+    elif self.ship.name == &#34;battleship&#34;:
+        self.curr_player.playerShips[&#34;battleship&#34;] = battleship()
+    else:
+        self.curr_player.playerShips[&#34;carrier&#34;] = carrier()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.ship_list"><code class="name flex">
+<span>def <span class="ident">ship_list</span></span>(<span>self) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns a list containing the ship objects that have been placed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def ship_list(self)-&gt;list:
+    &#34;&#34;&#34;
+    Returns a list containing the ship objects that have been placed
+    &#34;&#34;&#34;
+    ship_list = []
+    for ship in self.ship_types:
+        if ship.name not in self.ship_types_placed:
+            ship_list.append(ship)
+    return ship_list</code></pre>
+</details>
+</dd>
+<dt id="control.Control.submarine_handler"><code class="name flex">
+<span>def <span class="ident">submarine_handler</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Handles when the submarine ship type button is pushed, and ensures push is legal</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def submarine_handler(self)-&gt;None:
+    &#34;&#34;&#34;
+    Handles when the submarine ship type button is pushed, and ensures push is legal
+    &#34;&#34;&#34;
+    if &#34;submarine&#34; not in self.ship_types_placed and self.delete_mode == False:
+        self.ship_to_place = True
+        self.ship = submarine()
+        self.board.submarine.configure(fg = self.mod_color)</code></pre>
+</details>
+</dd>
+<dt id="control.Control.update_cells"><code class="name flex">
+<span>def <span class="ident">update_cells</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Updates window with the curr_players ship and attacking board</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_cells(self)-&gt;None:
+    &#34;&#34;&#34;
+    Updates window with the curr_players ship and attacking board
+    &#34;&#34;&#34;
+    #Nested for loop to go through all cells
+    for r in range(self.NUM_ROWS):
+        for c in range(self.NUM_COLS):
+            #For upper 100 cells
+            #If there was a ship, and its been hit
+            if (self.other_player.shipCells[r][c].ship == True and self.curr_player.attackingCells[r][c].hit == True):
+                self.board.cells[r][c].configure(bg=&#34;red&#34;)
+            #If there was a hit with no ship
+            elif (self.curr_player.attackingCells[r][c].hit == True):
+                self.board.cells[r][c].configure(bg=&#34;grey&#34;)
+            #No hit or ship
+            else:
+                self.board.cells[r][c].configure(bg=&#34;blue&#34;)
+
+            #For lower 100 cells
+            #If there was a ship, and its been hit
+            if (self.curr_player.shipCells[r][c].ship == True and self.other_player.attackingCells[r][c].hit == True):
+                self.board.cells2[r][c].configure(bg=&#34;orange&#34;)
+            #If there is a ship no hit
+            elif(self.curr_player.shipCells[r][c].ship == True):
+                self.board.cells2[r][c].configure(bg=&#34;grey&#34;)
+            #If there was a hit no ship
+            elif(self.other_player.attackingCells[r][c].hit == True):
+                self.board.cells2[r][c].configure(bg=&#34;black&#34;)
+            #No ship no hit
+            else:
+                self.board.cells2[r][c].configure(bg=&#34;blue&#34;)         </code></pre>
+</details>
+</dd>
+<dt id="control.Control.update_player"><code class="name flex">
+<span>def <span class="ident">update_player</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Switches player and updates the screen</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_player(self)-&gt;None:
+    &#34;&#34;&#34;
+    Switches player and updates the screen
+    &#34;&#34;&#34;
+    if (self.curr_player.numOfHits == 17): #check game over
+        self.board.window.destroy()
+        self.end_game_setup()
+    else: #game not over yet
+        self.board.shipSinkNotification[&#39;text&#39;] = &#34;&#34;
+
+        #Updates curr_player and other_player
+        if (self.curr_player.playerNum == 1):
+            self.curr_player = self.player2
+            self.other_player = self.player1
+        else:
+            self.curr_player = self.player1
+            self.other_player = self.player2
+
+        #Updating the game board, hits and player turn
+        self.board.your_hits[&#39;text&#39;] = &#34;Your Hits: &#34; + str(self.curr_player.numOfHits)
+        self.board.opponent[&#39;text&#39;] = &#34;Opponent: &#34; + str(self.other_player.numOfHits)
+        
+        if self.curr_player.is_human == True:
+            if self.player2.is_human == True:
+                if (self.curr_player.playerNum == 2):
+                    self.board.player[&#39;text&#39;] = &#34;PLAYER 2S TURN&#34;
+                else:
+                    self.board.player[&#39;text&#39;] = &#34;PLAYER 1S TURN&#34;
+
+                self.player_switch_screen_management(False)
+
+            #Updates window for the curr_player
+            self.update_cells()
+        else:
+            self.player2.computer_hit(self.other_player.shipCells, self.other_player.playerShips)
+            self.update_player()</code></pre>
+</details>
+</dd>
+<dt id="control.Control.update_ship_labels"><code class="name flex">
+<span>def <span class="ident">update_ship_labels</span></span>(<span>self, ship_name: str, color: str) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Changes the button text colors when pressed</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_ship_labels(self, ship_name:str, color:str)-&gt;None:
+    &#34;&#34;&#34;
+    Changes the button text colors when pressed
+    &#34;&#34;&#34;
+    if ship_name == &#34;carrier&#34;:
+        self.board.carrier.configure(fg = color)
+    elif ship_name == &#34;destroyer&#34;:
+        self.board.destroyer.configure(fg = color)
+    elif ship_name == &#34;battleship&#34;:
+        self.board.battleship.configure(fg = color)
+    elif ship_name == &#34;submarine&#34;:
+        self.board.submarine.configure(fg = color)
+    elif ship_name == &#34;cruiser&#34;:
+        self.board.cruiser.configure(fg = color)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="control.Control" href="#control.Control">Control</a></code></h4>
+<ul class="">
+<li><code><a title="control.Control.ai_handler" href="#control.Control.ai_handler">ai_handler</a></code></li>
+<li><code><a title="control.Control.battleship_handler" href="#control.Control.battleship_handler">battleship_handler</a></code></li>
+<li><code><a title="control.Control.board_setup" href="#control.Control.board_setup">board_setup</a></code></li>
+<li><code><a title="control.Control.carrier_handler" href="#control.Control.carrier_handler">carrier_handler</a></code></li>
+<li><code><a title="control.Control.cell_click_handler1" href="#control.Control.cell_click_handler1">cell_click_handler1</a></code></li>
+<li><code><a title="control.Control.cell_click_handler2" href="#control.Control.cell_click_handler2">cell_click_handler2</a></code></li>
+<li><code><a title="control.Control.clear_ship" href="#control.Control.clear_ship">clear_ship</a></code></li>
+<li><code><a title="control.Control.confirm_hit_handler" href="#control.Control.confirm_hit_handler">confirm_hit_handler</a></code></li>
+<li><code><a title="control.Control.cruiser_handler" href="#control.Control.cruiser_handler">cruiser_handler</a></code></li>
+<li><code><a title="control.Control.delete_mode_func" href="#control.Control.delete_mode_func">delete_mode_func</a></code></li>
+<li><code><a title="control.Control.delete_ship_handler" href="#control.Control.delete_ship_handler">delete_ship_handler</a></code></li>
+<li><code><a title="control.Control.destroyer_handler" href="#control.Control.destroyer_handler">destroyer_handler</a></code></li>
+<li><code><a title="control.Control.done_placing_ships_handler" href="#control.Control.done_placing_ships_handler">done_placing_ships_handler</a></code></li>
+<li><code><a title="control.Control.end_game_setup" href="#control.Control.end_game_setup">end_game_setup</a></code></li>
+<li><code><a title="control.Control.human_handler" href="#control.Control.human_handler">human_handler</a></code></li>
+<li><code><a title="control.Control.initializing_board_handlers" href="#control.Control.initializing_board_handlers">initializing_board_handlers</a></code></li>
+<li><code><a title="control.Control.place_random_ships" href="#control.Control.place_random_ships">place_random_ships</a></code></li>
+<li><code><a title="control.Control.place_ship" href="#control.Control.place_ship">place_ship</a></code></li>
+<li><code><a title="control.Control.player_switch_screen_management" href="#control.Control.player_switch_screen_management">player_switch_screen_management</a></code></li>
+<li><code><a title="control.Control.quit_handler" href="#control.Control.quit_handler">quit_handler</a></code></li>
+<li><code><a title="control.Control.repeat_handler" href="#control.Control.repeat_handler">repeat_handler</a></code></li>
+<li><code><a title="control.Control.reset_cells2" href="#control.Control.reset_cells2">reset_cells2</a></code></li>
+<li><code><a title="control.Control.ship_board_update" href="#control.Control.ship_board_update">ship_board_update</a></code></li>
+<li><code><a title="control.Control.ship_list" href="#control.Control.ship_list">ship_list</a></code></li>
+<li><code><a title="control.Control.submarine_handler" href="#control.Control.submarine_handler">submarine_handler</a></code></li>
+<li><code><a title="control.Control.update_cells" href="#control.Control.update_cells">update_cells</a></code></li>
+<li><code><a title="control.Control.update_player" href="#control.Control.update_player">update_player</a></code></li>
+<li><code><a title="control.Control.update_ship_labels" href="#control.Control.update_ship_labels">update_ship_labels</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

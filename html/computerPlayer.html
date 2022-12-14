@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>computerPlayer API documentation</title>
+<meta name="description" content="Description: Class for computerPlayer object
+&lt;pre&gt;
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: …" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>computerPlayer</code></h1>
+</header>
+<section id="section-intro">
+<p>Description: Class for computerPlayer object</p>
+<pre>
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+</pre>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">&#34;&#34;&#34;
+Description: Class for computerPlayer object
+&lt;pre&gt;
+Name: Gabriel Krishnadasan, Alizea Hinz, Aidan Rooney, Marissa Nicole Esteban (Pascal)
+Course: COMP-305 FA22
+Professor: A. Nuzen
+&lt;/pre&gt;
+&#34;&#34;&#34;
+
+import time
+from player import player
+import random
+class computerPlayer(player):
+    def __init__(self, playerNum:int, score:int, is_turn:bool)-&gt;None:
+        &#34;&#34;&#34;
+        Constructor for computerPlayer object
+        &#34;&#34;&#34;
+        super().__init__(playerNum, score, is_turn)
+        self.is_human = False
+        self.max_ship_length_left = 5
+        self.last_missile_success = False
+        self.direction = 0
+        self.curr_direction = 0
+        self.original_success = (-1,-1)
+        self.last_hit = (-1, -1)
+        self.flip_attack = False
+
+    def random_ints(self)-&gt;tuple:
+        &#34;&#34;&#34;
+        Function generates random cell coordinates and returns them as a tuple of ints
+        &#34;&#34;&#34;
+        return random.randint(0,9), random.randint(0,9)
+
+    def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
+        &#34;&#34;&#34;
+        Will make either a computer generated smart hit or a random hit depending on the 
+        outcome of the previous hit
+        &#34;&#34;&#34;
+        next_x = -1
+        next_y = -1
+        # if we should make a random computer hit or a smart computer hit
+        if self.last_missile_success == True:
+
+            # After first hit, checking neighboring cells to see which direction we should go
+            if self.curr_direction == 0:
+                valid = False
+                count = 0
+
+                #Random int 1-4 to choose where we go next (1 = North, 2 = East, 3 = West, 4 = South)
+                while valid == False:
+                    count += 1
+                    self.direction = random.randint(1,4)
+                    if self.direction == 1:
+                        next_x = self.original_success[0]
+                        next_y = self.original_success[1]-1
+                    elif self.direction == 2:
+                        next_x = self.original_success[0]+1
+                        next_y = self.original_success[1]
+                    elif self.direction == 3:
+                        next_x = self.original_success[0]
+                        next_y = self.original_success[1]+1
+                    else:
+                        next_x = self.original_success[0] - 1
+                        next_y = self.original_success[1]
+
+                    # checking on whether these points are valid
+                    if not( self.out_of_bounds(next_x, next_y) or self.attackingCells[next_x][next_y].hit == True):
+                        valid = True
+                    elif count &gt; 4:
+                        valid = True
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+                if other_player_ships[next_x][next_y].ship == True:
+                    self.curr_direction = self.direction
+
+            else:
+                valid = False
+                center_x = self.last_hit[0]
+                center_y = self.last_hit[1]
+                count = 0
+
+                # will attempt a hit in a neighboring cell
+                while valid == False:
+                    if self.curr_direction == 1:
+                        center_y -= 1
+                    elif self.curr_direction == 2:
+                        center_x += 1             
+                    elif self.curr_direction == 3:
+                        center_y += 1
+                    else:
+                        center_x -= 1       
+                    next_x = center_x
+                    next_y = center_y
+                    count +=1
+
+                    # checking if this hit is valid or whether to flip sides
+                    if ((not self.out_of_bounds(next_x, next_y) and self.attackingCells[next_x][next_y].hit != True) and (self.flip_attack == False)):
+                        valid = True
+                    elif count &gt;4:
+                        valid = True
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+                    else:
+                        center_x = self.original_success[0]
+                        center_y = self.original_success[1]
+                        if self.curr_direction ==  1:
+                            self.curr_direction = 3
+                        elif self.curr_direction == 2:
+                            self.curr_direction = 4
+                        elif self.curr_direction == 3:
+                            self.curr_direction = 1
+                        else:
+                            self.curr_direction = 2
+                        self.flip_attack = False
+
+                if other_player_ships[next_x][next_y].ship == False:
+                    self.flip_attack = True
+
+            # reset direction variables
+            if other_player_ships[next_x][next_y].ship == True:
+                temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+                temp.timeHit += 1
+                self.numOfHits +=1
+                if temp.isSunk() == True:
+                    self.last_missile_success = False
+                    self.curr_direction = 0
+                    self.direction = 0
+                    self.original_success = (-1,-1)
+                    self.last_hit = (-1, -1)
+                self.attackingCells[next_x][next_y].successful_hit = True
+
+        else:
+            next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+
+        #Changing the hit bool in the selected cell in both players boards
+        other_player_ships[next_x][next_y].hit = True
+        self.attackingCells[next_x][next_y].hit = True 
+        
+        self.last_hit = (next_x, next_y)
+
+    def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
+        &#34;&#34;&#34;
+        Generates a completely random set of coordinates
+        &#34;&#34;&#34;
+        next_x, next_y = self.random_ints()
+
+        # checking whether there was already a hit to that location
+        while self.attackingCells[next_x][next_y].hit == True or False not in self.check_neighbors(next_x, next_y):
+            print(&#34;searching&#34;)
+            next_x, next_y = self.random_ints()
+
+        # updating the board for the ships
+        if other_player_ships[next_x][next_y].ship == True:
+            self.last_missile_success = True
+            self.original_success = (next_x, next_y)
+            temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+            temp.timeHit += 1
+            self.attackingCells[next_x][next_y].successful_hit = True
+            self.numOfHits += 1
+        return next_x, next_y
+
+    def out_of_bounds(self, x, y)-&gt;bool:
+        &#34;&#34;&#34; 
+        Checks if coordinate pairs are out of bounds 
+        &#34;&#34;&#34;
+        if x &lt; 0 or x &gt; 9 or y &lt; 0 or y &gt; 9:
+            return True
+        else:
+            return False
+
+    def check_neighbors(self, x, y)-&gt;list:
+        &#34;&#34;&#34;
+        Returns information about contents of neighboring cells
+        &#34;&#34;&#34;
+        if(x+1 &gt;= 10):
+            to_right = True
+        else:
+            to_right = self.attackingCells[x+1][y].hit == True and self.attackingCells[x+1][y].successful_hit == False
+        if(x-1 &lt; 0):
+            to_left = True
+        else:
+            to_left = self.attackingCells[x-1][y].hit == True and self.attackingCells[x-1][y].successful_hit == False
+        if(y-1 &lt;0):
+            to_top = True
+        else:
+            to_top = self.attackingCells[x][y-1].hit == True and self.attackingCells[x][y-1].successful_hit == False
+        if(y+1&gt;=10):
+            to_bottom = True
+        else:
+            to_bottom = self.attackingCells[x][y+1].hit == True and self.attackingCells[x][y+1].successful_hit == False
+        return [to_top, to_right, to_bottom, to_left]
+    </code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="computerPlayer.computerPlayer"><code class="flex name class">
+<span>class <span class="ident">computerPlayer</span></span>
+<span>(</span><span>playerNum: int, score: int, is_turn: bool)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Constructor for computerPlayer object</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class computerPlayer(player):
+    def __init__(self, playerNum:int, score:int, is_turn:bool)-&gt;None:
+        &#34;&#34;&#34;
+        Constructor for computerPlayer object
+        &#34;&#34;&#34;
+        super().__init__(playerNum, score, is_turn)
+        self.is_human = False
+        self.max_ship_length_left = 5
+        self.last_missile_success = False
+        self.direction = 0
+        self.curr_direction = 0
+        self.original_success = (-1,-1)
+        self.last_hit = (-1, -1)
+        self.flip_attack = False
+
+    def random_ints(self)-&gt;tuple:
+        &#34;&#34;&#34;
+        Function generates random cell coordinates and returns them as a tuple of ints
+        &#34;&#34;&#34;
+        return random.randint(0,9), random.randint(0,9)
+
+    def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
+        &#34;&#34;&#34;
+        Will make either a computer generated smart hit or a random hit depending on the 
+        outcome of the previous hit
+        &#34;&#34;&#34;
+        next_x = -1
+        next_y = -1
+        # if we should make a random computer hit or a smart computer hit
+        if self.last_missile_success == True:
+
+            # After first hit, checking neighboring cells to see which direction we should go
+            if self.curr_direction == 0:
+                valid = False
+                count = 0
+
+                #Random int 1-4 to choose where we go next (1 = North, 2 = East, 3 = West, 4 = South)
+                while valid == False:
+                    count += 1
+                    self.direction = random.randint(1,4)
+                    if self.direction == 1:
+                        next_x = self.original_success[0]
+                        next_y = self.original_success[1]-1
+                    elif self.direction == 2:
+                        next_x = self.original_success[0]+1
+                        next_y = self.original_success[1]
+                    elif self.direction == 3:
+                        next_x = self.original_success[0]
+                        next_y = self.original_success[1]+1
+                    else:
+                        next_x = self.original_success[0] - 1
+                        next_y = self.original_success[1]
+
+                    # checking on whether these points are valid
+                    if not( self.out_of_bounds(next_x, next_y) or self.attackingCells[next_x][next_y].hit == True):
+                        valid = True
+                    elif count &gt; 4:
+                        valid = True
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+                if other_player_ships[next_x][next_y].ship == True:
+                    self.curr_direction = self.direction
+
+            else:
+                valid = False
+                center_x = self.last_hit[0]
+                center_y = self.last_hit[1]
+                count = 0
+
+                # will attempt a hit in a neighboring cell
+                while valid == False:
+                    if self.curr_direction == 1:
+                        center_y -= 1
+                    elif self.curr_direction == 2:
+                        center_x += 1             
+                    elif self.curr_direction == 3:
+                        center_y += 1
+                    else:
+                        center_x -= 1       
+                    next_x = center_x
+                    next_y = center_y
+                    count +=1
+
+                    # checking if this hit is valid or whether to flip sides
+                    if ((not self.out_of_bounds(next_x, next_y) and self.attackingCells[next_x][next_y].hit != True) and (self.flip_attack == False)):
+                        valid = True
+                    elif count &gt;4:
+                        valid = True
+                        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+                    else:
+                        center_x = self.original_success[0]
+                        center_y = self.original_success[1]
+                        if self.curr_direction ==  1:
+                            self.curr_direction = 3
+                        elif self.curr_direction == 2:
+                            self.curr_direction = 4
+                        elif self.curr_direction == 3:
+                            self.curr_direction = 1
+                        else:
+                            self.curr_direction = 2
+                        self.flip_attack = False
+
+                if other_player_ships[next_x][next_y].ship == False:
+                    self.flip_attack = True
+
+            # reset direction variables
+            if other_player_ships[next_x][next_y].ship == True:
+                temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+                temp.timeHit += 1
+                self.numOfHits +=1
+                if temp.isSunk() == True:
+                    self.last_missile_success = False
+                    self.curr_direction = 0
+                    self.direction = 0
+                    self.original_success = (-1,-1)
+                    self.last_hit = (-1, -1)
+                self.attackingCells[next_x][next_y].successful_hit = True
+
+        else:
+            next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+
+        #Changing the hit bool in the selected cell in both players boards
+        other_player_ships[next_x][next_y].hit = True
+        self.attackingCells[next_x][next_y].hit = True 
+        
+        self.last_hit = (next_x, next_y)
+
+    def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
+        &#34;&#34;&#34;
+        Generates a completely random set of coordinates
+        &#34;&#34;&#34;
+        next_x, next_y = self.random_ints()
+
+        # checking whether there was already a hit to that location
+        while self.attackingCells[next_x][next_y].hit == True or False not in self.check_neighbors(next_x, next_y):
+            print(&#34;searching&#34;)
+            next_x, next_y = self.random_ints()
+
+        # updating the board for the ships
+        if other_player_ships[next_x][next_y].ship == True:
+            self.last_missile_success = True
+            self.original_success = (next_x, next_y)
+            temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+            temp.timeHit += 1
+            self.attackingCells[next_x][next_y].successful_hit = True
+            self.numOfHits += 1
+        return next_x, next_y
+
+    def out_of_bounds(self, x, y)-&gt;bool:
+        &#34;&#34;&#34; 
+        Checks if coordinate pairs are out of bounds 
+        &#34;&#34;&#34;
+        if x &lt; 0 or x &gt; 9 or y &lt; 0 or y &gt; 9:
+            return True
+        else:
+            return False
+
+    def check_neighbors(self, x, y)-&gt;list:
+        &#34;&#34;&#34;
+        Returns information about contents of neighboring cells
+        &#34;&#34;&#34;
+        if(x+1 &gt;= 10):
+            to_right = True
+        else:
+            to_right = self.attackingCells[x+1][y].hit == True and self.attackingCells[x+1][y].successful_hit == False
+        if(x-1 &lt; 0):
+            to_left = True
+        else:
+            to_left = self.attackingCells[x-1][y].hit == True and self.attackingCells[x-1][y].successful_hit == False
+        if(y-1 &lt;0):
+            to_top = True
+        else:
+            to_top = self.attackingCells[x][y-1].hit == True and self.attackingCells[x][y-1].successful_hit == False
+        if(y+1&gt;=10):
+            to_bottom = True
+        else:
+            to_bottom = self.attackingCells[x][y+1].hit == True and self.attackingCells[x][y+1].successful_hit == False
+        return [to_top, to_right, to_bottom, to_left]</code></pre>
+</details>
+<h3>Ancestors</h3>
+<ul class="hlist">
+<li>player.player</li>
+</ul>
+<h3>Methods</h3>
+<dl>
+<dt id="computerPlayer.computerPlayer.check_neighbors"><code class="name flex">
+<span>def <span class="ident">check_neighbors</span></span>(<span>self, x, y) ‑> list</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Returns information about contents of neighboring cells</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_neighbors(self, x, y)-&gt;list:
+    &#34;&#34;&#34;
+    Returns information about contents of neighboring cells
+    &#34;&#34;&#34;
+    if(x+1 &gt;= 10):
+        to_right = True
+    else:
+        to_right = self.attackingCells[x+1][y].hit == True and self.attackingCells[x+1][y].successful_hit == False
+    if(x-1 &lt; 0):
+        to_left = True
+    else:
+        to_left = self.attackingCells[x-1][y].hit == True and self.attackingCells[x-1][y].successful_hit == False
+    if(y-1 &lt;0):
+        to_top = True
+    else:
+        to_top = self.attackingCells[x][y-1].hit == True and self.attackingCells[x][y-1].successful_hit == False
+    if(y+1&gt;=10):
+        to_bottom = True
+    else:
+        to_bottom = self.attackingCells[x][y+1].hit == True and self.attackingCells[x][y+1].successful_hit == False
+    return [to_top, to_right, to_bottom, to_left]</code></pre>
+</details>
+</dd>
+<dt id="computerPlayer.computerPlayer.computer_hit"><code class="name flex">
+<span>def <span class="ident">computer_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Will make either a computer generated smart hit or a random hit depending on the
+outcome of the previous hit</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def computer_hit(self, other_player_ships, other_player_sunk_data)-&gt;None:
+    &#34;&#34;&#34;
+    Will make either a computer generated smart hit or a random hit depending on the 
+    outcome of the previous hit
+    &#34;&#34;&#34;
+    next_x = -1
+    next_y = -1
+    # if we should make a random computer hit or a smart computer hit
+    if self.last_missile_success == True:
+
+        # After first hit, checking neighboring cells to see which direction we should go
+        if self.curr_direction == 0:
+            valid = False
+            count = 0
+
+            #Random int 1-4 to choose where we go next (1 = North, 2 = East, 3 = West, 4 = South)
+            while valid == False:
+                count += 1
+                self.direction = random.randint(1,4)
+                if self.direction == 1:
+                    next_x = self.original_success[0]
+                    next_y = self.original_success[1]-1
+                elif self.direction == 2:
+                    next_x = self.original_success[0]+1
+                    next_y = self.original_success[1]
+                elif self.direction == 3:
+                    next_x = self.original_success[0]
+                    next_y = self.original_success[1]+1
+                else:
+                    next_x = self.original_success[0] - 1
+                    next_y = self.original_success[1]
+
+                # checking on whether these points are valid
+                if not( self.out_of_bounds(next_x, next_y) or self.attackingCells[next_x][next_y].hit == True):
+                    valid = True
+                elif count &gt; 4:
+                    valid = True
+                    next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+            if other_player_ships[next_x][next_y].ship == True:
+                self.curr_direction = self.direction
+
+        else:
+            valid = False
+            center_x = self.last_hit[0]
+            center_y = self.last_hit[1]
+            count = 0
+
+            # will attempt a hit in a neighboring cell
+            while valid == False:
+                if self.curr_direction == 1:
+                    center_y -= 1
+                elif self.curr_direction == 2:
+                    center_x += 1             
+                elif self.curr_direction == 3:
+                    center_y += 1
+                else:
+                    center_x -= 1       
+                next_x = center_x
+                next_y = center_y
+                count +=1
+
+                # checking if this hit is valid or whether to flip sides
+                if ((not self.out_of_bounds(next_x, next_y) and self.attackingCells[next_x][next_y].hit != True) and (self.flip_attack == False)):
+                    valid = True
+                elif count &gt;4:
+                    valid = True
+                    next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+                else:
+                    center_x = self.original_success[0]
+                    center_y = self.original_success[1]
+                    if self.curr_direction ==  1:
+                        self.curr_direction = 3
+                    elif self.curr_direction == 2:
+                        self.curr_direction = 4
+                    elif self.curr_direction == 3:
+                        self.curr_direction = 1
+                    else:
+                        self.curr_direction = 2
+                    self.flip_attack = False
+
+            if other_player_ships[next_x][next_y].ship == False:
+                self.flip_attack = True
+
+        # reset direction variables
+        if other_player_ships[next_x][next_y].ship == True:
+            temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+            temp.timeHit += 1
+            self.numOfHits +=1
+            if temp.isSunk() == True:
+                self.last_missile_success = False
+                self.curr_direction = 0
+                self.direction = 0
+                self.original_success = (-1,-1)
+                self.last_hit = (-1, -1)
+            self.attackingCells[next_x][next_y].successful_hit = True
+
+    else:
+        next_x, next_y = self.random_hit(other_player_ships, other_player_sunk_data)
+
+    #Changing the hit bool in the selected cell in both players boards
+    other_player_ships[next_x][next_y].hit = True
+    self.attackingCells[next_x][next_y].hit = True 
+    
+    self.last_hit = (next_x, next_y)</code></pre>
+</details>
+</dd>
+<dt id="computerPlayer.computerPlayer.out_of_bounds"><code class="name flex">
+<span>def <span class="ident">out_of_bounds</span></span>(<span>self, x, y) ‑> bool</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Checks if coordinate pairs are out of bounds</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def out_of_bounds(self, x, y)-&gt;bool:
+    &#34;&#34;&#34; 
+    Checks if coordinate pairs are out of bounds 
+    &#34;&#34;&#34;
+    if x &lt; 0 or x &gt; 9 or y &lt; 0 or y &gt; 9:
+        return True
+    else:
+        return False</code></pre>
+</details>
+</dd>
+<dt id="computerPlayer.computerPlayer.random_hit"><code class="name flex">
+<span>def <span class="ident">random_hit</span></span>(<span>self, other_player_ships, other_player_sunk_data) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generates a completely random set of coordinates</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random_hit(self, other_player_ships, other_player_sunk_data)-&gt;tuple:
+    &#34;&#34;&#34;
+    Generates a completely random set of coordinates
+    &#34;&#34;&#34;
+    next_x, next_y = self.random_ints()
+
+    # checking whether there was already a hit to that location
+    while self.attackingCells[next_x][next_y].hit == True or False not in self.check_neighbors(next_x, next_y):
+        print(&#34;searching&#34;)
+        next_x, next_y = self.random_ints()
+
+    # updating the board for the ships
+    if other_player_ships[next_x][next_y].ship == True:
+        self.last_missile_success = True
+        self.original_success = (next_x, next_y)
+        temp = other_player_sunk_data.get(other_player_ships[next_x][next_y].id)
+        temp.timeHit += 1
+        self.attackingCells[next_x][next_y].successful_hit = True
+        self.numOfHits += 1
+    return next_x, next_y</code></pre>
+</details>
+</dd>
+<dt id="computerPlayer.computerPlayer.random_ints"><code class="name flex">
+<span>def <span class="ident">random_ints</span></span>(<span>self) ‑> tuple</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function generates random cell coordinates and returns them as a tuple of ints</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def random_ints(self)-&gt;tuple:
+    &#34;&#34;&#34;
+    Function generates random cell coordinates and returns them as a tuple of ints
+    &#34;&#34;&#34;
+    return random.randint(0,9), random.randint(0,9)</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="computerPlayer.computerPlayer" href="#computerPlayer.computerPlayer">computerPlayer</a></code></h4>
+<ul class="">
+<li><code><a title="computerPlayer.computerPlayer.check_neighbors" href="#computerPlayer.computerPlayer.check_neighbors">check_neighbors</a></code></li>
+<li><code><a title="computerPlayer.computerPlayer.computer_hit" href="#computerPlayer.computerPlayer.computer_hit">computer_hit</a></code></li>
+<li><code><a title="computerPlayer.computerPlayer.out_of_bounds" href="#computerPlayer.computerPlayer.out_of_bounds">out_of_bounds</a></code></li>
+<li><code><a title="computerPlayer.computerPlayer.random_hit" href="#computerPlayer.computerPlayer.random_hit">random_hit</a></code></li>
+<li><code><a title="computerPlayer.computerPlayer.random_ints" href="#computerPlayer.computerPlayer.random_ints">random_ints</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
