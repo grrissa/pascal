@@ -9,7 +9,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 class Gameboard:
-    def __init__(self, num_rows, num_cols)->None:
+    def __init__(self, num_rows:int, num_cols:int)->None:
         """ 
         Initialize the GUI gameboard
         """
@@ -55,7 +55,7 @@ class Gameboard:
         self.window.grid_columnconfigure(0, weight=1)
         self.switch_players = self.player_switch()
 
-    def player_switch(self):
+    def player_switch(self)->object:
         """
         Function that handles the switch between players
         """
@@ -190,13 +190,13 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler)->None:
+    def set_cell_click_handler_top(self, row:int, column:int, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """
         self.cells[row][column].bind('<Button-1>', handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler)->None:
+    def set_cell_click_handler_bottom(self, row:int, column:int, handler)->None:
         """ 
         Set handler for clicking on cell in row, column to the function handler 
         """

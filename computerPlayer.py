@@ -11,7 +11,7 @@ import time
 from player import player
 import random
 class computerPlayer(player):
-    def __init__(self, playerNum, score:int, is_turn:bool)->None:
+    def __init__(self, playerNum:int, score:int, is_turn:bool)->None:
         """
         Constructor for computerPlayer object
         """

@@ -336,7 +336,7 @@ class Control:
         self.board.set_random_ships_handler(self.place_random_ships)
         self.board.set_switch_players_handler(self.player_switch_screen_management)
 
-    def player_switch_screen_management(self, delete: bool = True)->None:
+    def player_switch_screen_management(self, delete:bool = True)->None:
         """
         Covers board when players switch to ensure fairness of game
         """

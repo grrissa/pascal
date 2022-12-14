@@ -46,7 +46,7 @@ Professor: A. Nuzen
 
 import tkinter as tk
 class Gameboard:
-    def __init__(self, num_rows, num_cols)-&gt;None:
+    def __init__(self, num_rows:int, num_cols:int)-&gt;None:
         &#34;&#34;&#34; 
         Initialize the GUI gameboard
         &#34;&#34;&#34;
@@ -92,7 +92,7 @@ class Gameboard:
         self.window.grid_columnconfigure(0, weight=1)
         self.switch_players = self.player_switch()
 
-    def player_switch(self):
+    def player_switch(self)-&gt;object:
         &#34;&#34;&#34;
         Function that handles the switch between players
         &#34;&#34;&#34;
@@ -227,13 +227,13 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
+    def set_cell_click_handler_top(self, row:int, column:int, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
+    def set_cell_click_handler_bottom(self, row:int, column:int, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
@@ -263,7 +263,7 @@ class Gameboard:
 <dl>
 <dt id="gameboard.Gameboard"><code class="flex name class">
 <span>class <span class="ident">Gameboard</span></span>
-<span>(</span><span>num_rows, num_cols)</span>
+<span>(</span><span>num_rows: int, num_cols: int)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Initialize the GUI gameboard</p></div>
@@ -272,7 +272,7 @@ class Gameboard:
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">class Gameboard:
-    def __init__(self, num_rows, num_cols)-&gt;None:
+    def __init__(self, num_rows:int, num_cols:int)-&gt;None:
         &#34;&#34;&#34; 
         Initialize the GUI gameboard
         &#34;&#34;&#34;
@@ -318,7 +318,7 @@ class Gameboard:
         self.window.grid_columnconfigure(0, weight=1)
         self.switch_players = self.player_switch()
 
-    def player_switch(self):
+    def player_switch(self)-&gt;object:
         &#34;&#34;&#34;
         Function that handles the switch between players
         &#34;&#34;&#34;
@@ -453,13 +453,13 @@ class Gameboard:
             cells.append(row)
         return cells
 
-    def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
+    def set_cell_click_handler_top(self, row:int, column:int, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
         self.cells[row][column].bind(&#39;&lt;Button-1&gt;&#39;, handler)
 
-    def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
+    def set_cell_click_handler_bottom(self, row:int, column:int, handler)-&gt;None:
         &#34;&#34;&#34; 
         Set handler for clicking on cell in row, column to the function handler 
         &#34;&#34;&#34;
@@ -543,7 +543,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.player_switch"><code class="name flex">
-<span>def <span class="ident">player_switch</span></span>(<span>self)</span>
+<span>def <span class="ident">player_switch</span></span>(<span>self) ‑> object</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Function that handles the switch between players</p></div>
@@ -551,7 +551,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def player_switch(self):
+<pre><code class="python">def player_switch(self)-&gt;object:
     &#34;&#34;&#34;
     Function that handles the switch between players
     &#34;&#34;&#34;
@@ -609,7 +609,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_cell_click_handler_bottom"><code class="name flex">
-<span>def <span class="ident">set_cell_click_handler_bottom</span></span>(<span>self, row, column, handler) ‑> None</span>
+<span>def <span class="ident">set_cell_click_handler_bottom</span></span>(<span>self, row: int, column: int, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -617,7 +617,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_cell_click_handler_bottom(self, row, column, handler)-&gt;None:
+<pre><code class="python">def set_cell_click_handler_bottom(self, row:int, column:int, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
@@ -625,7 +625,7 @@ class Gameboard:
 </details>
 </dd>
 <dt id="gameboard.Gameboard.set_cell_click_handler_top"><code class="name flex">
-<span>def <span class="ident">set_cell_click_handler_top</span></span>(<span>self, row, column, handler) ‑> None</span>
+<span>def <span class="ident">set_cell_click_handler_top</span></span>(<span>self, row: int, column: int, handler) ‑> None</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Set handler for clicking on cell in row, column to the function handler</p></div>
@@ -633,7 +633,7 @@ class Gameboard:
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def set_cell_click_handler_top(self, row, column, handler)-&gt;None:
+<pre><code class="python">def set_cell_click_handler_top(self, row:int, column:int, handler)-&gt;None:
     &#34;&#34;&#34; 
     Set handler for clicking on cell in row, column to the function handler 
     &#34;&#34;&#34;
