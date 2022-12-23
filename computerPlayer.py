@@ -187,5 +187,3 @@ class computerPlayer(player):
         else:
             to_bottom = self.attackingCells[x][y+1].hit == True and self.attackingCells[x][y+1].successful_hit == False
         return [to_top, to_right, to_bottom, to_left]
-    
-
